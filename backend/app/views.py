@@ -4,6 +4,7 @@ import json
 from .db_connections import db
 from datetime import datetime
 
+
 @csrf_exempt # Necessary for React to POST without a CSRF token in development
 def log_interaction(request):
     if request.method == 'POST':

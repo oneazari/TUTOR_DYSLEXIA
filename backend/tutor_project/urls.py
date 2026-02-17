@@ -1,7 +1,7 @@
 from django.contrib import admin
-from django.urls import path, include # Add 'include' here
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls')), # This tells Django to look inside your new api folder
+    path('api/', include('app.urls')),   # Connect app URLs
 ]

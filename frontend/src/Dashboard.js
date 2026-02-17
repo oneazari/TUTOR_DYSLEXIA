@@ -1,81 +1,198 @@
-import React from 'react';
+import React from "react";
 
-function Dashboard({ onStartLesson, onStartFlashcards, onOpenSettings, onOpenCreateUser }) {
-  // We use these styles to match your original screenshot perfectly
-  const cardStyle = {
-    background: 'white',
-    padding: '30px',
-    borderRadius: '30px',
-    width: '280px',
-    textAlign: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    boxShadow: '0 10px 20px rgba(0,0,0,0.05)'
-  };
-
-  const buttonStyle = {
-    padding: '12px 25px',
-    borderRadius: '25px',
-    border: 'none',
-    cursor: 'pointer',
-    fontWeight: 'bold',
-    color: 'white',
-    marginTop: '20px',
-    fontSize: '16px'
-  };
-
+function Dashboard({ currentUser, onStartLesson, onLogout }) {
   return (
-    <div style={{ padding: '40px', textAlign: 'left' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '48px', margin: 0 }}>Hi, Michael! 👋</h1>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <span style={{ fontWeight: 'bold' }}>Level 3: Logic</span>
-          <button onClick={onOpenSettings} style={{ padding: '10px 20px', borderRadius: '10px', border: '1px solid #ccc', background: 'white', cursor: 'pointer' }}>⚙️ Settings</button>
+    <div style={styles.page}>
+
+      {/* Top Bar */}
+      <div style={styles.topBar}>
+        <h2>Hi {currentUser}! 👋</h2>
+        <div>
+          <button style={styles.iconBtn}>🔔</button>
+          <button style={styles.iconBtn}>⚙</button>
+          <button style={styles.startBtn} onClick={onStartLesson}>
+            Start!
+          </button>
         </div>
       </div>
 
-      {/* This container centers all the cards */}
-      <div style={{ 
-        display: 'flex', 
-        gap: '30px', 
-        justifyContent: 'center', 
-        alignItems: 'stretch',
-        marginTop: '20px' 
-      }}>
-        
-        {/* English Skills */}
-        <div style={cardStyle}>
-          <div style={{ fontSize: '50px' }}>📖</div>
-          <h2 style={{ fontSize: '28px', color: '#2D3436' }}>English Skills</h2>
-          <button onClick={onStartLesson} style={{ ...buttonStyle, backgroundColor: '#FF7675' }}>Start Lesson</button>
+      {/* Profile Card */}
+      <div style={styles.profileCard}>
+        <div style={styles.avatar}>👦</div>
+        <div>
+          <h3>{currentUser}</h3>
+          <p>Level 3 ⭐ 225 XP</p>
+          <div style={styles.progressBar}>
+            <div style={styles.progressFill}></div>
+          </div>
         </div>
-
-        {/* Math Skills */}
-        <div style={cardStyle}>
-          <div style={{ fontSize: '50px' }}>🔢</div>
-          <h2 style={{ fontSize: '28px', color: '#2D3436' }}>Math Skills</h2>
-          <button style={{ ...buttonStyle, backgroundColor: '#FAB1A0' }}>Start Practice</button>
-        </div>
-
-        {/* Flashcards */}
-        <div style={cardStyle}>
-          <div style={{ fontSize: '50px' }}>🗂️</div>
-          <h2 style={{ fontSize: '28px', color: '#2D3436' }}>Flashcards</h2>
-          <button onClick={onStartFlashcards} style={{ ...buttonStyle, backgroundColor: '#0984E3' }}>Practice</button>
-        </div>
-
-        {/* New User Profile Card - Styled exactly like the others */}
-        <div style={cardStyle}>
-          <div style={{ fontSize: '50px' }}>👤</div>
-          <h2 style={{ fontSize: '28px', color: '#2D3436' }}>User Profile</h2>
-          <button onClick={onOpenCreateUser} style={{ ...buttonStyle, backgroundColor: '#6C5CE7' }}>+ Create User</button>
-        </div>
-
       </div>
+
+      {/* Subject Cards */}
+      <div style={styles.subjectRow}>
+        <div style={styles.subjectCard}>
+          📖
+          <h4>Language</h4>
+        </div>
+
+        <div style={styles.subjectCard}>
+          ➕
+          <h4>Mathematics</h4>
+        </div>
+      </div>
+
+      {/* Lesson Panel */}
+      <div style={styles.lessonPanel}>
+        <h3>New Lesson</h3>
+        <p>The hurricane has devastated the coastal town.</p>
+        <div style={styles.definition}>
+          <strong>Devastated:</strong> to strongly damage or destroy.
+        </div>
+      </div>
+
+      {/* Bottom Navigation */}
+      <div style={styles.navRow}>
+        <button style={styles.blueBtn}>🔊</button>
+        <button style={styles.orangeBtn}>⬅</button>
+        <button style={styles.orangeBtn}>➡</button>
+      </div>
+
+      <button onClick={onLogout} style={styles.logout}>
+        Logout
+      </button>
+
     </div>
   );
 }
+
+const styles = {
+  page: {
+    backgroundColor: "#FDF6E3",
+    minHeight: "100vh",
+    padding: "30px",
+    fontFamily: "Arial"
+  },
+
+  topBar: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+
+  iconBtn: {
+    marginRight: "10px",
+    padding: "8px",
+    borderRadius: "10px",
+    border: "none",
+    cursor: "pointer"
+  },
+
+  startBtn: {
+    backgroundColor: "#FB8C00",
+    color: "white",
+    padding: "10px 20px",
+    borderRadius: "20px",
+    border: "none",
+    cursor: "pointer"
+  },
+
+  profileCard: {
+    display: "flex",
+    alignItems: "center",
+    backgroundColor: "#FFF8E7",
+    padding: "20px",
+    borderRadius: "20px",
+    marginTop: "20px",
+    boxShadow: "0px 6px 12px rgba(0,0,0,0.1)"
+  },
+
+  avatar: {
+    fontSize: "50px",
+    marginRight: "20px"
+  },
+
+  progressBar: {
+    width: "200px",
+    height: "10px",
+    backgroundColor: "#ddd",
+    borderRadius: "10px",
+    marginTop: "5px"
+  },
+
+  progressFill: {
+    width: "60%",
+    height: "100%",
+    backgroundColor: "#4CAF50",
+    borderRadius: "10px"
+  },
+
+  subjectRow: {
+    display: "flex",
+    justifyContent: "space-around",
+    marginTop: "30px"
+  },
+
+  subjectCard: {
+    backgroundColor: "#FFF8E7",
+    padding: "30px",
+    borderRadius: "20px",
+    width: "200px",
+    textAlign: "center",
+    boxShadow: "0px 6px 12px rgba(0,0,0,0.1)",
+    cursor: "pointer"
+  },
+
+  lessonPanel: {
+    backgroundColor: "#FFF8E7",
+    padding: "20px",
+    borderRadius: "20px",
+    marginTop: "30px",
+    boxShadow: "0px 6px 12px rgba(0,0,0,0.1)"
+  },
+
+  definition: {
+    marginTop: "10px",
+    backgroundColor: "#FFE0B2",
+    padding: "10px",
+    borderRadius: "10px"
+  },
+
+  navRow: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "30px",
+    gap: "20px"
+  },
+
+  blueBtn: {
+    backgroundColor: "#1976D2",
+    color: "white",
+    borderRadius: "50%",
+    width: "60px",
+    height: "60px",
+    border: "none",
+    cursor: "pointer"
+  },
+
+  orangeBtn: {
+    backgroundColor: "#FB8C00",
+    color: "white",
+    borderRadius: "50%",
+    width: "60px",
+    height: "60px",
+    border: "none",
+    cursor: "pointer"
+  },
+
+  logout: {
+    marginTop: "30px",
+    padding: "8px 20px",
+    borderRadius: "10px",
+    border: "none",
+    backgroundColor: "#E53935",
+    color: "white",
+    cursor: "pointer"
+  }
+};
 
 export default Dashboard;

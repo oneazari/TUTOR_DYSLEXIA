@@ -5,11 +5,15 @@ import Quiz from './Quiz';
 import Flashcards from './Flashcards';
 import CreateUser from './CreateUser';
 import Accessibility from './Accessibility';
+import Welcome from './Welcome';
+import Login from './Login';
+
 
 function App() {
   // Navigation State
-  const [view, setView] = useState('dashboard');
-  
+  const [view, setView] = useState('welcome');
+  const [currentUser, setCurrentUser] = useState(null);
+
   // "Database" States
   const [users, setUsers] = useState({}); // Local cache of user profiles
   const [, setInteractionLogs] = useState([]); // Stores logs
@@ -22,36 +26,39 @@ function App() {
   });
 
   // 1. User Creation Logic (CONNECTED TO PYTHON BACKEND)
-  const handleCreateUser = async (userData) => {
-    try {
-      // We send the data to your Flask server running on port 5000
-      const response = await fetch('http://localhost:5000/api/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData), 
-      });
+ const handleCreateUser = async (userData) => {
+  try {
+    const response = await fetch('http://127.0.0.1:8000/api/signup/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (response.ok) {
-        alert("Success: " + data.message);
-        // Update local React state so the UI stays in sync
-        setUsers(prev => ({ ...prev, [userData.id]: { username: userData.username } }));
-        setView('dashboard');
-        return true;
-      } else {
-        // This handles "ID already exists" or other backend errors
-        alert("Error: " + (data.error || data.message));
-        return false;
-      }
-    } catch (error) {
-      console.error("Connection Error:", error);
-      alert("Could not connect to the Python backend. Make sure your Flask server is running!");
+    if (response.ok) {
+      alert("Success: " + data.message);
+
+      setUsers(prev => ({
+        ...prev,
+        [userData.username]: { username: userData.username }
+      }));
+
+      setView('dashboard');
+      return true;
+    } else {
+      alert("Error: " + (data.error || data.message));
       return false;
     }
-  };
+  } catch (error) {
+    console.error("Connection Error:", error);
+    alert("Could not connect to the Django backend. Make sure your server is running!");
+    return false;
+  }
+};
+
 
   // 2. Interaction Logging Logic
   const handleLogInteraction = (data) => {
@@ -80,6 +87,24 @@ function App() {
 
   return (
     <div style={globalStyle}>
+      {view === 'welcome' && (
+      <Welcome 
+        onCreate={() => setView('createUser')}
+        onLogin={() => setView('login')}
+      />
+    )}
+
+    {view === 'login' && (
+  <Login 
+    onSuccess={(username) => {
+      setCurrentUser(username);
+      setView('dashboard');
+    }}
+    onBack={() => setView('welcome')}
+  />
+)}
+
+
       {view === 'dashboard' && (
         <Dashboard 
   onStartLesson={() => setView('lesson')} 
