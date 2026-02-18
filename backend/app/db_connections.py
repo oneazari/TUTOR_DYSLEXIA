@@ -1,7 +1,10 @@
 import pymongo
 
-# Connect to your MongoDB (Running on your computer)
 client = pymongo.MongoClient("mongodb://localhost:27017/")
+db = client["tutor_dyslexia"]
 
-# This creates a database named 'tutor_db'
-db = client['tutor_db']
+users_collection = db["users"]
+interaction_collection = db["interaction_logs"]
+lessons_collection = db["lessons"]
+quiz_collection = db["quiz"]
+progress_collection = db["progress"]
