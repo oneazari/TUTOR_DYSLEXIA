@@ -1,110 +1,138 @@
-/* Dyslexia-friendly + Game-like style */
+/* ---------------- User Card ---------------- */
+.user-card {
+  display: flex;
+  align-items: center;
+  background-color: #fff8e7;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 15px;
+  box-shadow: 2px 2px 12px rgba(0,0,0,0.15);
+}
 
-body {
-  font-family: "OpenDyslexic", Arial, sans-serif;
-  background-color: #fdfaf6;
-  color: #222;
+.user-card .avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 20px;
+  object-fit: cover;
+  border: 2px solid #007acc;
+}
+
+.user-card .user-info h2 {
   margin: 0;
-  padding: 0;
+  font-size: 1.5rem;
 }
 
-h1, h2, h3 {
-  font-weight: 600;
-  color: #222;
+.user-card .level-xp {
+  margin: 10px 0;
 }
 
-button {
-  font-family: inherit;
-  font-size: 18px;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  padding: 12px 20px;
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-
-input[type="text"] {
-  font-size: 18px;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  width: 250px;
-  margin-bottom: 15px;
-}
-
-/* Progress Bars */
-.progress-bar {
-  width: 100%;
+.user-card .xp-bar {
+  width: 150px;
+  height: 18px;
   background-color: #ddd;
   border-radius: 10px;
-  height: 18px;
   overflow: hidden;
 }
 
-.progress-bar-fill {
-  height: 100%;
+.user-card .xp-progress {
   width: 0;
+  height: 100%;
   background-color: #4CAF50;
   border-radius: 10px;
   transition: width 0.3s;
 }
 
-/* Flashcards */
-.flashcard {
-  width: 140px;
-  height: 160px;
-  border: 2px solid #ccc;
-  border-radius: 12px;
-  padding: 10px;
-  margin: 10px;
-  text-align: center;
-  background-color: #fff;
-}
-
-/* Tabs */
-.tab-button {
-  padding: 12px 20px;
-  margin: 5px;
-  border-radius: 8px;
-  border: 1px solid #007acc;
-  background-color: #e6f2ff;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.tab-button.active {
-  background-color: #007acc;
+.user-card .continue-btn {
+  margin-top: 10px;
+  padding: 10px 16px;
+  background-color: #ff9800;
   color: white;
   font-weight: bold;
+  border-radius: 12px;
 }
 
-/* Dashboard Cards */
+/* ---------------- Skills Grid ---------------- */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 100px; /* space for bottom nav */
+}
+
 .skill-card {
   background-color: #fff8e7;
   border-radius: 12px;
   box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
   padding: 15px;
   margin: 10px;
-  width: 200px;
+  width: 180px;
   text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 4px 4px 12px rgba(0,0,0,0.25);
 }
 
 .skill-card h3 {
   margin-bottom: 10px;
 }
 
+.skill-progress {
+  width: 100%;
+  height: 12px;
+  background-color: #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.skill-progress-bar {
+  height: 100%;
+  width: 0;
+  background-color: #2196f3;
+  border-radius: 8px;
+  transition: width 0.3s;
+}
+
+.continue-btn-small {
+  padding: 6px 12px;
+  background-color: #ff5722;
+  color: white;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+/* ---------------- Bottom Navigation ---------------- */
 .bottom-nav {
   display: flex;
   justify-content: space-around;
-  padding: 15px 0;
+  padding: 12px 0;
   background-color: #f5f5f5;
   position: fixed;
   bottom: 0;
   width: 100%;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
 }
 
 .bottom-nav button {
   flex: 1;
   margin: 0 5px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.bottom-nav button span {
+  display: block;
+}
+
+.bottom-nav button:hover {
+  color: #007acc;
 }
