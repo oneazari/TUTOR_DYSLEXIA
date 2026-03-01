@@ -1,10 +1,54 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Theme } from "./Theme";
 
 const LessonView = ({ chapter, onBack, onStartQuiz, onStartFlashcards }) => {
+  const [highlightIdx, setHighlightIdx] = useState(-1);
+  const [activeSentence, setActiveSentence] = useState(null);
+
+  // Stop speech if user leaves the lesson
+  useEffect(() => {
+    return () => window.speechSynthesis.cancel();
+  }, []);
+
   if (!chapter) return null;
-  return (
+
+  // Split text into sentences for better highlighting control
+  // This regex splits by . ! or ? followed by a space
+const sentences = chapter.text.split(/(?<=[.!?])\s+/);
+
+  const readSentence = (text, index) => {
+    window.speechSynthesis.cancel();
     
+    // If clicking the same sentence that is already playing, just stop it
+    if (activeSentence === index) {
+      setActiveSentence(null);
+      setHighlightIdx(-1);
+      return;
+    }
+
+    setActiveSentence(index);
+    setHighlightIdx(-1);
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 0.85;
+
+    utterance.onboundary = (event) => {
+      if (event.name === "word") {
+        const textUpToBoundary = text.substring(0, event.charIndex);
+        const wordIndex = textUpToBoundary.trim().split(/\s+/).length - (textUpToBoundary.trim() === "" ? 1 : 0);
+        setHighlightIdx(wordIndex);
+      }
+    };
+
+    utterance.onend = () => {
+      setHighlightIdx(-1);
+      setActiveSentence(null);
+    };
+
+    window.speechSynthesis.speak(utterance);
+  };
+
+  return (
     <div style={{ 
       maxWidth: "900px", 
       margin: "0 auto", 
@@ -13,7 +57,7 @@ const LessonView = ({ chapter, onBack, onStartQuiz, onStartFlashcards }) => {
       backgroundColor: Theme.background,
       minHeight: "100vh"
     }}>
-      {/* 1. BACK BUTTON - Simple & Clean */}
+      {/* 1. BACK BUTTON */}
       <button 
         onClick={onBack} 
         style={{ 
@@ -35,7 +79,8 @@ const LessonView = ({ chapter, onBack, onStartQuiz, onStartFlashcards }) => {
         padding: "50px", 
         borderRadius: Theme.borderRadius, 
         boxShadow: Theme.cardShadow,
-        border: "1px solid #E2E8F0"
+        border: "1px solid #E2E8F0",
+        position: "relative"
       }}>
         <h1 style={{ fontSize: Theme.fontSize.header, color: Theme.textMain, marginBottom: "25px" }}>
           {chapter.title}
@@ -47,7 +92,7 @@ const LessonView = ({ chapter, onBack, onStartQuiz, onStartFlashcards }) => {
           style={{ width: "100%", borderRadius: "12px", marginBottom: "35px", objectFit: "cover", maxHeight: "400px" }} 
         />
 
-        {/* 3. DYSLEXIA FRIENDLY TEXT BLOCK */}
+        {/* 3. DYSLEXIA FRIENDLY TEXT BLOCK WITH HIGHLIGHTING */}
         <div style={{ 
           fontSize: Theme.fontSize.base, 
           lineHeight: Theme.lineHeight, 
@@ -55,13 +100,56 @@ const LessonView = ({ chapter, onBack, onStartQuiz, onStartFlashcards }) => {
           letterSpacing: "0.5px",
           textAlign: "left"
         }}>
-          {/* Automatically breaks long text into clean paragraphs */}
-          {chapter.text.split('. ').map((sentence, i) => (
-            <p key={i} style={{ marginBottom: "25px" }}>{sentence}.</p>
+          {sentences.map((sentence, sIdx) => (
+            <div 
+              key={sIdx} 
+              style={{ 
+                marginBottom: "25px", 
+                padding: "10px",
+                borderRadius: "8px",
+                backgroundColor: activeSentence === sIdx ? "#F8FAFC" : "transparent",
+                borderLeft: activeSentence === sIdx ? `6px solid ${Theme.accent}` : "6px solid transparent",
+                display: "flex",
+                alignItems: "flex-start",
+                gap: "15px",
+                transition: "all 0.3s ease"
+              }}
+            >
+              {/* Individual Play Button per Sentence */}
+              <button 
+                onClick={() => readSentence(sentence, sIdx)}
+                style={{ 
+                  background: "none", 
+                  border: "none", 
+                  fontSize: "24px", 
+                  cursor: "pointer",
+                  marginTop: "4px"
+                }}
+              >
+                {activeSentence === sIdx ? "⏹️" : "🔊"}
+              </button>
+
+              <p style={{ margin: 0, flex: 1 }}>
+                {sentence.split(" ").map((word, wIdx) => (
+                  <span 
+                    key={wIdx}
+                    style={{
+                      backgroundColor: (activeSentence === sIdx && highlightIdx === wIdx) ? "#FACC15" : "transparent",
+                      color: (activeSentence === sIdx && highlightIdx === wIdx) ? "black" : "inherit",
+                      borderRadius: "4px",
+                      padding: "0 2px",
+                      transition: "background-color 0.1s"
+                    }}
+                  >
+                    {word}{" "}
+                  </span>
+                ))}
+              </p>
+            </div>
           ))}
         </div>
 
-        {/* 4. ACTION BUTTONS - Combined Styles to avoid warnings */}
+        {/* 4. ACTION BUTTONS */}
         <div style={{ display: "flex", gap: "20px", marginTop: "40px" }}>
           <button 
             onClick={onStartFlashcards} 
@@ -88,7 +176,7 @@ const LessonView = ({ chapter, onBack, onStartQuiz, onStartFlashcards }) => {
               fontSize: "22px",
               borderRadius: "12px",
               border: "none",
-              backgroundColor: Theme.success,
+              backgroundColor: Theme.success || "#2ecc71",
               color: "white",
               fontWeight: "bold",
               cursor: "pointer"

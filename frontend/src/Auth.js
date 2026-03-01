@@ -1,18 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Theme } from "./Theme";
+
+const avatars = ["🦊", "🐼", "🐨", "🦁", "🤖", "🚀", "🦄", "🦉"];
 
 const Auth = ({ onLogin }) => {
   const [isRegistering, setIsRegistering] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false); // New state for confirmation
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [selectedAvatar, setSelectedAvatar] = useState(avatars[0]);
+  const [rememberMe, setRememberMe] = useState(true);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const rememberedUser = localStorage.getItem("tutor_remembered_name");
+    if (rememberedUser) setUsername(rememberedUser);
+  }, []);
 
   const handleAuth = (e) => {
     e.preventDefault();
     setError("");
 
-    const cleanUsername = username.trim();
-
+    const cleanUsername = username.trim().toLowerCase();
     if (password.length !== 6 || isNaN(password)) {
       setError("PIN must be exactly 6 numbers.");
       return;
@@ -24,18 +33,33 @@ const Auth = ({ onLogin }) => {
       if (allUsers[cleanUsername]) {
         setError("That name is taken! Try another one.");
       } else {
+        // --- CREATE USER LOGIC ---
         const newUser = { 
-          username: cleanUsername, 
+          username: username.trim(),
           password, 
+          avatar: selectedAvatar,
           progress: { Science: {}, Math: {}, English: {} } 
         };
         allUsers[cleanUsername] = newUser;
         localStorage.setItem("tutor_users", JSON.stringify(allUsers));
-        onLogin(newUser);
+        
+        // Show success message, then switch to login mode
+        setShowSuccess(true);
+        setTimeout(() => {
+          setShowSuccess(false);
+          setIsRegistering(false); // Take them back to login page
+          setPassword(""); // Clear password for security
+        }, 2000);
       }
     } else {
+      // --- LOGIN LOGIC ---
       const user = allUsers[cleanUsername];
       if (user && user.password === password) {
+        if (rememberMe) {
+          localStorage.setItem("tutor_remembered_name", user.username);
+        } else {
+          localStorage.removeItem("tutor_remembered_name");
+        }
         onLogin(user);
       } else {
         setError("Oops! Wrong name or PIN. Try again!");
@@ -51,37 +75,72 @@ const Auth = ({ onLogin }) => {
     }}>
       <div style={{ 
         display: "flex", backgroundColor: "white", borderRadius: Theme.borderRadius, 
-        boxShadow: Theme.cardShadow, width: "100%", maxWidth: "900px", overflow: "hidden",
-        flexDirection: "row", border: "1px solid #e2e8f0"
+        boxShadow: Theme.cardShadow, width: "100%", maxWidth: "1000px", overflow: "hidden",
+        flexDirection: "row", border: "1px solid #e2e8f0", minHeight: "600px"
       }}>
         
-        {/* LEFT PANEL: WELCOME */}
+        {/* LEFT PANEL */}
         <div style={{ 
-          flex: 1, backgroundColor: "#EBF4FF", padding: "40px", 
+          flex: 1, backgroundColor: showSuccess ? "#d1fae5" : "#EBF4FF", padding: "40px", 
           display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-          textAlign: "center"
+          textAlign: "center", transition: "background-color 0.5s"
         }}>
-          <img 
-            src="https://illustrations.popsy.co/blue/studying-from-home.svg" 
-            alt="Welcome" 
-            style={{ width: "100%", maxWidth: "250px", marginBottom: "20px" }}
-          />
-          <h1 style={{ color: "#2c3e50", fontSize: "32px", marginBottom: "10px" }}>Hi there! 👋</h1>
-          <p style={{ color: "#7f8c8d", fontSize: "18px" }}>Ready to earn some stars today?</p>
+          <div style={{ fontSize: "120px", marginBottom: "20px" }}>
+            {showSuccess ? "✅" : (isRegistering ? selectedAvatar : "👋")}
+          </div>
+          <h1 style={{ color: "#2c3e50", fontSize: "32px", marginBottom: "10px" }}>
+            {showSuccess ? "Account Created!" : (isRegistering ? "Pick an Avatar!" : "Welcome Back!")}
+          </h1>
+          <p style={{ color: "#7f8c8d", fontSize: "18px" }}>
+            {showSuccess ? "Now you can log in with your PIN." : "Ready to earn some stars today?"}
+          </p>
         </div>
 
         {/* RIGHT PANEL: FORM */}
-        <form onSubmit={handleAuth} style={{ flex: 1, padding: "50px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+        <form onSubmit={handleAuth} style={{ flex: 1.5, padding: "50px", display: "flex", flexDirection: "column", justifyContent: "center", position: "relative" }}>
+          
+          {/* SUCCESS OVERLAY */}
+          {showSuccess && (
+            <div style={{ 
+              position: "absolute", top: 0, left: 0, right: 0, bottom: 0, 
+              backgroundColor: "rgba(255,255,255,0.9)", zIndex: 10, display: "flex",
+              flexDirection: "column", alignItems: "center", justifyContent: "center",
+              textAlign: "center", borderRadius: Theme.borderRadius
+            }}>
+              <h2 style={{ color: Theme.success, fontSize: "36px" }}>Awesome! 🚀</h2>
+              <p style={{ fontSize: "20px", color: Theme.textMain }}>Taking you to the login page...</p>
+            </div>
+          )}
+
           <h2 style={{ color: "#2c3e50", fontSize: "36px", marginBottom: "30px", textAlign: "center" }}>
             {isRegistering ? "Join the Club" : "Student Login"}
           </h2>
           
           {error && (
-            <div style={{ 
-              backgroundColor: "#fee2e2", color: "#e74c3c", padding: "12px", 
-              borderRadius: "12px", marginBottom: "20px", textAlign: "center", fontWeight: "bold" 
-            }}>
+            <div style={{ backgroundColor: "#fee2e2", color: "#e74c3c", padding: "12px", borderRadius: "12px", marginBottom: "20px", textAlign: "center", fontWeight: "bold" }}>
               {error}
+            </div>
+          )}
+
+          {isRegistering && (
+            <div style={{ marginBottom: "25px" }}>
+              <label style={{ display: "block", marginBottom: "10px", fontWeight: "bold", fontSize: "18px" }}>Choose your character:</label>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", justifyContent: "center" }}>
+                {avatars.map(a => (
+                  <div 
+                    key={a}
+                    onClick={() => setSelectedAvatar(a)}
+                    style={{ 
+                      fontSize: "30px", padding: "10px", cursor: "pointer", borderRadius: "12px",
+                      backgroundColor: selectedAvatar === a ? Theme.accent : "#f1f5f9",
+                      transform: selectedAvatar === a ? "scale(1.1)" : "scale(1)",
+                      transition: "0.2s"
+                    }}
+                  >
+                    {a}
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
@@ -95,7 +154,7 @@ const Auth = ({ onLogin }) => {
             />
           </div>
 
-          <div style={{ marginBottom: "30px" }}>
+          <div style={{ marginBottom: "20px" }}>
             <label style={{ display: "block", marginBottom: "8px", fontWeight: "bold", fontSize: "18px" }}>6-Digit PIN</label>
             <input 
               type="password" placeholder="● ● ● ● ● ●" value={password} maxLength={6}
@@ -105,6 +164,19 @@ const Auth = ({ onLogin }) => {
             />
           </div>
 
+          {!isRegistering && (
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "30px", cursor: "pointer" }} onClick={() => setRememberMe(!rememberMe)}>
+               <div style={{ 
+                 width: "24px", height: "24px", borderRadius: "6px", border: `3px solid ${Theme.accent}`,
+                 backgroundColor: rememberMe ? Theme.accent : "transparent",
+                 display: "flex", alignItems: "center", justifyContent: "center", color: "white", fontWeight: "bold"
+               }}>
+                 {rememberMe && "✓"}
+               </div>
+               <span style={{ fontSize: "18px", fontWeight: "bold", color: "#64748b" }}>Remember my name</span>
+            </div>
+          )}
+
           <button type="submit" style={{ 
             width: "100%", padding: "20px", backgroundColor: "#2ecc71", 
             color: "white", border: "none", borderRadius: "50px", fontSize: "22px", 
@@ -113,7 +185,7 @@ const Auth = ({ onLogin }) => {
             {isRegistering ? "Create Account! 🚀" : "Let's Go! →"}
           </button>
 
-          <p onClick={() => setIsRegistering(!isRegistering)} style={{ marginTop: "25px", color: "#3498db", cursor: "pointer", fontSize: "18px", textAlign: "center", textDecoration: "underline" }}>
+          <p onClick={() => { setIsRegistering(!isRegistering); setError(""); }} style={{ marginTop: "25px", color: "#3498db", cursor: "pointer", fontSize: "18px", textAlign: "center", textDecoration: "underline" }}>
             {isRegistering ? "I already have an account" : "I'm a new student!"}
           </p>
         </form>
