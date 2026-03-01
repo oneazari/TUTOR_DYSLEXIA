@@ -1,32 +1,35 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from .db_connections import db
 import json
-from .db_connections import lessons_collection
-from bson import ObjectId
+
+
+@csrf_exempt
+def get_lessons(request):
+    """
+    GET /lessons/?level=1&subject=Science
+    """
+    if request.method == "GET":
+        level = request.GET.get("level")
+        subject = request.GET.get("subject")
+
+        query = {}
+        if level:
+            query["level"] = int(level)
+        if subject:
+            query["subject"] = subject
+
+        lessons = list(db.lessons.find(query, {"_id": 0}))
+        return JsonResponse({"lessons": lessons})
+
+    return JsonResponse({"error": "Only GET allowed"}, status=405)
 
 
 @csrf_exempt
 def add_lesson(request):
     if request.method == "POST":
-        data = json.loads(request.body)
+        lesson = json.loads(request.body)
+        db.lessons.insert_one(lesson)
+        return JsonResponse({"status": "lesson added"}, status=201)
 
-        lesson = {
-            "title": data["title"],
-            "content": data["content"],
-            "difficulty": data["difficulty"]
-        }
-
-        lessons_collection.insert_one(lesson)
-
-        return JsonResponse({"message": "Lesson added successfully"})
-
-    return JsonResponse({"error": "Invalid request"}, status=405)
-
-
-def get_lessons(request):
-    lessons = list(lessons_collection.find())
-
-    for lesson in lessons:
-        lesson["_id"] = str(lesson["_id"])
-
-    return JsonResponse(lessons, safe=False)
+    return JsonResponse({"error": "Only POST allowed"}, status=405)

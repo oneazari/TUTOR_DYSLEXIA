@@ -1,64 +1,146 @@
-import React, { useState, useEffect, useRef } from 'react';
+// Lesson.js
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Flashcards from "./Flashcards";
 
-const Lesson = ({ onBack, onNext, logInteraction }) => {
-  const [startTime] = useState(Date.now());
-  const [isReading, setIsReading] = useState(false);
-  const lessonRef = useRef(null);
+const Lesson = ({ subject, chapter, onBack, user, onComplete }) => {
+  const [lesson, setLesson] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [showFlashcards, setShowFlashcards] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
+  const [feedback, setFeedback] = useState("");
 
-  // 1. TEXT-TO-SPEECH (Multisensory Support)
-  const speak = (text) => {
-    window.speechSynthesis.cancel(); // Stop any current speech
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 0.85; // Slower pace for dyslexia support
-    utterance.onstart = () => setIsReading(true);
-    utterance.onend = () => {
-      setIsReading(false);
-      // LOGGING: User used audio support (Sign of engagement or struggle)
-      logInteraction({ user_id: "User_01", type: "audio_play", content_id: "lesson_1" });
-    };
+  // Fetch lesson from backend
+  useEffect(() => {
+    setLoading(true);
+    setLesson(null);
+    setShowFlashcards(false);
+    setShowQuiz(false);
+    setFeedback("");
+
+    axios
+      .get(`http://127.0.0.1:8000/api/lessons/?subject=${subject}`)
+      .then((res) => {
+        console.log("Fetched lessons:", res.data.lessons);
+        const current = res.data.lessons?.find((l) => l.chapter === chapter);
+        if (current) setLesson(current);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching lesson:", err);
+        setLesson(null);
+        setLoading(false);
+      });
+  }, [subject, chapter]);
+
+  // Handle quiz answer
+  const handleAnswer = (option) => {
+    if (option === lesson.answer) {
+      setFeedback("✅ Correct! Well done!");
+      if (!user.completedChapters.includes(chapter)) {
+        const updatedChapters = [...user.completedChapters, chapter];
+        const newProgress = Math.min(
+          Math.round((updatedChapters.length / 10) * 100),
+          100
+        );
+        onComplete(newProgress, updatedChapters);
+      }
+    } else {
+      setFeedback("❌ Almost there! Try again 🌱");
+    }
+  };
+
+  // Read lesson aloud
+  const speakText = () => {
+    if (!lesson?.text) return;
+    const textToRead = Array.isArray(lesson.text) ? lesson.text.join(". ") : lesson.text;
+    const utterance = new SpeechSynthesisUtterance(textToRead);
+    utterance.rate = 0.85;
+    utterance.pitch = 1;
+    window.speechSynthesis.cancel();
     window.speechSynthesis.speak(utterance);
   };
 
-  // 2. INTERACTION TRACKING (For your ML Model)
-  const handleNext = () => {
-    const timeSpent = (Date.now() - startTime) / 1000;
-    // Sending metrics: Time spent is key for "Struggle" classification
-    logInteraction({
-      user_id: "User_01",
-      dwellTime: timeSpent,
-      content_id: "lesson_1"
-    });
-    onNext();
-  };
+  // --- Loading state ---
+  if (loading) return <h2>Loading lesson 🌱</h2>;
 
-  const lessonContent = "Dyslexia is a learning difficulty that affects the way people read and spell words. It has nothing to do with intelligence. Many creative people have dyslexia!";
-
-  return (
-    <div className="lesson-container" style={{ padding: '40px', textAlign: 'left' }}>
-      <button onClick={onBack}>⬅ Back to Dashboard</button>
-      
-      <h2 style={{ marginTop: '20px' }}>What is Dyslexia?</h2>
-      
-      {/* Visual Aid placeholder */}
-      <div style={{ background: '#ddd', height: '200px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '20px' }}>
-        <p>[Educational Image/Animation Here]</p>
-      </div>
-
-      <p style={{ lineHeight: '1.6', fontSize: '1.2em' }}>{lessonContent}</p>
-
-      <div style={{ marginTop: '30px', display: 'flex', gap: '10px' }}>
-        <button 
-          onClick={() => speak(lessonContent)}
-          style={{ padding: '15px', backgroundColor: '#4A90E2', color: 'white', border: 'none', borderRadius: '8px' }}
-        >
-          {isReading ? "🔈 Reading Aloud..." : "🔊 Read to Me"}
+  // --- No lesson found ---
+  if (!lesson) {
+    return (
+      <div className="lesson-container">
+        <h2>Lesson coming soon 🚧</h2>
+        <button onClick={onBack} className="secondary-btn">
+          ⬅ Back to Chapters
         </button>
+      </div>
+    );
+  }
 
-        <button 
-          onClick={handleNext}
-          style={{ padding: '15px', backgroundColor: '#55efc4', border: 'none', borderRadius: '8px' }}
-        >
-          Continue to Quiz ➡
+  // --- Flashcards page ---
+  if (showFlashcards) {
+    return (
+      <Flashcards
+        flashcards={lesson.flashcards}
+        onBack={() => setShowFlashcards(false)}
+      />
+    );
+  }
+
+  // --- Main lesson UI ---
+  return (
+    <div className="lesson-container">
+      <div className="card">
+        <div className="lesson-header">
+          <span className="subject-badge">{subject}</span>
+          <h1>{chapter}</h1>
+        </div>
+
+        {!showQuiz ? (
+          <>
+            <div className="lesson-text">
+              {lesson.text.map((line, idx) => (
+                <p key={idx}>{line}</p>
+              ))}
+            </div>
+
+            <div className="lesson-actions">
+              <button className="secondary-btn" onClick={speakText}>
+                🔊 Read Aloud
+              </button>
+
+              <button
+                className="secondary-btn"
+                onClick={() => setShowFlashcards(true)}
+              >
+                🃏 Open Flashcards
+              </button>
+
+              <button
+                className="primary-btn"
+                onClick={() => setShowQuiz(true)}
+              >
+                🎯 Take Quiz
+              </button>
+            </div>
+          </>
+        ) : (
+          <div className="quiz-section">
+            <h2>{lesson.question}</h2>
+            {lesson.options.map((option, idx) => (
+              <button
+                key={idx}
+                className="quiz-btn"
+                onClick={() => handleAnswer(option)}
+              >
+                {option}
+              </button>
+            ))}
+            <p className="feedback">{feedback}</p>
+          </div>
+        )}
+
+        <button className="secondary-btn back-btn" onClick={onBack}>
+          ⬅ Back to Chapters
         </button>
       </div>
     </div>

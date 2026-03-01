@@ -128,3 +128,10 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+# ================= MONGODB CONFIGURATION =================
+from mongoengine import connect
+
+connect(
+    db="tutor_learning_db",
+    host="mongodb://localhost:27017/tutor_learning_db"
+)

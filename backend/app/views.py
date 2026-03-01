@@ -5,29 +5,46 @@ from .db_connections import db
 from datetime import datetime
 
 
-@csrf_exempt # Necessary for React to POST without a CSRF token in development
-def log_interaction(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            
-            # Prepare the document based on your schema [cite: 31, 33, 36, 39]
-            log_entry = {
-                "user_id": data.get("user_id", "Michael_01"),
-                "content_id": data.get("content_id", "lesson_01"),
-                "metrics": {
-                    "cursor_dwell_time": data.get("dwellTime", 0),
-                    "click_latency": data.get("clickLatency", 0),
-                    "saccade_pattern": data.get("saccades", [])
-                },
-                "timestamp": datetime.now()
+@csrf_exempt
+def get_lesson(request):
+    """
+    GET /lesson/?subject=English&chapter=Alphabet A&level=1
+    Always returns text, quiz, and flashcards arrays (even if empty)
+    """
+    if request.method == "GET":
+        level = int(request.GET.get("level", 1))
+        subject = request.GET.get("subject")
+        chapter = request.GET.get("chapter")
+
+        lesson = db.lessons.find_one(
+            {
+                "level": level,
+                "subject": subject,
+                "chapter": chapter
+            },
+            {"_id": 0}  # hide MongoDB _id
+        )
+
+        if not lesson:
+            # Return defaults instead of null
+            lesson = {
+                "subject": subject or "",
+                "chapter": chapter or "",
+                "text": [],
+                "flashcards": [],
+                "quiz": {"question": "", "options": [], "answer": ""},
+                "level": level
             }
-            
-            # Insert into MongoDB InteractionLogs collection [cite: 27]
-            db.interaction_logs.insert_one(log_entry)
-            
-            return JsonResponse({"status": "success", "message": "Log saved!"}, status=201)
-        except Exception as e:
-            return JsonResponse({"status": "error", "message": str(e)}, status=400)
-    
-    return JsonResponse({"status": "error", "message": "Only POST allowed"}, status=405)
+
+        else:
+            # Ensure missing fields are filled
+            lesson["text"] = lesson.get("text", [])
+            lesson["flashcards"] = lesson.get("flashcards", [])
+            lesson["quiz"] = lesson.get(
+                "quiz",
+                {"question": "", "options": [], "answer": ""}
+            )
+
+        return JsonResponse(lesson, safe=False)
+
+    return JsonResponse({"error": "Only GET allowed"}, status=405)
