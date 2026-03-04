@@ -11,6 +11,10 @@ import { useLevelProgress } from "./LevelProgressContext";
 import { lessonsData } from "./lessonsData"; 
 import { level2Data } from "./level2Data"; 
 import { Theme } from "./Theme";
+import useTracker from "./useTracker";
+import QuizWrapper from "./QuizTracker";
+import LessonWrapper from "./LessonTracker";
+import FlashcardsWrapper from "./FlashcardsTracker";
 
 const SuccessScreen = ({ level, onContinue }) => (
   <div style={{ 
@@ -126,9 +130,9 @@ function App() {
     level1Success: <SuccessScreen level={1} onContinue={() => { setCurrentLevel(2); setPage("level2Dashboard"); }} />,
     level2Success: <SuccessScreen level={2} onContinue={() => { setCurrentLevel(3); setPage("level2Dashboard"); }} />,
     chapterSelection: <ChapterSelection subject={subject} currentLevel={currentLevel} chapters={activeDataSource[subject]} onSelectChapter={(ch) => { setChapterData(ch); setPage("lesson"); }} onBack={() => setPage(currentLevel === 2 ? "level2Dashboard" : "dashboard")} />,
-    lesson: chapterData && <LessonView chapter={chapterData} onBack={() => setPage("chapterSelection")} onStartFlashcards={() => setPage("flashcards")} onStartQuiz={() => setPage("quiz")} />,
-    flashcards: chapterData && <Flashcards flashcards={chapterData.flashcards} onBack={() => setPage("lesson")} />,
-    quiz: chapterData && <Quiz questions={chapterData.test} onFinish={handleComplete} onBackToLesson={() => setPage("chapterSelection")} />
+    lesson: chapterData && <LessonWrapper chapter={chapterData} onBack={() => setPage("chapterSelection")} />,
+    flashcards: chapterData && <FlashcardsWrapper flashcards={chapterData.flashcards} onBack={() => setPage("lesson")} />,
+    quiz: chapterData && <QuizWrapper chapterData={chapterData} onFinish={handleComplete} onBackToLesson={() => setPage("chapterSelection")} />,
   };
 
   return (
