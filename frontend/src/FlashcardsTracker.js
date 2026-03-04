@@ -1,8 +1,8 @@
-<<<<<<< HEAD
-import React from "react";
+import React, { useRef } from 'react';
 import Flashcards from "./Flashcards";
 import useTracker from "./useTracker";
 
+// --- VERSION 1: The Main Wrapper ---
 const FlashcardsWrapper = ({ flashcards, onBack }) => {
   // This helps the computer remember which flashcards the student looked at
   const metrics = useTracker("flashcards_session");
@@ -17,10 +17,9 @@ const FlashcardsWrapper = ({ flashcards, onBack }) => {
 };
 
 export default FlashcardsWrapper;
-=======
-import React, { useRef, useState } from 'react';
 
-export const FlashcardsWrapper = ({ children, cardId }) => {
+// --- VERSION 2: The Individual Card Tracker ---
+export const FlashcardCardTracker = ({ children, cardId }) => {
     const startTime = useRef(null);
 
     const handleCardInteraction = (action) => {
@@ -45,13 +44,14 @@ export const FlashcardsWrapper = ({ children, cardId }) => {
         }
     };
 
-    return <div 
-        onMouseEnter={() => { startTime.current = Date.now(); }}
-        onMouseLeave={() => handleCardInteraction('view')}
-        onClick={() => handleCardInteraction('flip')}
-        style={{ cursor: 'pointer' }}
-    >
-        {children}
-    </div>;
+    return (
+      <div 
+          onMouseEnter={() => { startTime.current = Date.now(); }}
+          onMouseLeave={() => handleCardInteraction('view')}
+          onClick={() => handleCardInteraction('flip')}
+          style={{ cursor: 'pointer' }}
+      >
+          {children}
+      </div>
+    );
 };
->>>>>>> d3c2a73 (forced save of frontend fixes)

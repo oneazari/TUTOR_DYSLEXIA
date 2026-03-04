@@ -1,17 +1,37 @@
 import React, { useRef } from 'react';
+import Quiz from "./Quiz";
+import useTracker from "./useTracker";
 
-// Use 'export const' so App.js can find it with { QuizWrapper }
-export const QuizWrapper = ({ children, questionId }) => {
+// --- VERSION 1: The Main Quiz View (Used in App.js) ---
+const QuizWrapper = ({ chapterData, onFinish, onBackToLesson }) => {
+  // This tells the tracker which chapter we are working on
+  const metrics = useTracker(chapterData.id);
+
+  return (
+    <Quiz 
+      chapterData={chapterData} 
+      onFinish={onFinish} 
+      onBackToLesson={onBackToLesson} 
+      trackingMetrics={metrics}
+    />
+  );
+};
+
+export default QuizWrapper;
+
+// --- VERSION 2: The Click Timer (Used inside Quiz questions) ---
+export const QuizClickTracker = ({ children, questionId }) => {
     const questionStartTime = useRef(null);
-    const clickStartTime = useRef(null);
 
     const handleQuestionStart = () => {
+        // Start the stopwatch!
         questionStartTime.current = Date.now();
     };
 
     const handleAnswerClick = async (e) => {
         if (!questionStartTime.current) return;
         
+        // Calculate how many milliseconds you took to think
         const clickLatency = Date.now() - questionStartTime.current;
         
         try {
@@ -30,6 +50,7 @@ export const QuizWrapper = ({ children, questionId }) => {
             console.error("Failed to log quiz data:", err);
         }
         
+        // Reset the stopwatch for the next question
         questionStartTime.current = null;
     };
 

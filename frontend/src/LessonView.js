@@ -1,3 +1,4 @@
+import { LessonDwellTracker } from "./LessonTracker";
 import React, { useState, useEffect } from "react";
 import { Theme } from "./Theme";
 
@@ -13,13 +14,11 @@ const LessonView = ({ chapter, onBack, onStartQuiz, onStartFlashcards }) => {
   if (!chapter) return null;
 
   // Split text into sentences for better highlighting control
-  // This regex splits by . ! or ? followed by a space
-const sentences = chapter.text.split(/(?<=[.!?])\s+/);
+  const sentences = chapter.text.split(/(?<=[.!?])\s+/);
 
   const readSentence = (text, index) => {
     window.speechSynthesis.cancel();
     
-    // If clicking the same sentence that is already playing, just stop it
     if (activeSentence === index) {
       setActiveSentence(null);
       setHighlightIdx(-1);
@@ -131,18 +130,21 @@ const sentences = chapter.text.split(/(?<=[.!?])\s+/);
 
               <p style={{ margin: 0, flex: 1 }}>
                 {sentence.split(" ").map((word, wIdx) => (
-                  <span 
-                    key={wIdx}
-                    style={{
-                      backgroundColor: (activeSentence === sIdx && highlightIdx === wIdx) ? "#FACC15" : "transparent",
-                      color: (activeSentence === sIdx && highlightIdx === wIdx) ? "black" : "inherit",
-                      borderRadius: "4px",
-                      padding: "0 2px",
-                      transition: "background-color 0.1s"
-                    }}
-                  >
-                    {word}{" "}
-                  </span>
+                  /* 🚀 KEY CHANGE: We pass the 'word' itself to the tracker! */
+                  <LessonDwellTracker key={wIdx} wordId={word.replace(/[.,!?]/g, "")}>
+                    <span 
+                      style={{
+                        backgroundColor: (activeSentence === sIdx && highlightIdx === wIdx) ? "#FACC15" : "transparent",
+                        color: (activeSentence === sIdx && highlightIdx === wIdx) ? "black" : "inherit",
+                        borderRadius: "4px",
+                        padding: "0 2px",
+                        transition: "background-color 0.1s",
+                        display: "inline-block" 
+                      }}
+                    >
+                      {word}{" "}
+                    </span>
+                  </LessonDwellTracker>
                 ))}
               </p>
             </div>

@@ -24,6 +24,7 @@ if client:
     lessons_collection = db["lessons"]
     quiz_collection = db["quiz"]
     progress_collection = db["progress"]
+    print("🚀 MongoDB Collections are ready to use!")
 else:
     # Create dummy collections for development
     logger.warning("Using dummy collections - MongoDB is not available")

@@ -1,10 +1,24 @@
 import React, { useState } from "react";
 import { Theme } from "./Theme";
 
-const Quiz = ({ questions, onFinish, onBackToLesson }) => {
+const Quiz = ({ chapterData, onFinish, onBackToLesson }) => {
+  const questions = chapterData?.questions || [];
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
+
+
+if (!questions || questions.length === 0) {
+    return (
+      <div style={{ padding: "40px", textAlign: "center", backgroundColor: Theme.background, minHeight: "100vh" }}>
+        <h2 style={{ color: Theme.textMain }}>Loading questions...</h2>
+        <p style={{ color: Theme.textMuted }}>If this takes too long, check your data files!</p>
+        <button onClick={onBackToLesson} style={{ marginTop: "20px", padding: "10px", cursor: "pointer" }}>Go Back</button>
+      </div>
+    );
+  }
+
+
 
   const handleAnswer = (selectedOption) => {
     const isCorrect = selectedOption === questions[currentQuestion].answer;

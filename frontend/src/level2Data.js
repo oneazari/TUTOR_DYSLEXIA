@@ -12,7 +12,7 @@ export const level2Data = {
         { front: "What is in blood?", back: "Oxygen" },
         { front: "How many chambers?", back: "Four" }
       ],
-      test: [
+      questions: [
         { question: "The heart is a ___?", options: ["Bone", "Muscle", "Skin", "Hair"], answer: "Muscle" },
         { question: "How big is your heart?", options: ["Small bean", "Your fist", "A football", "A house"], answer: "Your fist" },
         { question: "What does it pump?", options: ["Water", "Air", "Blood", "Food"], answer: "Blood" },
@@ -37,7 +37,7 @@ export const level2Data = {
         { front: "Is a carrot a root?", back: "Yes" },
         { front: "What is their job?", back: "To hold the plant steady" }
       ],
-      test: [
+      questions: [
         { question: "Where do roots grow?", options: ["Sky", "In dirt", "On leaves", "In fruit"], answer: "In dirt" },
         { question: "Roots drink ___?", options: ["Milk", "Water", "Juice", "Soda"], answer: "Water" },
         { question: "Roots act like a ___?", options: ["Spoon", "Straw", "Fork", "Plate"], answer: "Straw" },
@@ -62,7 +62,7 @@ export const level2Data = {
         { front: "Is there air?", back: "No" },
         { front: "What are shapes called?", back: "Phases" }
       ],
-      test: [
+      questions: [
         { question: "The moon is a ___?", options: ["Star", "Planet", "Big rock", "Gas ball"], answer: "Big rock" },
         { question: "Does it make light?", options: ["Yes", "No", "Sometimes", "Only at night"], answer: "No" },
         { question: "It reflects the ___?", options: ["Earth", "Sun", "Mars", "Stars"], answer: "Sun" },
@@ -87,7 +87,7 @@ export const level2Data = {
         { front: "Is it hot?", back: "Yes (Very!)" },
         { front: "What kills germs?", back: "Boiling" }
       ],
-      test: [
+      questions: [
         { question: "Boiling makes ___?", options: ["Ice", "Steam", "Milk", "Sand"], answer: "Steam" },
         { question: "Steam is a ___?", options: ["Solid", "Liquid", "Gas", "Food"], answer: "Gas" },
         { question: "What do you see first?", options: ["Ice", "Bubbles", "Rocks", "Fish"], answer: "Bubbles" },
@@ -112,7 +112,7 @@ export const level2Data = {
         { front: "Different poles (N and S)...?", back: "Stick together" },
         { front: "Does it pull wood?", back: "No" }
       ],
-      test: [
+      questions: [
         { question: "What do magnets pull?", options: ["Wood", "Plastic", "Metal", "Paper"], answer: "Metal" },
         { question: "Ends are called ___?", options: ["Legs", "Poles", "Arms", "Heads"], answer: "Poles" },
         { question: "North and North will ___?", options: ["Stick", "Push away", "Sleep", "Sing"], answer: "Push away" },
@@ -140,7 +140,7 @@ export const level2Data = {
         { front: "How many tens make 50?", back: "Five" },
         { front: "How many tens make 100?", back: "Ten" }
       ],
-      test: [
+      questions: [
         { question: "Count: 10, 20, ...?", options: ["21", "30", "25", "40"], answer: "30" },
         { question: "What is 10 + 10?", options: ["11", "20", "100", "0"], answer: "20" },
         { question: "How many tens are in 40?", options: ["1", "4", "40", "0"], answer: "4" },
@@ -166,7 +166,7 @@ export const level2Data = {
         { front: "What has 2 long and 2 short sides?", back: "A rectangle" },
         { front: "Which shape is strongest?", back: "A triangle" }
       ],
-      test: [
+      questions: [
         { question: "How many sides does a square have?", options: ["2", "3", "4", "5"], answer: "4" },
         { question: "A triangle has how many sides?", options: ["1", "3", "4", "10"], answer: "3" },
         { question: "Which shape has NO corners?", options: ["Square", "Circle", "Box", "Star"], answer: "Circle" },
@@ -195,7 +195,7 @@ export const level2Data = {
         { front: "Are halves always equal?", back: "Yes" },
         { front: "How do we write one half?", back: "1/2" }
       ],
-      test: [
+      questions: [
         { question: "What is a 'whole'?", options: ["Part", "Full thing", "Empty", "Half"], answer: "Full thing" },
         { question: "How many halves make 1 whole?", options: ["1", "2", "4", "10"], answer: "2" },
         { question: "What is half of 10?", options: ["2", "5", "10", "20"], answer: "5" },
@@ -221,7 +221,7 @@ export const level2Data = {
         { front: "What is 12:00 called?", back: "O'clock" },
         { front: "How many hours in a day?", back: "24" }
       ],
-      test: [
+      questions: [
         { question: "Which hand shows the HOUR?", options: ["Short", "Long", "Fast", "Red"], answer: "Short" },
         { question: "The long hand shows ___?", options: ["Hours", "Minutes", "Days", "Years"], answer: "Minutes" },
         { question: "How many minutes in 1 hour?", options: ["10", "30", "60", "100"], answer: "60" },
@@ -247,7 +247,7 @@ export const level2Data = {
         { front: "Which is smaller, cm or inch?", back: "Centimeter" },
         { front: "What is a long measurement?", back: "A Meter" }
       ],
-      test: [
+      questions: [
         { question: "What tool do we use?", options: ["Clock", "Ruler", "Spoon", "Cup"], answer: "Ruler" },
         { question: "Start measuring at the ___?", options: ["1", "End", "Zero (0)", "Middle"], answer: "Zero (0)" },
         { question: "What does 'cm' stand for?", options: ["Color", "Centimeter", "Circle", "Counting"], answer: "Centimeter" },
@@ -277,7 +277,7 @@ export const level2Data = {
         { front: "Is 'JUMP' a verb?", back: "Yes" },
         { front: "Every sentence needs a...?", back: "Verb" }
       ],
-      test: [
+      questions: [
         { question: "Which word is a verb?", options: ["Apple", "Run", "Table", "Blue"], answer: "Run" },
         { question: "What does a verb show?", options: ["Color", "Action", "Size", "Name"], answer: "Action" },
         { question: "Pick the verb: The cat ___.", options: ["Sits", "Happy", "Soft", "Small"], answer: "Sits" },
@@ -303,7 +303,7 @@ export const level2Data = {
         { front: "Is 'Apple' a noun?", back: "Yes (a thing)" },
         { front: "Is 'Run' a noun?", back: "No (that is a verb)" }
       ],
-      test: [
+      questions: [
         { question: "What is a noun?", options: ["An action", "A name", "A color", "A sound"], answer: "A name" },
         { question: "Which is a person?", options: ["Box", "Doctor", "Park", "Blue"], answer: "Doctor" },
         { question: "Which is a place?", options: ["School", "Happy", "Jump", "Red"], answer: "School" },
@@ -329,7 +329,7 @@ export const level2Data = {
         { front: "Is 'monday' correct?", back: "No (Monday)" },
         { front: "What is a Proper Noun?", back: "A specific name" }
       ],
-      test: [
+      questions: [
         { question: "Start a sentence with a ___ letter?", options: ["Small", "Capital", "Red", "Old"], answer: "Capital" },
         { question: "Which name is correct?", options: ["tom", "Tom", "tOm", "toM"], answer: "Tom" },
         { question: "Is the word 'I' always a capital?", options: ["Yes", "No", "Only at the start", "Never"], answer: "Yes" },
@@ -354,7 +354,7 @@ export const level2Data = {
         { front: "Where do marks go?", back: "At the end" },
         { front: "What do marks tell us?", back: "When to STOP" }
       ],
-      test: [
+      questions: [
         { question: "A period looks like a ___?", options: ["Line", "Dot", "Hook", "Star"], answer: "Dot" },
         { question: "Use a (?) when you ___?", options: ["Tell", "Ask", "Shout", "Run"], answer: "Ask" },
         { question: "Use a (!) when you are ___?", options: ["Sad", "Excited", "Sleeping", "Bored"], answer: "Excited" },
@@ -380,7 +380,7 @@ export const level2Data = {
         { front: "Rhyme for SUN?", back: "Run or Fun" },
         { front: "What matters in a rhyme?", back: "The Sound" }
       ],
-      test: [
+      questions: [
         { question: "Which rhymes with CAT?", options: ["Dog", "Hat", "Pig", "Sun"], answer: "Hat" },
         { question: "Which rhymes with DOG?", options: ["Cat", "Log", "Fish", "Bird"], answer: "Log" },
         { question: "Rhyming words sound the same at the ___?", options: ["Start", "Middle", "End", "Top"], answer: "End" },

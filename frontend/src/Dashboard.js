@@ -11,20 +11,30 @@ const Dashboard = ({ user, onSelectSubject }) => {
     { name: "English", icon: "📚", color: "#e67e22" }
   ];
 
-  const totalStars = subjects.reduce((acc, sub) => {
+  // 🕵️ Step 1: Count all the actual stars earned (even if it's 16 or 100!)
+  const rawStars = subjects.reduce((acc, sub) => {
     const scores = Object.values(progress[sub.name] || {});
     return acc + scores.filter(s => s >= 7).length;
   }, 0);
 
-  const goal = 15;
-  const percent = Math.min(Math.round((totalStars / goal) * 100), 100);
+  // 🕵️ Step 2: Set the goal based on the Level
+  // For Level 1, 2, and 3, the goal is 15. For Level 4, it is 20.
+  const currentLevelName = user.level || "Level 1"; 
+  const goal = currentLevelName.includes("Level 4") ? 20 : 15;
+
+  // 🕵️ Step 3: Cap the stars so it doesn't show "16/15"
+  // Math.min picks the smaller number, so it stops exactly at the goal!
+  const displayStars = Math.min(rawStars, goal);
+
+  // Calculate the percentage for the green/blue bar
+  const percent = Math.min(Math.round((displayStars / goal) * 100), 100);
   const unlocked = isLevel2Unlocked();
 
   return (
     <div style={{ padding: "40px", backgroundColor: Theme.background, minHeight: "100vh", fontFamily: Theme.fontFamily }}>
       <div style={{ maxWidth: "900px", margin: "0 auto" }}>
         
-        {/* PERSONALIZED HEADER - Top Anchor */}
+        {/* PERSONALIZED HEADER */}
         <div style={{ 
           display: "flex", 
           alignItems: "center", 
@@ -50,20 +60,20 @@ const Dashboard = ({ user, onSelectSubject }) => {
             {user.avatar || "🦊"}
           </div>
           <div>
-            <h1 style={{ color: Theme.textMain, margin: 0, fontSize: "32px" }}>Welcome back, {user.username}!</h1>
-            <p style={{ color: Theme.textMuted, margin: "5px 0 0 0", fontSize: "20px" }}>Foundations · Level 1</p>
+            <h1 style={{ color: Theme.textMain, margin: 0, fontSize: "32px" }}>Welcome, {user.username}!</h1>
+            <p style={{ color: Theme.textMuted, margin: "5px 0 0 0", fontSize: "20px" }}>Foundations · {currentLevelName}</p>
           </div>
         </div>
 
         {/* --- PROGRESS BAR --- */}
         <div style={{ backgroundColor: "white", padding: "25px", borderRadius: Theme.borderRadius, boxShadow: Theme.cardShadow, marginBottom: "40px" }}>
-           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px", fontWeight: "bold", fontSize: "20px" }}>
-              <span style={{ color: Theme.textMain }}>Level 2 Unlock Progress</span>
-              <span style={{ color: Theme.accent }}>{totalStars} / {goal} Stars</span>
-           </div>
-           <div style={{ position: "relative", width: "100%", height: "24px", backgroundColor: "#eee", borderRadius: "12px", overflow: "hidden" }}>
-             <div style={{ width: `${percent}%`, height: "100%", backgroundColor: Theme.accent, transition: "width 1s ease-out" }} />
-           </div>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px", fontWeight: "bold", fontSize: "20px" }}>
+               <span style={{ color: Theme.textMain }}>{unlocked ? "Level Up Complete!" : "Level 2 Unlock Progress"}</span>
+               <span style={{ color: Theme.accent }}>{displayStars} / {goal} Stars</span>
+            </div>
+            <div style={{ position: "relative", width: "100%", height: "24px", backgroundColor: "#eee", borderRadius: "12px", overflow: "hidden" }}>
+              <div style={{ width: `${percent}%`, height: "100%", backgroundColor: Theme.accent, transition: "width 1s ease-out" }} />
+            </div>
         </div>
 
         {/* --- SUBJECT CARDS --- */}

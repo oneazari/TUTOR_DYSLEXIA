@@ -13,7 +13,7 @@ export const lessonsData = {
         { word: "Stem", img: "https://via.placeholder.com/100?text=Stem" },
         { word: "Photosynthesis", img: "https://via.placeholder.com/100?text=Sun" }
       ],
-      test: [
+      questions: [
         { question: "Plants make their food through?", options: ["Photosynthesis", "Respiration", "Digestion", "Evaporation"], answer: "Photosynthesis" },
         { question: "Which part absorbs water?", options: ["Leaf", "Root", "Stem", "Flower"], answer: "Root" },
         { question: "Which part holds the plant upright?", options: ["Leaf", "Root", "Stem", "Flower"], answer: "Stem" },
@@ -38,7 +38,7 @@ export const lessonsData = {
         { word: "Flowers", img: "https://via.placeholder.com/100?text=Flowers" },
         { word: "Photosynthesis", img: "https://via.placeholder.com/100?text=Sun" }
       ],
-      test: [
+      questions: [
         { question: "Roots anchor plants?", options: ["Yes", "No"], answer: "Yes" },
         { question: "Leaves make food by?", options: ["Photosynthesis", "Respiration", "Digestion", "Evaporation"], answer: "Photosynthesis" },
         { question: "Stems transport?", options: ["Food", "Water", "Both", "None"], answer: "Both" },
@@ -63,7 +63,7 @@ export const lessonsData = {
         { word: "Oxygen", img: "https://via.placeholder.com/100?text=O2" },
         { word: "Glucose", img: "https://via.placeholder.com/100?text=Glucose" }
       ],
-      test: [
+      questions: [
         { question: "Photosynthesis produces?", options: ["Food", "Water", "Air", "None"], answer: "Food" },
         { question: "Sunlight is required?", options: ["Yes", "No"], answer: "Yes" },
         { question: "Carbon dioxide is needed?", options: ["Yes", "No"], answer: "Yes" },
@@ -88,7 +88,7 @@ export const lessonsData = {
         { word: "Water", img: "https://via.placeholder.com/100?text=Water" },
         { word: "Nutrients", img: "https://via.placeholder.com/100?text=Nutrients" }
       ],
-      test: [
+      questions: [
         { question: "Plants grow from?", options: ["Seeds", "Leaves", "Roots", "Flowers"], answer: "Seeds" },
         { question: "Growth needs?", options: ["Water", "Sunlight", "Soil", "All"], answer: "All" },
         { question: "Roots grow to?", options: ["Absorb water", "Make food", "Transport", "None"], answer: "Absorb water" },
@@ -113,7 +113,7 @@ export const lessonsData = {
         { word: "Flowers", img: "https://via.placeholder.com/100?text=Flowers" },
         { word: "Pollination", img: "https://via.placeholder.com/100?text=Pollination" }
       ],
-      test: [
+      questions: [
         { question: "Plants reproduce by?", options: ["Seeds", "Spores", "Cuttings", "All"], answer: "All" },
         { question: "Flowers produce?", options: ["Leaves", "Stems", "Seeds", "Roots"], answer: "Seeds" },
         { question: "Asexual reproduction is?", options: ["Seeds", "Spores", "Cuttings", "All"], answer: "All" },
@@ -139,7 +139,7 @@ export const lessonsData = {
         { word: "Four", img: "https://via.placeholder.com/100?text=4" },
         { word: "Five", img: "https://via.placeholder.com/100?text=5" },
       ],
-      test: [
+      questions: [
         { question: "What is 2 + 3?", options: ["4", "5", "6", "7"], answer: "5" },
         { question: "5 - 2 = ?", options: ["2", "3", "4", "1"], answer: "3" },
         { question: "What is 4 x 2?", options: ["6", "8", "10", "12"], answer: "8" },
@@ -161,7 +161,7 @@ export const lessonsData = {
         { word: "Sum", img: "https://via.placeholder.com/100?text=Sum" },
         { word: "Addend", img: "https://via.placeholder.com/100?text=Addend" },
       ],
-      test: [
+      questions: [
         { question: "2 + 3 = ?", options: ["4", "5", "6", "7"], answer: "5" },
         { question: "5 + 4 = ?", options: ["8", "9", "10", "11"], answer: "9" },
         { question: "1 + 6 = ?", options: ["6", "7", "8", "9"], answer: "7" },
@@ -182,7 +182,7 @@ export const lessonsData = {
         { word: "Minus", img: "https://via.placeholder.com/100?text=-" },
         { word: "Difference", img: "https://via.placeholder.com/100?text=Diff" },
       ],
-      test: [
+      questions: [
         { question: "5 - 2 = ?", options: ["2", "3", "4", "1"], answer: "3" },
         { question: "8 - 3 = ?", options: ["5", "4", "6", "3"], answer: "5" },
         { question: "10 - 7 = ?", options: ["3", "2", "4", "5"], answer: "3" },
@@ -203,7 +203,7 @@ export const lessonsData = {
         { word: "Times", img: "https://via.placeholder.com/100?text=x" },
         { word: "Product", img: "https://via.placeholder.com/100?text=Prod" },
       ],
-      test: [
+      questions: [
         { question: "2 x 3 = ?", options: ["5", "6", "7", "8"], answer: "6" },
         { question: "4 x 2 = ?", options: ["6", "8", "9", "10"], answer: "8" },
         { question: "5 x 5 = ?", options: ["20", "25", "30", "15"], answer: "25" },
@@ -224,7 +224,7 @@ export const lessonsData = {
         { word: "Divide", img: "https://via.placeholder.com/100?text=÷" },
         { word: "Quotient", img: "https://via.placeholder.com/100?text=Quotient" },
       ],
-      test: [
+      questions: [
         { question: "6 ÷ 2 = ?", options: ["2", "3", "4", "5"], answer: "3" },
         { question: "10 ÷ 5 = ?", options: ["2", "5", "10", "1"], answer: "2" },
         { question: "12 ÷ 3 = ?", options: ["4", "3", "5", "6"], answer: "4" },
@@ -252,7 +252,7 @@ export const lessonsData = {
         { word: "D", img: "https://via.placeholder.com/100?text=D" },
         { word: "E", img: "https://via.placeholder.com/100?text=E" },
       ],
-      test: [
+      questions: [
         { question: "What letter comes after A?", options: ["B", "C", "D", "E"], answer: "B" },
         { question: "What letter comes before C?", options: ["A", "B", "D", "E"], answer: "B" },
         { question: "Which is the first letter?", options: ["A", "B", "C", "D"], answer: "A" },
@@ -276,7 +276,7 @@ export const lessonsData = {
         { word: "Moon", img: "https://via.placeholder.com/100?text=Moon" },
         { word: "Book", img: "https://via.placeholder.com/100?text=Book" },
       ],
-      test: [
+      questions: [
         { question: "Which is an animal?", options: ["Cat", "Sun", "Moon", "Book"], answer: "Cat" },
         { question: "Which is a celestial body?", options: ["Dog", "Sun", "Book", "Pen"], answer: "Sun" },
         { question: "Which can you read?", options: ["Book", "Dog", "Sun", "Moon"], answer: "Book" },
@@ -298,7 +298,7 @@ export const lessonsData = {
         { word: "It is raining.", img: "https://via.placeholder.com/100?text=It+is+raining" },
         { word: "I like cats.", img: "https://via.placeholder.com/100?text=I+like+cats" },
       ],
-      test: [
+      questions: [
         { question: "Which is a complete sentence?", options: ["Happy", "I am happy.", "Cat", "Sun"], answer: "I am happy." },
         { question: "Which expresses an action?", options: ["It is raining.", "Cat", "Sun", "Book"], answer: "It is raining." },
         { question: "Which tells a preference?", options: ["I like cats.", "Sun", "Moon", "Dog"], answer: "I like cats." },
@@ -320,7 +320,7 @@ export const lessonsData = {
         { word: "Verb", img: "https://via.placeholder.com/100?text=Verb" },
         { word: "Adjective", img: "https://via.placeholder.com/100?text=Adj" },
       ],
-      test: [
+      questions: [
         { question: "Which is a noun?", options: ["Cat", "Run", "Happy", "Quickly"], answer: "Cat" },
         { question: "Which is a verb?", options: ["Run", "Cat", "Blue", "Slowly"], answer: "Run" },
         { question: "Which is an adjective?", options: ["Beautiful", "Cat", "Run", "Quickly"], answer: "Beautiful" },
@@ -341,7 +341,7 @@ export const lessonsData = {
         { word: "Once upon a time", img: "https://via.placeholder.com/100?text=Once+upon+a+time" },
         { word: "The End", img: "https://via.placeholder.com/100?text=The+End" },
       ],
-      test: [
+      questions: [
         { question: "Who is usually the main character in a story?", options: ["Hero", "Book", "Sun", "Cat"], answer: "Hero" },
         { question: "What comes at the end?", options: ["The End", "Start", "Middle", "Sun"], answer: "The End" },
         { question: "Stories are meant to?", options: ["Entertain", "Confuse", "Bore", "Sleep"], answer: "Entertain" },

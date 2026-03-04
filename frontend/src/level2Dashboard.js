@@ -12,15 +12,22 @@ const Level2Dashboard = ({ user, onSelectSubject, onBackToLevel1 }) => {
     { name: "English", icon: "✍️", color: "#e67e22" }
   ];
 
-  // Logic to calculate progress for Level 3
-  const totalStars = subjectData.reduce((acc, sub) => {
+  // 🕵️ Step 1: Count all actual stars earned in the database
+  const rawStars = subjectData.reduce((acc, sub) => {
     const scores = Object.values(progress[sub.name] || {});
     return acc + scores.filter(s => s >= 7).length;
   }, 0);
 
-  const goal = 15;
-  const percent = Math.min(Math.round((totalStars / goal) * 100), 100);
-  const isLevel3Unlocked = totalStars >= goal;
+  // 🕵️ Step 2: Set the goal and cap the display
+  const goal = 15; 
+  
+  // This makes sure the screen shows "15/15" even if rawStars is 16!
+  const displayStars = Math.min(rawStars, goal);
+
+  const percent = Math.min(Math.round((displayStars / goal) * 100), 100);
+  
+  // Level 3 unlocks when you actually hit the goal
+  const isLevel3Unlocked = rawStars >= goal;
 
   return (
     <div style={{ padding: "40px", backgroundColor: Theme.background, minHeight: "100vh", fontFamily: Theme.fontFamily }}>
@@ -67,13 +74,13 @@ const Level2Dashboard = ({ user, onSelectSubject, onBackToLevel1 }) => {
 
         {/* PROGRESS CARD (UNLOCKS LEVEL 3) */}
         <div style={{ backgroundColor: "white", padding: "25px", borderRadius: Theme.borderRadius, boxShadow: Theme.cardShadow, marginBottom: "40px" }}>
-           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "15px", fontSize: "20px", fontWeight: "bold" }}>
-              <span style={{ color: Theme.textMain }}>Level 3 Unlock Progress</span>
-              <span style={{ color: "#9b59b6" }}>{totalStars} / {goal} Stars</span>
-           </div>
-           <div style={{ width: "100%", height: "24px", backgroundColor: "#f0f0f0", borderRadius: "12px", overflow: "hidden" }}>
-              <div style={{ width: `${percent}%`, height: "100%", backgroundColor: "#9b59b6", transition: "width 1s ease-out" }} />
-           </div>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "15px", fontSize: "20px", fontWeight: "bold" }}>
+               <span style={{ color: Theme.textMain }}>{isLevel3Unlocked ? "Level 3 Access Granted!" : "Level 3 Unlock Progress"}</span>
+               <span style={{ color: "#9b59b6" }}>{displayStars} / {goal} Stars</span>
+            </div>
+            <div style={{ width: "100%", height: "24px", backgroundColor: "#f0f0f0", borderRadius: "12px", overflow: "hidden" }}>
+               <div style={{ width: `${percent}%`, height: "100%", backgroundColor: "#9b59b6", transition: "width 1s ease-out" }} />
+            </div>
         </div>
 
         {/* SUBJECT CARDS */}
