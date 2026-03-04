@@ -1,11 +1,10 @@
 export const Theme = {
   // --- COLORS ---
-  // Using a soft cream/off-white background to prevent "dazzle"
-  background: "#f1eaef", 
+  background: "#f8fafc", 
   sidebar: "#9b2420",
   accent: "#3498db",
   success: "#2ecc71",
-  textMain: "#071a2e", // Dark charcoal (better than pure black)
+  textMain: "#071a2e", 
   textMuted: "#64748b",
   
   // --- TYPOGRAPHY ---
@@ -20,7 +19,7 @@ export const Theme = {
   
   // --- LAYOUT ---
   borderRadius: "20px",
-  cardShadow: "0 10px 30px rgba(0,0,0,0.1)",
+  cardShadow: "0 10px 30px rgba(0,0,0,0.1)", // Kept the bigger, cooler shadow!
 
   // --- COMPONENTS ---
   levelButton: {
