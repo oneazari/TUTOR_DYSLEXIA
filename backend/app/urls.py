@@ -10,6 +10,7 @@ urlpatterns = [
 
     # Lessons
     path("lessons/", get_lessons, name="get_lessons"),   # React frontend fetches all lessons
+    path('lessons/<str:lesson_id>/', get_lesson, name='get_lesson'),
     path("lesson/", get_lesson, name="get_lesson"),      # Fetch a single lesson (by subject/chapter)
 
     # Log interactions
