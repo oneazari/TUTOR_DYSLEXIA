@@ -3,15 +3,20 @@ import Dashboard from "./Dashboard";
 import ChapterSelection from "./ChapterSelection";
 import Auth from "./Auth";
 import Level2Dashboard from "./level2Dashboard"; 
+<<<<<<< HEAD
 import Level3Dashboard from "./level3Dashboard"; 
 import Level4Dashboard from "./level4Dashboard"; 
 import ProfileView from "./ProfileView"; // Added this import
+=======
+import ProfileView from "./ProfileView";
+>>>>>>> d3c2a73 (forced save of frontend fixes)
 import { useLevelProgress } from "./LevelProgressContext";
 import { lessonsData } from "./lessonsData"; 
 import { level2Data } from "./level2Data"; 
 import { level3Data } from "./level3Data";
 import { level4Data } from "./level4Data";
 import { Theme } from "./Theme";
+<<<<<<< HEAD
 import QuizWrapper from "./QuizTracker";
 import LessonWrapper from "./LessonTracker";
 import FlashcardsWrapper from "./FlashcardsTracker";
@@ -53,6 +58,16 @@ const SuccessScreen = ({ level, onContinue }) => {
     </div>
   );
 };
+=======
+
+// Fixed Named Imports
+import { useTracker } from "./useTracker";
+import { QuizWrapper } from "./QuizTracker";
+import { LessonWrapper } from "./LessonTracker";
+import { FlashcardsWrapper } from "./FlashcardsTracker";
+
+// ... (Keep SuccessScreen and Helper functions as they are) ...
+>>>>>>> d3c2a73 (forced save of frontend fixes)
 
 function App() {
   const { markModuleComplete, progress, isLevel2Unlocked, isLevel3Unlocked } = useLevelProgress();
@@ -69,6 +84,7 @@ function App() {
     return saved ? JSON.parse(saved) : null;
   });
 
+<<<<<<< HEAD
   // --- HELPERS ---
 // 1. This function is now the "Star Counter" for any level we ask for
 const getStarsForLevel = (levelNum) => {
@@ -128,6 +144,9 @@ const getStarsForLevel = (levelNum) => {
 };
 
   if (!user) return <Auth onLogin={handleLogin} />;
+=======
+  if (!user) return <Auth onLogin={(userData) => { localStorage.setItem("current_user", JSON.stringify(userData)); setUser(userData); setPage("dashboard"); }} />;
+>>>>>>> d3c2a73 (forced save of frontend fixes)
 
   // This tells the app exactly which book to open based on the level number
 const activeDataSource = 
@@ -137,6 +156,7 @@ const activeDataSource =
   lessonsData;
 
   const views = {
+<<<<<<< HEAD
     dashboard: (
       <Dashboard 
         user={user} 
@@ -236,13 +256,21 @@ lesson: chapterData && (
 ),
     flashcards: chapterData && <FlashcardsWrapper flashcards={chapterData.flashcards} onBack={() => setPage("lesson")} />,
     quiz: chapterData && <QuizWrapper chapterData={chapterData} onFinish={handleComplete} onBackToLesson={() => setPage("chapterSelection")} />,
+=======
+    dashboard: <Dashboard user={user} onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} onOpenProfile={() => setPage("profile")} />,
+    level2Dashboard: <Level2Dashboard user={user} onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} onBackToLevel1={() => { setCurrentLevel(1); setPage("dashboard"); }} onOpenProfile={() => setPage("profile")} />,
+    profile: <ProfileView user={user} progress={progress} onBack={() => setPage(currentLevel === 2 ? "level2Dashboard" : "dashboard")} />,
+    chapterSelection: <ChapterSelection subject={subject} currentLevel={currentLevel} chapters={activeDataSource[subject]} onSelectChapter={(ch) => { setChapterData(ch); setPage("lesson"); }} onBack={() => setPage(currentLevel === 2 ? "level2Dashboard" : "dashboard")} />,
+    lesson: chapterData && <LessonWrapper><LessonView chapter={chapterData} onBack={() => setPage("chapterSelection")} /></LessonWrapper>,
+    flashcards: chapterData && <FlashcardsWrapper><Flashcards flashcards={chapterData.flashcards} onBack={() => setPage("lesson")} /></FlashcardsWrapper>,
+    quiz: chapterData && <QuizWrapper><Quiz chapterData={chapterData} onFinish={(score) => { markModuleComplete(subject, chapterData.id, score); setPage("chapterSelection"); }} onBackToLesson={() => setPage("chapterSelection")} /></QuizWrapper>,
+>>>>>>> d3c2a73 (forced save of frontend fixes)
   };
 
   return (
     <div style={{ display: "flex", minHeight: "100vh", backgroundColor: Theme.background, fontFamily: Theme.fontFamily }}>
-      
-      {/* SIDEBAR */}
       <div style={{ width: "280px", backgroundColor: "#1E293B", color: "white", display: "flex", flexDirection: "column", padding: "30px 20px" }}>
+<<<<<<< HEAD
         
         {/* SIDEBAR PROFILE SECTION */}
         <div 
@@ -317,19 +345,22 @@ lesson: chapterData && (
     </div>
   );
 })}
+=======
+        <h2 style={{ fontSize: "20px", marginBottom: "30px", textAlign: "center", color: Theme.accent }}>MY ACADEMY</h2>
+        <nav style={{ flex: 1 }}>
+          {[1, 2].map((lvl) => (
+            <div key={lvl} onClick={() => { setCurrentLevel(lvl); setPage(lvl === 1 ? "dashboard" : "level2Dashboard"); }} style={{ padding: "18px", marginBottom: "12px", borderRadius: "12px", cursor: "pointer", backgroundColor: currentLevel === lvl ? Theme.accent : "transparent" }}>
+              Level {lvl}
+            </div>
+          ))}
+>>>>>>> d3c2a73 (forced save of frontend fixes)
         </nav>
-
-        <button onClick={handleLogout} style={{ padding: "12px", background: "none", color: "#F87171", border: "2px solid #F87171", borderRadius: "12px", cursor: "pointer", fontWeight: "bold" }}>
-          Sign Out
-        </button>
       </div>
-
-      {/* MAIN CONTENT AREA */}
       <div style={{ flex: 1, overflowY: "auto" }}>
-        {views[page] || <div style={{ padding: "50px", textAlign: "center" }}>Loading adventure...</div>}
+        {views[page] || <div>Loading...</div>}
       </div>
     </div>
   );
-}
+} // Fixed closing brace
 
 export default App;
