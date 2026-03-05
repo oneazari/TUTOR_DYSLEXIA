@@ -5,14 +5,29 @@ export const lessonsData = {
       id: "l1_sci_1",
       title: "Introduction to Plants",
       text: "Plants are living organisms that make their own food through photosynthesis. They have roots, stems, leaves, and flowers.",
-      imageUrl: "https://via.placeholder.com/400x200?text=Plants",
-      flashcards: [
-        { word: "Leaf", img: "https://via.placeholder.com/100?text=Leaf" },
-        { word: "Flower", img: "https://via.placeholder.com/100?text=Flower" },
-        { word: "Root", img: "https://via.placeholder.com/100?text=Root" },
-        { word: "Stem", img: "https://via.placeholder.com/100?text=Stem" },
-        { word: "Photosynthesis", img: "https://via.placeholder.com/100?text=Sun" }
-      ],
+      imageUrl: "https://cdn.pixabay.com/photo/2016/02/19/10/00/tree-1209809_1280.jpg",
+    flashcards: [
+  { 
+    word: "Leaf", 
+    img: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=400&auto=format&fit=crop"
+  },
+  { 
+    word: "Flower", 
+    img: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?q=80&w=400&auto=format&fit=crop" 
+  },
+  { 
+    word: "Root", 
+    img: "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=400&auto=format&fit=crop" 
+  },
+  { 
+    word: "Stem", 
+    img: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=400&auto=format&fit=crop" 
+  },
+  { 
+    word: "Photosynthesis", 
+    img: "https://images.unsplash.com/photo-1501746790748-4033b49743c8?q=80&w=400&auto=format&fit=crop"
+  }
+],
       questions: [
         { question: "Plants make their food through?", options: ["Photosynthesis", "Respiration", "Digestion", "Evaporation"], answer: "Photosynthesis" },
         { question: "Which part absorbs water?", options: ["Leaf", "Root", "Stem", "Flower"], answer: "Root" },
