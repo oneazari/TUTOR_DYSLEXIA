@@ -94,6 +94,14 @@ function App() {
 
   const handleLogin = async (userData) => {
     // 🕵️ Step 1: Figure out if userData is a string or an object
+    console.log("🕵️ What did the Auth component send me?", userData);
+
+    const nameToSubmit = typeof userData === 'string' ? userData : userData.username;
+    
+    // 🔍 ADD THIS LOG TOO!
+    console.log("📦 What am I putting in the username envelope?", nameToSubmit);
+    
+    
     const finalUsername = typeof userData === 'object' ? userData.username : userData;
 
     console.log("📤 Sending to Django:", finalUsername); // Check your browser console for this!
@@ -101,13 +109,8 @@ function App() {
     try {
       const response = await fetch('http://127.0.0.1:8000/api/login/', {
         method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          // 🚀 Add this to help Django stay safe
-          'Accept': 'application/json',
-        },
-        // 🚀 MUST be an object with the key "username"
-        body: JSON.stringify({ username: typeof userData === 'string' ? userData : userData.username }) 
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: nameToSubmit }) 
       });
 
       const dataFromMongo = await response.json();

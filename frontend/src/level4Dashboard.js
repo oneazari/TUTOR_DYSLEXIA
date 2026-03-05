@@ -14,13 +14,20 @@ const Level4Dashboard = ({ user, onSelectSubject, onBackToLevel3 }) => {
   ];
 
   // Calculate Stars for Level 4
+ // 🕵️ Filter: Only count stars where the Quiz ID starts with "l4"
+// 🕵️ Step 1: Count ONLY Level 4 stars
   const totalStars = subjectData.reduce((acc, sub) => {
-    const scores = Object.values(progress[sub.name] || {});
-    // Only count stars earned in Level 4 (scores 7 or higher)
-    return acc + scores.filter(s => s >= 7).length;
+    const subjectProgress = progress[sub.name] || {};
+    
+    // 🌟 We filter for IDs starting with 'l4'
+    const level4Scores = Object.entries(subjectProgress).filter(([quizId, score]) => 
+      quizId.startsWith("l4") && score >= 7
+    );
+    
+    return acc + level4Scores.length;
   }, 0);
 
-  // Level 4 goal is higher because we have 4 subjects now!
+  // 🕵️ Step 2: Now 'totalStars' exists, so these lines work!
   const goal = 20; 
   const percent = Math.min(Math.round((totalStars / goal) * 100), 100);
   const isLevel5Unlocked = totalStars >= goal;

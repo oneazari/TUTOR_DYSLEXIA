@@ -6,11 +6,11 @@ from .quiz import add_quiz, get_quiz, submit_quiz
 
 urlpatterns = [
     # --- Auth & User Memory ---
-    path("signup/", signup, name="signup"),
-    path("login/", login, name="login"), # This might be your old one
+    #path("signup/", signup, name="signup"),
+    #path("login/", login, name="login"), # This might be your old one
     
     # 🌟 This is the "Memory" path we just built for React!
-    path('api/login/', login_user, name='login_user'), 
+    path('login/', login_user, name='login_user'), 
 
     # --- Lessons ---
     path("lessons/", get_lessons, name="get_lessons"),

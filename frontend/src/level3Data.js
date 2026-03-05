@@ -1,7 +1,7 @@
 export const level3Data = {
   Science: [
   {
-    id: "sci_301",
+    id: "l3_sci_1",
     title: "The Circulatory System",
     text: "Your **HEART** is a muscle pump the size of your **FIST**. It moves **BLOOD** through your body (Circulation). The heart has **FOUR CHAMBERS**: Atriums on top and Ventricles on bottom. Blood delivers **OXYGEN** and **NUTRIENTS** to your cells and carries away waste!",
     imageUrl: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8",
@@ -26,7 +26,7 @@ export const level3Data = {
     ]
   },
   {
-    id: "sci_302",
+    id: "l3_sci_2",
     title: "Photosynthesis",
     text: "Plants make food using **SUNLIGHT**, **WATER**, and **CARBON DIOXIDE**. Inside leaves, **CHLOROPHYLL** (green helper) turns these into **SUGAR** and **OXYGEN**. This is why plants are the lungs of the Earth!",
     imageUrl: "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2",
@@ -51,7 +51,7 @@ export const level3Data = {
     ]
   },
   {
-    id: "sci_303",
+    id: "l3_sci_3",
     title: "Gravity & The Solar System",
     text: "**GRAVITY** is a pull. The **SUN** has the most gravity, so planets orbit it. On the **MOON**, gravity is 6 times weaker than Earth!",
     imageUrl: "https://images.unsplash.com/photo-1454789548928-9efd52dc4031",
@@ -76,7 +76,7 @@ export const level3Data = {
     ]
   },
   {
-    id: "sci_304",
+    id: "l3_sci_4",
     title: "States of Matter",
     text: "Matter is everything! It can be **SOLID** (tight molecules), **LIQUID** (sliding molecules), or **GAS** (flying molecules). Heating changes states!",
     imageUrl: "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d",
@@ -101,7 +101,7 @@ export const level3Data = {
     ]
   },
   {
-    id: "sci_305",
+    id: "l3_sci_5",
     title: "The Nervous System",
     text: "Your **BRAIN** is the computer. It sends messages through **NERVES** to your muscles. Your **SPINAL CORD** is the main highway for these messages!",
     imageUrl: "https://images.unsplash.com/photo-1559757175-5700dde675bc",
@@ -129,7 +129,7 @@ export const level3Data = {
 
   Math: [
   {
-    id: "math_301",
+    id: "l3_math_1",
     title: "Introduction to Fractions",
     text: "A **FRACTION** is a part of a **WHOLE**. The **NUMERATOR** (top) tells you how many pieces you have. The **DENOMINATOR** (bottom) tells you how many pieces make the whole. If you eat 1 slice of a 4-slice pizza, you ate **1/4**!",
     imageUrl: "https://images.unsplash.com/photo-1574129810594-a187f897b2f4",
@@ -154,7 +154,7 @@ export const level3Data = {
     ]
   },
   {
-    id: "math_302",
+    id: "l3_math_2",
     title: "Multiplication Master",
     text: "**MULTIPLICATION** is repeated addition. **3 x 4** is the same as **4 + 4 + 4**. Any number times **ZERO** is 0. Any number times **ONE** stays the same!",
     imageUrl: "https://images.unsplash.com/photo-1509228468518-180dd482195e",
@@ -179,7 +179,7 @@ export const level3Data = {
     ]
   },
   {
-    id: "math_303",
+    id: "l3_math_3",
     title: "Division: Sharing Equally",
     text: "**DIVISION** means splitting a large number into **EQUAL GROUPS**. If you have 6 cookies and 2 friends, each friend gets 3! It is the opposite of multiplication.",
     imageUrl: "https://images.unsplash.com/photo-1587145820266-a5951ee6f620",
@@ -204,7 +204,7 @@ export const level3Data = {
     ]
   },
   {
-    id: "math_304",
+    id: "l3_math_4",
     title: "Elapsed Time & Calendars",
     text: "**ELAPSED TIME** is how much time has passed. There are **60 minutes** in an hour. We use a **CALENDAR** to track days, weeks, and months. There are 7 days in a week and 12 months in a year!",
     imageUrl: "https://images.unsplash.com/photo-1508921313339-b770a319d741",
@@ -229,7 +229,7 @@ export const level3Data = {
     ]
   },
   {
-    id: "math_305",
+    id: "l3_math_5",
     title: "3D Shapes (Geometry)",
     text: "3D shapes are fat, not flat! A **CUBE** looks like a dice. A **SPHERE** looks like a ball. A **CYLINDER** looks like a soda can. A **CONE** looks like a party hat!",
     imageUrl: "https://images.unsplash.com/photo-1616440347437-b1c73416efc2",
@@ -257,7 +257,7 @@ export const level3Data = {
 
   English: [
   {
-    id: "eng_301",
+    id: "l3_eng_1",
     title: "Adjectives (Describing Words)",
     text: "An **ADJECTIVE** is a word that describes a **NOUN**. They tell us 'What kind?' (The **fuzzy** cat), 'Which one?' (That **blue** car), or 'How many?' (The **three** dogs). Adjectives make your writing more exciting!",
     imageUrl: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b",
@@ -282,7 +282,7 @@ export const level3Data = {
     ]
   },
   {
-    id: "eng_302",
+    id: "l3_eng_2",
     title: "Pronouns (The Short-Cuts)",
     text: "**PRONOUNS** are small words that take the place of a noun. Instead of saying 'The boy is running,' you can say '**HE** is running.' Instead of 'The girl is happy,' say '**SHE** is happy.' For a thing, like a ball, we use '**IT**.'",
     imageUrl: "https://images.unsplash.com/photo-1521791136064-7986c2959210",
@@ -307,7 +307,7 @@ export const level3Data = {
     ]
   },
   {
-    id: "eng_303",
+    id: "l3_eng_3",
     title: "Possessive Apostrophes",
     text: "An **APOSTROPHE** (') is a tiny mark that shows who **OWNS** something. If a dog has a bone, we write: **The dog's bone**. The **'s** tells us the bone belongs to the dog. It’s like a little hook holding onto the owner!",
     imageUrl: "https://images.unsplash.com/photo-1456735190827-d1262f71b8a3",
@@ -332,7 +332,7 @@ export const level3Data = {
     ]
   },
   {
-    id: "eng_304",
+    id: "l3_eng_4",
     title: "Compound Sentences",
     text: "A **COMPOUND SENTENCE** is two small sentences joined together by a 'joining word' like **AND**, **BUT**, or **OR**. Example: 'I like cake, **and** I like ice cream.' We use a **COMMA** before the joining word.",
     imageUrl: "https://images.unsplash.com/photo-1455390582262-044cdead277a",
@@ -357,7 +357,7 @@ export const level3Data = {
     ]
   },
   {
-    id: "eng_305",
+    id: "l3_eng_5",
     title: "Action Verbs & Adverbs",
     text: "A **VERB** is an action (run, jump, think). An **ADVERB** describes how the action happens! Most adverbs end in **-LY**. Example: He ran **QUICKLY**. The word 'quickly' is the adverb.",
     imageUrl: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",

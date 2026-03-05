@@ -12,10 +12,15 @@ const Dashboard = ({ user, onSelectSubject }) => {
   ];
 
   // 🕵️ Step 1: Count all the actual stars earned (even if it's 16 or 100!)
-  const rawStars = subjects.reduce((acc, sub) => {
-    const scores = Object.values(progress[sub.name] || {});
-    return acc + scores.filter(s => s >= 7).length;
-  }, 0);
+  // 🕵️ Filter: Only count stars where the Quiz ID starts with "l1"
+ const rawStars = subjects.reduce((acc, sub) => {
+  const subjectProgress = progress[sub.name] || {};
+  // 🌟 Only count if ID starts with 'l1'
+  const level1Scores = Object.entries(subjectProgress).filter(([quizId, score]) => 
+    quizId.startsWith("l1") && score >= 7
+  );
+  return acc + level1Scores.length;
+}, 0);
 
   // 🕵️ Step 2: Set the goal based on the Level
   // For Level 1, 2, and 3, the goal is 15. For Level 4, it is 20.
@@ -68,7 +73,7 @@ const Dashboard = ({ user, onSelectSubject }) => {
         {/* --- PROGRESS BAR --- */}
         <div style={{ backgroundColor: "white", padding: "25px", borderRadius: Theme.borderRadius, boxShadow: Theme.cardShadow, marginBottom: "40px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px", fontWeight: "bold", fontSize: "20px" }}>
-               <span style={{ color: Theme.textMain }}>{unlocked ? "Level Up Complete!" : "Level 2 Unlock Progress"}</span>
+               <span style={{ color: Theme.textMain }}>{unlocked ? "Level 2 Unlock progress" : "Level 2 Unlock Progress"}</span>
                <span style={{ color: Theme.accent }}>{displayStars} / {goal} Stars</span>
             </div>
             <div style={{ position: "relative", width: "100%", height: "24px", backgroundColor: "#eee", borderRadius: "12px", overflow: "hidden" }}>

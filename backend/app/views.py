@@ -58,34 +58,35 @@ def log_interaction(request):
 
 # --- 4. LOGIN USER ---
 @csrf_exempt
+@csrf_exempt
 def login_user(request):
     if request.method == "POST":
         try:
-            # 🕵️ Check if the data is coming in as JSON
-            if request.content_type == 'application/json':
-                data = json.loads(request.body)
-            else:
-                # 🕵️ Fallback for form-data (sometimes React sends this)
-                data = request.POST
-            
+            # 🕵️ This line is a 'Super-Decoder' for the incoming data
+            raw_data = request.body.decode('utf-8')
+            print(f"📦 What React sent (Raw): {raw_data}") # LOOK FOR THIS IN TERMINAL
+
+            data = json.loads(raw_data)
             username = data.get("username")
-            print(f"🕵️ Trying to login: {username}") # Look for this in terminal!
-
+            
             if not username:
-                return JsonResponse({"error": "No username provided"}, status=400)
+                print("❌ No username in the box!")
+                return JsonResponse({"error": "Empty name"}, status=400)
 
-            # Look in MongoDB
+            # 🔎 Check MongoDB
             user = users_collection.find_one({"username": username}, {"_id": 0})
 
             if user:
+                print(f"✅ Found existing user: {username}")
                 return JsonResponse(user, status=200)
             else:
+                print(f"✨ Creating brand new user: {username}")
                 new_user = {"username": username, "level": "Level 1", "stars": 0}
                 users_collection.insert_one(new_user.copy())
                 return JsonResponse(new_user, status=201)
 
         except Exception as e:
-            print(f"❌ Error: {e}")
+            print(f"🔥 Error during login: {e}")
             return JsonResponse({"error": str(e)}, status=400)
 
-    return JsonResponse({"error": "Invalid method"}, status=405)
+    return JsonResponse({"error": "Wrong method"}, status=405)

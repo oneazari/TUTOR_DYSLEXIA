@@ -2,7 +2,7 @@
 export const lessonsData = {
   Science: [
     {
-      id: 1,
+      id: "l1_sci_1",
       title: "Introduction to Plants",
       text: "Plants are living organisms that make their own food through photosynthesis. They have roots, stems, leaves, and flowers.",
       imageUrl: "https://via.placeholder.com/400x200?text=Plants",
@@ -27,7 +27,7 @@ export const lessonsData = {
       ]
     },
     {
-      id: 2,
+      id: "l1_sci_2",
       title: "Plant Parts and Functions",
       text: "Roots anchor plants and absorb water. Stems support leaves and flowers. Leaves make food. Flowers help in reproduction.",
       imageUrl: "https://via.placeholder.com/400x200?text=Plant+Parts",
@@ -52,7 +52,7 @@ export const lessonsData = {
       ]
     },
     {
-      id: 3,
+      id: "l1_sci_3",
       title: "Photosynthesis Process",
       text: "Photosynthesis is how plants make food using sunlight, water, and carbon dioxide. Oxygen is released as a by-product.",
       imageUrl: "https://via.placeholder.com/400x200?text=Photosynthesis",
@@ -77,7 +77,7 @@ export const lessonsData = {
       ]
     },
     {
-      id: 4,
+      id: "l1_sci_4",
       title: "Plant Growth and Development",
       text: "Plants grow from seeds. They need water, sunlight, and nutrients from soil. Growth occurs in roots, stems, and leaves.",
       imageUrl: "https://via.placeholder.com/400x200?text=Plant+Growth",
@@ -102,7 +102,7 @@ export const lessonsData = {
       ]
     },
     {
-      id: 5,
+      id: "l1_sci_5",
       title: "Plant Reproduction",
       text: "Plants reproduce by seeds, spores, or cuttings. Flowers produce seeds. Some plants reproduce asexually.",
       imageUrl: "https://via.placeholder.com/400x200?text=Plant+Reproduction",
@@ -129,7 +129,7 @@ export const lessonsData = {
   ],
   Math: [
     {
-      id: 1,
+      id: "l1_math_1",
       title: "Numbers",
       text: "Numbers are used to count, measure, and label things in everyday life.",
       flashcards: [
@@ -153,7 +153,7 @@ export const lessonsData = {
       ],
     },
     {
-      id: 2,
+      id: "l1_math_2",
       title: "Addition",
       text: "Addition is combining two or more numbers to get a total.",
       flashcards: [
@@ -175,7 +175,7 @@ export const lessonsData = {
       ],
     },
     {
-      id: 3,
+      id: "l1_math_3",
       title: "Subtraction",
       text: "Subtraction is taking away a number from another number.",
       flashcards: [
@@ -196,7 +196,7 @@ export const lessonsData = {
       ],
     },
     {
-      id: 4,
+      id: "l1_math_4",
       title: "Multiplication",
       text: "Multiplication is repeated addition of the same number.",
       flashcards: [
@@ -217,7 +217,7 @@ export const lessonsData = {
       ],
     },
     {
-      id: 5,
+      id: "l1_math_5",
       title: "Division",
       text: "Division is splitting a number into equal parts.",
       flashcards: [
@@ -242,7 +242,7 @@ export const lessonsData = {
   English: [
 
     {
-      id: 1,
+      id: "l1_eng_1",
       title: "Alphabets",
       text: "The English alphabet has 26 letters from A to Z.",
       flashcards: [
@@ -266,7 +266,7 @@ export const lessonsData = {
       ],
     },
     {
-      id: 2,
+      id: "l1_eng_2",
       title: "Simple Words",
       text: "Simple words are basic words used for communication.",
       flashcards: [
@@ -290,7 +290,7 @@ export const lessonsData = {
       ],
     },
     {
-      id: 3,
+      id: "l1_eng_3",
       title: "Sentences",
       text: "A sentence is a group of words that expresses a complete thought.",
       flashcards: [
@@ -312,7 +312,7 @@ export const lessonsData = {
       ],
     },
     {
-      id: 4,
+      id: "l1_eng_4",
       title: "Grammar",
       text: "Grammar is the system of rules that helps us speak and write correctly.",
       flashcards: [
@@ -334,7 +334,7 @@ export const lessonsData = {
       ],
     },
     {
-      id: 5,
+      id: "l1_eng_5",
       title: "Story",
       text: "Stories are a way to share events and ideas in an interesting way.",
       flashcards: [

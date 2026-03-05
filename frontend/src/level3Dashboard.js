@@ -13,21 +13,26 @@ const Level3Dashboard = ({ user, onSelectSubject, onBackToLevel2 }) => {
   ];
 
   // 🕵️ Step 1: Count all actual stars earned
-  const rawStars = subjectData.reduce((acc, sub) => {
-    const scores = Object.values(progress[sub.name] || {});
-    return acc + scores.filter(s => s >= 7).length;
+ // 🕵️ Step 1: Calculate Stars (using the 'totalStars' name)
+// 🕵️ Step 1: Calculate Stars (Change the name to totalStars here!)
+  const totalStars = subjectData.reduce((acc, sub) => {
+    const subjectProgress = progress[sub.name] || {};
+    
+    // Filter for IDs starting with 'l3'
+    const level3Scores = Object.entries(subjectProgress).filter(([quizId, score]) => 
+      quizId.startsWith("l3") && score >= 7
+    );
+    
+    return acc + level3Scores.length;
   }, 0);
 
-  // 🕵️ Step 2: Set the goal for Level 3 
-  const goal = 15; 
-  
-  // 🕵️ Step 3: Cap the display so it stops at 5/5
-  const displayStars = Math.min(rawStars, goal);
-
+  // 🕵️ Step 2: Now these lines will work perfectly!
+  const goal = 15;
+  const displayStars = Math.min(totalStars, goal); 
   const percent = Math.min(Math.round((displayStars / goal) * 100), 100);
   
-  // Level 4 unlocks when you hit the 5-star goal
-  const isLevel4Unlocked = rawStars >= goal;
+  // 🕵️ Step 3: Check for unlock
+  const isLevel4Unlocked = totalStars >= goal;
 
   return (
     <div style={{ padding: "40px", backgroundColor: Theme.background, minHeight: "100vh", fontFamily: Theme.fontFamily }}>

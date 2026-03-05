@@ -60,7 +60,12 @@ const Auth = ({ onLogin }) => {
         } else {
           localStorage.removeItem("tutor_remembered_name");
         }
-        onLogin(user);
+
+        // 🚀 THIS IS THE FIX:
+        // We send the user object to App.js, which then calls Django!
+        console.log("📢 Auth is calling App.js handleLogin for:", user.username);
+        onLogin(user); 
+
       } else {
         setError("Oops! Wrong name or PIN. Try again!");
       }

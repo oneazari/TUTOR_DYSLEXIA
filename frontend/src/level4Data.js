@@ -2,7 +2,7 @@ export const level4Data = {
 
 Science: [
   {
-    id: "sci_401",
+    id: "l4_sci_1",
     title: "States of Matter",
     text: "Everything in the universe is made of **MATTER**. Matter usually comes in three states: **SOLIDS** (hard shapes), **LIQUIDS** (flowy stuff), and **GASES** (invisible like air). If you add heat, a solid can melt into a liquid, and a liquid can evaporate into a gas!",
     imageUrl: "https://images.unsplash.com/photo-1530210124550-912dc1381cb8",
@@ -27,7 +27,7 @@ Science: [
     ]
   },
   {
-    id: "sci_402",
+    id: "l4_sci_2",
     title: "The Power of Electricity",
     text: "**ELECTRICITY** is a type of energy caused by the movement of tiny particles called **ELECTRONS**. It flows through a **CIRCUIT**. Materials like metal that let electricity pass are called **CONDUCTORS**, while things like rubber that stop it are **INSULATORS**.",
     imageUrl: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e",
@@ -52,7 +52,7 @@ Science: [
     ]
   },
   {
-    id: "sci_403",
+    id: "l4_sci_3",
     title: "The Solar System",
     text: "Our Solar System has **8 PLANETS** orbiting one star: the **SUN**. The inner planets (like Earth) are rocky, while the outer planets (like Jupiter) are huge **GAS GIANTS**. Gravity is the 'glue' that keeps all the planets spinning around the Sun.",
     imageUrl: "https://images.unsplash.com/photo-1454789548928-9efd52dc4031",
@@ -77,7 +77,7 @@ Science: [
     ]
   },
   {
-    id: "sci_404",
+    id: "l4_sci_4",
     title: "Light and Shadows",
     text: "**LIGHT** travels in a straight line at the fasquestions speed in the universe! When light hits an object it can't go through (OPAKQUE), it creates a **SHADOW**. Shiny things **REFLECT** light, like a mirror.",
     imageUrl: "https://images.unsplash.com/photo-1532012197267-da84d127e765",
@@ -102,7 +102,7 @@ Science: [
     ]
   },
   {
-    id: "sci_405",
+    id: "l4_sci_5",
     title: "The Human Brain & Nerves",
     text: "Your **BRAIN** is the computer of your body! It sends messages through **NERVES** to tell your muscles to move. It also processes what you see, hear, and feel. The brain never stops working, even when you are asleep!",
     imageUrl: "https://images.unsplash.com/photo-1559757175-5700dde675bc",
@@ -129,7 +129,7 @@ Science: [
 ],
 Math: [
   {
-    id: "math_401",
+    id: "l4_math_1",
     title: "Understanding Decimals",
     text: "**DECIMALS** are a way to show numbers that are smaller than 1. Think of them like money! **$1.50** means one whole dollar and fifty cents. The dot is called the **Decimal Point**. Anything to the right of the dot is a tiny piece of a whole number.",
     imageUrl: "https://images.unsplash.com/photo-1518133910546-b6c2fb7d79e3",
@@ -154,7 +154,7 @@ Math: [
     ]
   },
   {
-    id: "math_402",
+    id: "l4_math_2",
     title: "Angles and Protractors",
     text: "When two lines meet, they create an **ANGLE**. We measure them in **Degrees (°)**. A square corner is a **Right Angle** (90°). If it's smaller, it's **Acute**. If it's bigger, it's **Obtuse**. We use a tool called a **Protractor** to measure them!",
     imageUrl: "https://images.unsplash.com/photo-1509228468518-180dd482180c",
@@ -179,7 +179,7 @@ Math: [
     ]
   },
   {
-    id: "math_403",
+    id: "l4_math_3",
     title: "Area and Perimeter",
     text: "**PERIMETER** is the distance *around* the outside of a shape (like a fence). **AREA** is the space *inside* a shape (like the grass in a yard). To find the area of a rectangle, just multiply the **Length × Width**!",
     imageUrl: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b",
@@ -204,7 +204,7 @@ Math: [
     ]
   },
   {
-    id: "math_404",
+    id: "l4_math_4",
     title: "Negative Numbers",
     text: "Numbers can go below zero! These are called **NEGATIVE NUMBERS**. Think of a thermometer in the winter—if it's **-5°**, it's very cold! On a number line, negative numbers live to the left of zero. The further they go, the 'smaller' (colder) they get.",
     imageUrl: "https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22",
@@ -229,7 +229,7 @@ Math: [
     ]
   },
   {
-    id: "math_405",
+    id: "l4_math_5",
     title: "Introduction to Symmetry",
     text: "Something is **SYMMETRICAL** if you can fold it in half and both sides match perfectly. The 'fold' is called the **Line of Symmetry**. Butterflies, circles, and even your own face have symmetry!",
     imageUrl: "https://images.unsplash.com/photo-1517670869917-326703b44b97",
@@ -256,7 +256,7 @@ Math: [
 ],
 English: [
   {
-    id: "eng_401",
+    id: "l4_eng_1",
     title: "Idioms: Secret Code Language",
     text: "An **IDIOM** is a phrase that sounds silly if you take it literally, but has a secret meaning. For example, if someone says it's **'raining cats and dogs,'** they don't mean animals are falling from the sky—they just mean it's raining very hard! Understanding idioms makes your writing much more colorful.",
     imageUrl: "https://images.unsplash.com/photo-1516414447565-b14be0afa13e",
@@ -281,7 +281,7 @@ English: [
     ]
   },
   {
-    id: "eng_402",
+    id: "l4_eng_2",
     title: "Quotation Marks & Dialogue",
     text: "When characters in a story talk, we use **QUOTATION MARKS** (\" \") to show exactly what they said. This is called **Dialogue**. You always put the punctuation *inside* the marks. For example: \"I love coding!\" shouted the student.",
     imageUrl: "https://images.unsplash.com/photo-1455390582262-044cdead277a",
@@ -306,7 +306,7 @@ English: [
     ]
   },
   {
-    id: "eng_403",
+    id: "l4_eng_3",
     title: "Prefixes and Suffixes",
     text: "You can change the meaning of a word by adding bits to the beginning (**PREFIX**) or the end (**SUFFIX**). For example, 'un-' means 'not.' So, **unhappy** means not happy. '-less' means 'without,' so **fearless** means without fear!",
     imageUrl: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8",
@@ -331,7 +331,7 @@ English: [
     ]
   },
   {
-    id: "eng_404",
+    id: "l4_eng_4",
     title: "Poetry and Rhyme",
     text: "**POETRY** is a way of writing that uses rhythm and feelings. Words that sound the same at the end, like 'cat' and 'hat,' are called **RHYMES**. A group of lines in a poem is called a **STANZA**—it's like a paragraph for poems!",
     imageUrl: "https://images.unsplash.com/photo-1473186533640-10972b904126",
@@ -356,7 +356,7 @@ English: [
     ]
   },
   {
-    id: "eng_405",
+    id: "l4_eng_5",
     title: "Fact vs. Opinion",
     text: "A **FACT** is something that is always true and can be proven (The Earth is round). An **OPINION** is how someone feels or what they think (Chocolate is the best!). In expert writing, it's important to know the difference!",
     imageUrl: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9",
@@ -384,7 +384,7 @@ English: [
 
   GK: [
     {
-      id: "gk_401",
+      id: "l4_gk_1",
       title: "Wonders of the World",
       text: "Our planet has amazing structures called **WONDERS**. Some are ancient, like the **Great Pyramid of Giza**, and some are 'New,' like the **Taj Mahal** in India or **Chichen Itza** in Mexico. These show how smart and creative humans have been for thousands of years!",
       imageUrl: "https://images.unsplash.com/photo-1548013146-72479768bbaa",
@@ -409,7 +409,7 @@ English: [
       ]
     },
     {
-      id: "gk_402",
+      id: "l4_gk_2",
       title: "The Seven Continents",
       text: "Earth is divided into 7 huge pieces of land called **CONTINENTS**. **Asia** is the biggest, **Australia** is the smallest, and **Antarctica** is the coldest. Most people live in Asia and Africa!",
       imageUrl: "https://images.unsplash.com/photo-1521295121783-8a321d551ad2",
@@ -434,7 +434,7 @@ English: [
       ]
     },
     {
-      id: "gk_403",
+      id: "l4_gk_3",
       title: "Our Blue Oceans",
       text: "Over **70%** of Earth is covered by water! We have 5 main oceans. The **Pacific** is the largest and deepest. The **Arctic** is at the very top of the world. Oceans give us oxygen and help control the weather.",
       imageUrl: "https://images.unsplash.com/photo-1551244072-5d12893278ab",
@@ -459,7 +459,7 @@ English: [
       ]
     },
     {
-      id: "gk_404",
+      id: "l4_gk_4",
       title: "Inventors and Inventions",
       text: "Inventors change the world! **Thomas Edison** gave us the lightbulb, **Alexander Graham Bell** gave us the telephone, and the **Wright Brothers** showed us how to fly. Every tool you use was once an idea in someone's head!",
       imageUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
@@ -484,7 +484,7 @@ English: [
       ]
     },
     {
-      id: "gk_405",
+      id: "l4_gk_5",
       title: "Famous Leaders of History",
       text: "Leaders help guide countries through hard times. **Mahatma Gandhi** used peace to free India. **Abraham Lincoln** helped end slavery in the USA. **Nelson Mandela** fought for fairness in South Africa. They all believed in **KINDNESS** and **JUSTICE**.",
       imageUrl: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620",

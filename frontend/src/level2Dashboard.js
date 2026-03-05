@@ -13,10 +13,15 @@ const Level2Dashboard = ({ user, onSelectSubject, onBackToLevel1 }) => {
   ];
 
   // 🕵️ Step 1: Count all actual stars earned in the database
-  const rawStars = subjectData.reduce((acc, sub) => {
-    const scores = Object.values(progress[sub.name] || {});
-    return acc + scores.filter(s => s >= 7).length;
-  }, 0);
+  // 🕵️ Filter: Only count stars where the Quiz ID starts with "l2"
+ const rawStars = subjectData.reduce((acc, sub) => {
+  const subjectProgress = progress[sub.name] || {};
+  // 🌟 Only count if ID starts with 'l2'
+  const level2Scores = Object.entries(subjectProgress).filter(([quizId, score]) => 
+    quizId.startsWith("l2") && score >= 7
+  );
+  return acc + level2Scores.length;
+}, 0);
 
   // 🕵️ Step 2: Set the goal and cap the display
   const goal = 15; 

@@ -6,7 +6,7 @@ const ChapterSelection = ({ subject, chapters, onSelectChapter, onBack, currentL
   const { progress } = useLevelProgress();
   
   // 1. We added "GK" to the list so it can count stars for Level 4!
-  const subjects = ["Science", "Math", "English", "GK"];
+  /*  const subjects = ["Science", "Math", "English", "GK"];
   
   const totalStars = subjects.reduce((acc, sub) => {
     const scores = Object.values(progress[sub] || {});
@@ -15,8 +15,8 @@ const ChapterSelection = ({ subject, chapters, onSelectChapter, onBack, currentL
 
   // 2. Level 4 has 20 stars total (5 per subject x 4 subjects)
   const goal = currentLevel === 4 ? 20 : 15;
-  const percent = Math.min(Math.round((totalStars / goal) * 100), 100);
-
+  //const percent = Math.min(Math.round((totalStars / goal) * 100), 100);
+*/
   // 3. THE SAFETY NET: If chapters are missing, show this instead of crashing!
   if (!chapters) {
     return (
@@ -38,16 +38,7 @@ const ChapterSelection = ({ subject, chapters, onSelectChapter, onBack, currentL
           ← Back to Dashboard
         </button>
 
-        {/* PROGRESS BAR */}
-        <div style={{ marginBottom: "40px", backgroundColor: "white", padding: "20px", borderRadius: Theme.borderRadius, boxShadow: Theme.cardShadow }}>
-           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "8px" }}>
-            <span style={{ color: Theme.textMuted, fontWeight: "bold" }}>Level {currentLevel} Overall Progress</span>
-            <span style={{ fontWeight: "bold", color: "#2ecc71" }}>{totalStars} / {goal} Stars</span>
-          </div>
-          <div style={{ width: "100%", height: "16px", backgroundColor: "#f0f0f0", borderRadius: "10px", overflow: "hidden" }}>
-            <div style={{ width: `${percent}%`, height: "100%", backgroundColor: "#2ecc71", transition: "width 0.8s ease-in-out" }} />
-          </div>
-        </div>
+        
 
         <h2 style={{ color: Theme.textMain, marginBottom: "30px", fontSize: "32px" }}>
           Select a <span style={{ color: Theme.accent }}>{subject}</span> Chapter
