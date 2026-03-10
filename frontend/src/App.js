@@ -5,8 +5,9 @@ import Auth from "./Auth";
 import Level2Dashboard from "./level2Dashboard"; 
 import Level3Dashboard from "./level3Dashboard"; 
 import Level4Dashboard from "./level4Dashboard"; 
+import Level5Dashboard from "./level5Dashboard"; // The component we just made
+import { level5Data } from "./level5Data";       // The data we made earlier
 import ProfileView from "./ProfileView"; 
-
 import { useLevelProgress } from "./LevelProgressContext";
 import { lessonsData } from "./lessonsData"; 
 import { level2Data } from "./level2Data"; 
@@ -75,6 +76,7 @@ function App() {
     if (levelNum === 2) dataToSearch = level2Data;
     if (levelNum === 3) dataToSearch = level3Data;
     if (levelNum === 4) dataToSearch = level4Data;
+    if (levelNum === 5) dataToSearch = level5Data;
 
     const subjects = ["Science", "Math", "English", "GK"];
     let totalStars = 0;
@@ -136,16 +138,20 @@ function App() {
     setPage("dashboard");
   };
 
-  const handleComplete = (score) => {
+ const handleComplete = (score) => {
     if (subject && chapterData) {
       markModuleComplete(subject, chapterData.id, score);
       const levelStars = getStarsForLevel(currentLevel);
       
+      // If they got enough stars (14) and passed the quiz (7/10)
       if (levelStars >= 14 && score >= 7) { 
         if (currentLevel === 1) setPage("level1Success");
         else if (currentLevel === 2) setPage("level2Success");
         else if (currentLevel === 3) setPage("level3Success");
+        else if (currentLevel === 4) setPage("level4Success");
+        else if (currentLevel === 5) setPage("level5Success"); // 🏆 Just this one line!
       } else {
+        // If they aren't done with the level yet, go back to pick another chapter
         setPage("chapterSelection");
       }
     }
@@ -154,6 +160,7 @@ function App() {
   if (!user) return <Auth onLogin={handleLogin} />;
 
   const activeDataSource = 
+    currentLevel === 5 ? level5Data :
     currentLevel === 4 ? level4Data : 
     currentLevel === 3 ? level3Data : 
     currentLevel === 2 ? level2Data : 
@@ -189,39 +196,46 @@ function App() {
         onBackToLevel3={() => { setCurrentLevel(3); setPage("level3Dashboard"); }} 
       />
     ),
-    level5ComingSoon: (
-      <div style={{ 
-        display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", 
-        height: "100vh", backgroundColor: "#1e293b", textAlign: "center", color: "white" 
-      }}>
-        <div style={{ fontSize: "100px", marginBottom: "20px" }}>🚀</div>
-        <h1 style={{ fontSize: "48px", fontFamily: Theme.fontFamily }}>Level 5: The Diamond Frontier</h1>
-        <p style={{ fontSize: "24px", color: "#94a3b8", maxWidth: "600px" }}>
-          Great job, Master Learner! You have conquered all current levels. 
-          Level 5 is currently being built by our scientists. Check back soon!
-        </p>
-        <button 
-          onClick={() => setPage("level4Dashboard")}
-          style={{ 
-            marginTop: "30px", padding: "15px 40px", borderRadius: "30px", 
-            border: "none", backgroundColor: "#38bdf8", color: "white", 
-            fontSize: "20px", fontWeight: "bold", cursor: "pointer" 
-          }}
-        >
-          Back to Level 4
-        </button>
-      </div>
-    ),
-    profile: (
-      <ProfileView 
-        user={user} 
-        progress={progress} 
-        onBack={() => setPage(currentLevel === 2 ? "level2Dashboard" : "dashboard")} 
+    level5Dashboard: (
+        <Level5Dashboard 
+          user={user} 
+          onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
+          onBackToLevel4={() => { setCurrentLevel(4); setPage("level4Dashboard"); }} 
+        />
+      ),
+    
+      level1Success: <SuccessScreen level={1} onContinue={() => { setCurrentLevel(2); setPage("level2Dashboard"); }} />,
+    level2Success: <SuccessScreen level={2} onContinue={() => { setCurrentLevel(3); setPage("level3Dashboard"); }} />,
+    level3Success: <SuccessScreen level={3} onContinue={() => { setPage("level3Dashboard"); }} />,
+    level4Success: <SuccessScreen level={4} onContinue={() => { setCurrentLevel(5); setPage("level5Dashboard"); }} />,
+    
+    // 🏆 ADD THIS ONE HERE!
+    level5Success: (
+      <SuccessScreen 
+        level={5} 
+        onContinue={() => { 
+          setCurrentLevel(5); 
+          setPage("level5Dashboard"); 
+        }} 
       />
     ),
-    level1Success: <SuccessScreen level={1} onContinue={() => { setCurrentLevel(2); setPage("level2Dashboard"); }} />,
-    level2Success: <SuccessScreen level={2} onContinue={() => { setCurrentLevel(3); setPage("level2Dashboard"); }} />,
-    level3Success: <SuccessScreen level={3} onContinue={() => { setPage("level3Dashboard"); }} />,
+
+
+
+    profile: (
+  <ProfileView 
+    user={user} 
+    progress={progress} 
+    onBack={() => {
+      // 🧭 This tells the app exactly which home screen to go to!
+      if (currentLevel === 5) setPage("level5Dashboard");
+      else if (currentLevel === 4) setPage("level4Dashboard");
+      else if (currentLevel === 3) setPage("level3Dashboard");
+      else if (currentLevel === 2) setPage("level2Dashboard");
+      else setPage("dashboard");
+    }} 
+  />
+),
     chapterSelection: (
       <ChapterSelection 
         subject={subject} 
@@ -308,49 +322,55 @@ function App() {
 
 
 
-        <nav style={{ flex: 1 }}>
-          {[1, 2, 3, 4, 5].map((lvl) => {
-            const isComingSoon = lvl === 5;
-            const unlocked = lvl === 1 || 
-                  (lvl === 2 && isLevel2Unlocked()) || 
-                  (lvl === 3 && isLevel3Unlocked()) ||
-                  (lvl === 4 || lvl <= 3);
+      <nav style={{ flex: 1 }}>
+  {[1, 2, 3, 4, 5].map((lvl) => {
+    // 1. Check if the level is unlocked based on your game rules
+    /*const unlocked = lvl === 1 || 
+      (lvl === 2 && isLevel2Unlocked()) || 
+      (lvl === 3 && isLevel3Unlocked()) ||
+      (lvl === 4 && getStarsForLevel(3) >= 14) || 
+      (lvl === 5 && getStarsForLevel(4) >= 14); */
+     
+    const unlocked = true;
 
-            return (
-              <div 
-                key={lvl}
-                onClick={() => {
-                  if (isComingSoon) {
-                    setPage("level5ComingSoon");
-                  } else if (unlocked) {
-                    setCurrentLevel(lvl);
-                    if (lvl === 1) setPage("dashboard");
-                    else if (lvl === 2) setPage("level2Dashboard");
-                    else if (lvl === 3) setPage("level3Dashboard");
-                    else if (lvl === 4) setPage("level4Dashboard");
-                  }
-                }}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  padding: "12px",
-                  margin: "8px 0",
-                  borderRadius: "8px",
-                  cursor: unlocked || isComingSoon ? "pointer" : "not-allowed",
-                  backgroundColor: currentLevel === lvl ? "rgba(255,255,255,0.1)" : "transparent",
-                  opacity: unlocked || isComingSoon ? 1 : 0.5,
-                }}
-              >
-                <span style={{ fontSize: "20px", marginRight: "10px" }}>
-                  {isComingSoon ? "🚀" : (unlocked ? "🔓" : "🔒")}
-                </span>
-                <span style={{ fontWeight: "bold" }}>
-                  Level {lvl} {isComingSoon && "(Soon!)"}
-                </span>
-              </div>
-            );
-          })}
-        </nav>
+    return (
+      <div 
+        key={lvl}
+        onClick={() => {
+          if (unlocked) {
+            setCurrentLevel(lvl);
+            // 2. Map each level number to its specific dashboard name
+            const pageNames = {
+              1: "dashboard",
+              2: "level2Dashboard",
+              3: "level3Dashboard",
+              4: "level4Dashboard",
+              5: "level5Dashboard"
+            };
+            setPage(pageNames[lvl]);
+          }
+        }}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          padding: "12px",
+          margin: "8px 0",
+          borderRadius: "8px",
+          cursor: unlocked ? "pointer" : "not-allowed",
+          backgroundColor: currentLevel === lvl ? "rgba(255,255,255,0.1)" : "transparent",
+          opacity: unlocked ? 1 : 0.5,
+        }}
+      >
+        <span style={{ fontSize: "20px", marginRight: "10px" }}>
+          {unlocked ? "🔓" : "🔒"}
+        </span>
+        <span style={{ fontWeight: "bold" }}>
+          Level {lvl}
+        </span>
+      </div>
+    );
+  })}
+</nav>
       </div>
       <div style={{ flex: 1, overflowY: "auto" }}>
         {views[page] || <div>Loading...</div>}
