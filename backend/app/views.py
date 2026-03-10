@@ -2,9 +2,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from datetime import datetime
-
-# 🚀 FIX: We added users_collection here! 
-# Also check if your db_connections file calls it 'interaction_logs' or 'interaction_collection'
+# Ensure these match your db_connections.py file exactly
 from .db_connections import interaction_collection, lessons_collection, users_collection 
 
 # --- 1. GET ALL LESSONS ---
@@ -28,65 +26,74 @@ def get_lesson(request, lesson_id=None):
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
 
-# --- 3. LOG USER INTERACTIONS ---
+# --- 3. ADAPTIVE LOGIC: STRUGGLE HANDLER ---
+@csrf_exempt
+def handle_struggle(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            username = data.get("username")
+            user = users_collection.find_one({"username": username})
+            
+            if not user:
+                return JsonResponse({"error": "User not found"}, status=404)
+
+            # Logic: Move down one level if possible (e.g., Level 4 -> Level 3)
+            current_lvl = int(user.get("level", "Level 1").split(" ")[1])
+            new_lvl = max(1, current_lvl - 1)
+            new_lvl_str = f"Level {new_lvl}"
+
+            users_collection.update_one({"username": username}, {"$set": {"level": new_lvl_str}})
+            
+            # Fetch simpler content for the student
+            easier_lesson = lessons_collection.find_one({"level": new_lvl}, {"_id": 0})
+            
+            return JsonResponse({
+                "status": "adapted",
+                "new_level": new_lvl_str,
+                "lesson": easier_lesson
+            })
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+
+# --- 4. LOG INTERACTIONS (Behavioral Tracker) ---
 @csrf_exempt
 def log_interaction(request):
     if request.method == "POST":
         try:
             data = json.loads(request.body)
             value = data.get("value", 0)
-            metric = data.get("metric")
+            metric = data.get("metric") # e.g., 'cursorDwellTime'
             
-            staring_too_long = (metric == 'cursorDwellTime' and value > 3000)
-            thinking_too_long = (metric == 'clickLatency' and value > 5000)
-            is_struggling = staring_too_long or thinking_too_long
+            # Adaptive Thresholds
+            is_struggling = (metric == 'cursorDwellTime' and value > 3000)
             
             log_entry = {
+                "username": data.get("username", "student_user"),
                 "metric": metric,
                 "value": value,
-                "element_id": data.get("id"),
-                "username": data.get("username", "student_user"),
                 "is_struggling": is_struggling,
                 "timestamp": datetime.now()
             }
-            
             interaction_collection.insert_one(log_entry)
             return JsonResponse({"status": "success", "struggling": is_struggling}, status=201)
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)
-    return JsonResponse({"error": "Invalid method"}, status=405)
 
-# --- 4. LOGIN USER ---
-@csrf_exempt
+# --- 5. LOGIN USER ---
 @csrf_exempt
 def login_user(request):
     if request.method == "POST":
         try:
-            # 🕵️ This line is a 'Super-Decoder' for the incoming data
-            raw_data = request.body.decode('utf-8')
-            print(f"📦 What React sent (Raw): {raw_data}") # LOOK FOR THIS IN TERMINAL
-
-            data = json.loads(raw_data)
+            data = json.loads(request.body)
             username = data.get("username")
-            
-            if not username:
-                print("❌ No username in the box!")
-                return JsonResponse({"error": "Empty name"}, status=400)
-
-            # 🔎 Check MongoDB
             user = users_collection.find_one({"username": username}, {"_id": 0})
 
             if user:
-                print(f"✅ Found existing user: {username}")
                 return JsonResponse(user, status=200)
             else:
-                print(f"✨ Creating brand new user: {username}")
                 new_user = {"username": username, "level": "Level 1", "stars": 0}
                 users_collection.insert_one(new_user.copy())
                 return JsonResponse(new_user, status=201)
-
         except Exception as e:
-            print(f"🔥 Error during login: {e}")
             return JsonResponse({"error": str(e)}, status=400)
-
-    return JsonResponse({"error": "Wrong method"}, status=405)
