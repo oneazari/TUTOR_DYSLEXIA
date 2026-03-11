@@ -23,7 +23,15 @@ export const level3Data = {
       { question: "The heart is a ___?", options: ["Filter", "Pump", "Brain", "Liver"], answer: "Pump" },
       { question: "Exercise makes the heart beat ___?", options: ["Slower", "Faster", "Stop", "Quiet"], answer: "Faster" },
       { question: "Where does oxygen go?", options: ["To cells", "To hair", "To shoes", "To nails"], answer: "To cells" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "Your heart is a muscle that acts like a ___?", options: ["Pump", "Balloon"], answer: "Pump" },
+  { question: "How many chambers (rooms) does the heart have?", options: ["4", "10"], answer: "4" },
+  { question: "What carries oxygen all around your body?", options: ["Blood", "Bones"], answer: "Blood" },
+  { question: "The heart is about the same size as your ___?", options: ["Fist", "Foot"], answer: "Fist" },
+  { question: "The top parts of the heart are called ___?", options: ["Atriums", "Vents"], answer: "Atriums" }
+  ]
+    
   },
   {
     id: "l3_sci_2",
@@ -48,7 +56,14 @@ export const level3Data = {
       { question: "Plant food is a type of ___?", options: ["Salt", "Sugar", "Protein", "Fat"], answer: "Sugar" },
       { question: "Chlorophyll is what color?", options: ["Red", "Green", "Blue", "Yellow"], answer: "Green" },
       { question: "Without sun, plants would ___?", options: ["Grow", "Die", "Run", "Sing"], answer: "Die" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "What is the green helper inside leaves called?", options: ["Chlorophyll", "Paint"], answer: "Chlorophyll" },
+  { question: "Where do plants get energy to make food?", options: ["The Sun", "The Moon"], answer: "The Sun" },
+  { question: "What do plants breathe out for us to use?", options: ["Oxygen", "Smoke"], answer: "Oxygen" },
+  { question: "Which part of the plant drinks water?", options: ["Roots", "Flowers"], answer: "Roots" },
+  { question: "Plants make a type of food called ___?", options: ["Sugar", "Salt"], answer: "Sugar" }
+]
   },
   {
     id: "l3_sci_3",
@@ -73,7 +88,14 @@ export const level3Data = {
       { question: "Gravity is a ___?", options: ["Push", "Pull", "Jump", "Slide"], answer: "Pull" },
       { question: "On the moon, you could jump ___?", options: ["Lower", "Higher", "Slower", "Faster"], answer: "Higher" },
       { question: "Does space have gravity?", options: ["No", "Yes", "Only on Mars", "Only on Earth"], answer: "Yes" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "Gravity is a force that does what?", options: ["Pulls things down", "Pushes things up"], answer: "Pulls things down" },
+  { question: "Is gravity stronger or weaker on the Moon?", options: ["Weaker", "Stronger"], answer: "Weaker" },
+  { question: "Who is the big puller in the middle of our planets?", options: ["The Sun", "The Earth"], answer: "The Sun" },
+  { question: "The path a planet takes around the Sun is an ___?", options: ["Orbit", "Aisle"], answer: "Orbit" },
+  { question: "Gravity is a ___?", options: ["Pull", "Push"], answer: "Pull" }
+  ]
   },
   {
     id: "l3_sci_4",
@@ -98,7 +120,15 @@ export const level3Data = {
       { question: "Everything is made of ___?", options: ["Matter", "Magic", "Space", "Wind"], answer: "Matter" },
       { question: "Liquid takes the shape of its ___?", options: ["Lid", "Container", "Box", "Floor"], answer: "Container" },
       { question: "Gas fills the ___ room?", options: ["Corner", "Whole", "Half", "Bottom"], answer: "Whole" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "Which one flows and takes the shape of a cup?", options: ["Liquid", "Solid"], answer: "Liquid" },
+  { question: "Ice is water in which state?", options: ["Solid", "Gas"], answer: "Solid" },
+  { question: "Steam coming off a hot drink is a ___?", options: ["Gas", "Solid"], answer: "Gas" },
+  { question: "What happens to ice when you heat it up?", options: ["It melts", "It freezes"], answer: "It melts" },
+  { question: "Everything in the world is made of ___?", options: ["Matter", "Magic"], answer: "Matter" }
+],
+
   },
   {
     id: "l3_sci_5",
@@ -123,7 +153,14 @@ export const level3Data = {
       { question: "Messages move very ___?", options: ["Slow", "Fast", "Quietly", "Never"], answer: "Fast" },
       { question: "Nerves are like ___?", options: ["Wires", "Rocks", "Clouds", "Trees"], answer: "Wires" },
       { question: "The brain never ___?", options: ["Works", "Sleeps", "Moves", "Thinks"], answer: "Sleeps" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "Who is the 'boss' or computer of your body?", options: ["The Brain", "The Stomach"], answer: "The Brain" },
+  { question: "What carries messages like tiny wires?", options: ["Nerves", "Hair"], answer: "Nerves" },
+  { question: "The main message highway in your back is the ___?", options: ["Spinal Cord", "Leg Bone"], answer: "Spinal Cord" },
+  { question: "A super fast move, like blinking, is a ___?", options: ["Reflex", "Dance"], answer: "Reflex" },
+  { question: "Does your brain ever sleep?", options: ["No", "Yes"], answer: "No" }
+]
   }
 ],
 
@@ -151,7 +188,14 @@ export const level3Data = {
       { question: "In 3/8, what is the numerator?", options: ["3", "8", "11", "5"], answer: "3" },
       { question: "In 5/6, what is the denominator?", options: ["5", "6", "11", "1"], answer: "6" },
       { question: "Fractions must be divided into ___ parts.", options: ["Uneven", "Equal", "Big", "Random"], answer: "Equal" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "In a fraction, which number is on the top?", options: ["Numerator", "Denominator"], answer: "Numerator" },
+  { question: "If you cut a pizza into 2 equal pieces, one piece is called a ___?", options: ["Half (1/2)", "Whole"], answer: "Half (1/2)" },
+  { question: "The bottom number (Denominator) tells us how many pieces make the ___?", options: ["Whole", "Top"], answer: "Whole" },
+  { question: "If you have 4/4 of a cake, how much do you have?", options: ["One Whole", "One Slice"], answer: "One Whole" },
+  { question: "Does a fraction have to be cut into equal parts?", options: ["Yes", "No"], answer: "Yes" }
+]
   },
   {
     id: "l3_math_2",
@@ -176,7 +220,14 @@ export const level3Data = {
       { question: "3 x 10 is ___?", options: ["13", "30", "3", "0"], answer: "30" },
       { question: "Multiplication is fast ___?", options: ["Subtraction", "Addition", "Sleeping", "Running"], answer: "Addition" },
       { question: "9 x 0 is ___?", options: ["9", "0", "90", "1"], answer: "0" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "What is 2 x 2? (That is 2 + 2)", options: ["4", "22"], answer: "4" },
+  { question: "Any number times ZERO equals ___?", options: ["0", "The same number"], answer: "0" },
+  { question: "What is 5 x 1?", options: ["5", "1"], answer: "5" },
+  { question: "Multiplication is just a fast way to do ___?", options: ["Addition", "Subtraction"], answer: "Addition" },
+  { question: "What is 2 groups of 5? (5 + 5)", options: ["10", "7"], answer: "10" }
+]
   },
   {
     id: "l3_math_3",
@@ -201,7 +252,14 @@ export const level3Data = {
       { question: "15 ÷ 3 is ___?", options: ["3", "5", "10", "4"], answer: "5" },
       { question: "Sharing means giving everyone the ___ amount.", options: ["Different", "Same/Equal", "More", "Less"], answer: "Same/Equal" },
       { question: "12 ÷ 2 is ___?", options: ["6", "10", "14", "24"], answer: "6" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "Division means sharing things into ___ groups.", options: ["Equal", "Different"], answer: "Equal" },
+  { question: "If you have 4 cookies and 2 friends, how many does each get?", options: ["2", "4"], answer: "2" },
+  { question: "What is the opposite of Multiplication?", options: ["Division", "Adding"], answer: "Division" },
+  { question: "What is 10 divided by 2? (Half of 10)", options: ["5", "2"], answer: "5" },
+  { question: "If you share 6 toys between 3 kids, is that sharing?", options: ["Yes", "No"], answer: "Yes" }
+]
   },
   {
     id: "l3_math_4",
@@ -226,7 +284,14 @@ export const level3Data = {
       { question: "A clock has ___ numbers on it.", options: ["10", "12", "24", "60"], answer: "12" },
       { question: "The short hand on a clock shows ___?", options: ["Minutes", "Hours", "Seconds", "Days"], answer: "Hours" },
       { question: "60 minutes is the same as ___?", options: ["1 Day", "1 Hour", "1 Week", "1 Month"], answer: "1 Hour" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "How many minutes are in one whole hour?", options: ["60", "10"], answer: "60" },
+  { question: "How many days are in one week?", options: ["7", "30"], answer: "7" },
+  { question: "Which hand on the clock tells us the HOUR?", options: ["The Short Hand", "The Long Hand"], answer: "The Short Hand" },
+  { question: "How many months are in a year?", options: ["12", "7"], answer: "12" },
+  { question: "If it is 1:00 and one hour passes, what time is it?", options: ["2:00", "12:00"], answer: "2:00" }
+]
   },
   {
     id: "l3_math_5",
@@ -251,7 +316,14 @@ export const level3Data = {
       { question: "A circle is 2D, but a ball is ___?", options: ["1D", "3D", "4D", "Flat"], answer: "3D" },
       { question: "Which shape has a circle on top and bottom?", options: ["Cube", "Cone", "Cylinder", "Sphere"], answer: "Cylinder" },
       { question: "Which shape can roll perfectly?", options: ["Cube", "Sphere", "Box", "Pyramid"], answer: "Sphere" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "Which 3D shape looks like a round ball?", options: ["Sphere", "Cube"], answer: "Sphere" },
+  { question: "A dice is an example of which shape?", options: ["Cube", "Cone"], answer: "Cube" },
+  { question: "Which shape looks like a party hat?", options: ["Cone", "Cylinder"], answer: "Cone" },
+  { question: "A soda can is which shape?", options: ["Cylinder", "Sphere"], answer: "Cylinder" },
+  { question: "Are 3D shapes flat like paper or fat like a box?", options: ["Fat/Solid", "Flat"], answer: "Fat/Solid" }
+]
   }
 ],
 
@@ -279,7 +351,14 @@ export const level3Data = {
       { question: "In 'Three birds,' which is the adjective?", options: ["Three", "Birds", "Fly", "Sky"], answer: "Three" },
       { question: "An adjective for a lemon is ___?", options: ["Sweet", "Sour", "Salty", "Bitter"], answer: "Sour" },
       { question: "A 'brave' knight is an example of ___?", options: ["A Verb", "A Noun", "An Adjective", "A Pronoun"], answer: "An Adjective" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "An adjective is a word that ___ something.", options: ["Describes", "Does"], answer: "Describes" },
+  { question: "In 'The blue car,' which word is the adjective?", options: ["Blue", "Car"], answer: "Blue" },
+  { question: "Which word describes a lemon?", options: ["Sour", "Run"], answer: "Sour" },
+  { question: "Can an adjective tell us 'how many' (like 'three dogs')?", options: ["Yes", "No"], answer: "Yes" },
+  { question: "Which word is an adjective?", options: ["Happy", "Apple"], answer: "Happy" }
+]
   },
   {
     id: "l3_eng_2",
@@ -304,7 +383,14 @@ export const level3Data = {
       { question: "We use 'It' for a ___?", options: ["Boy", "Girl", "Thing", "Group"], answer: "Thing" },
       { question: "I am talking to ___?", options: ["You", "It", "She", "He"], answer: "You" },
       { question: "Pronouns stop us from ___ names.", options: ["Knowing", "Repeating", "Finding", "Writing"], answer: "Repeating" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "An adjective is a word that ___ something.", options: ["Describes", "Does"], answer: "Describes" },
+  { question: "In 'The blue car,' which word is the adjective?", options: ["Blue", "Car"], answer: "Blue" },
+  { question: "Which word describes a lemon?", options: ["Sour", "Run"], answer: "Sour" },
+  { question: "Can an adjective tell us 'how many' (like 'three dogs')?", options: ["Yes", "No"], answer: "Yes" },
+  { question: "Which word is an adjective?", options: ["Happy", "Apple"], answer: "Happy" }
+]
   },
   {
     id: "l3_eng_3",
@@ -329,7 +415,14 @@ export const level3Data = {
       { question: "The teacher's desk belongs to the ___?", options: ["Student", "Teacher", "Principal", "Janitor"], answer: "Teacher" },
       { question: "Which shows the bird owns the nest?", options: ["Birds nest", "Bird's nest", "Bird nest", "B'ird nest"], answer: "Bird's nest" },
       { question: "We use 's to show something ___.", options: ["Is big", "Belongs to someone", "Is fast", "Is a name"], answer: "Belongs to someone" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "An apostrophe (') shows that something ___ someone.", options: ["Belongs to", "Is far from"], answer: "Belongs to" },
+  { question: "Which one is correct for 'The hat of the girl'?", options: ["Girl's hat", "Girls hat"], answer: "Girl's hat" },
+  { question: "Where does the tiny mark go?", options: ["Up high (Like 's)", "Down low (Like a comma)"], answer: "Up high (Like 's)" },
+  { question: "If it is 'Sam's ball', who owns the ball?", options: ["Sam", "The ball"], answer: "Sam" },
+  { question: "Does 'The dog's bone' mean the dog has a bone?", options: ["Yes", "No"], answer: "Yes" }
+]
   },
   {
     id: "l3_eng_4",
@@ -354,7 +447,14 @@ export const level3Data = {
       { question: "I ran fast, ___ I missed the bus.", options: ["And", "But", "Or", "So"], answer: "But" },
       { question: "A compound sentence makes writing ___?", options: ["Boring", "Better/Advanced", "Short", "Harder"], answer: "Better/Advanced" },
       { question: "Which is a compound sentence?", options: ["The cat sat.", "The cat sat, and it slept.", "Red ball.", "I am happy."], answer: "The cat sat, and it slept." }
-    ]
+    ],
+    easierQuestions: [
+  { question: "A compound sentence joins ___ small sentences together.", options: ["Two", "Zero"], answer: "Two" },
+  { question: "Which word can join two sentences?", options: ["And", "Run"], answer: "And" },
+  { question: "We use a ___ before the word 'and'.", options: ["Comma (,)", "Question Mark (?)"], answer: "Comma (,)" },
+  { question: "Which word shows a choice between two things?", options: ["Or", "But"], answer: "Or" },
+  { question: "I like milk ___ I like cookies.", options: ["And", "Chair"], answer: "And" }
+]
   },
   {
     id: "l3_eng_5",
@@ -379,7 +479,14 @@ export const level3Data = {
       { question: "Adverbs tell us ___ an action is done.", options: ["Why", "How", "Who", "Where"], answer: "How" },
       { question: "Find the adverb: 'He walked slowly.'", options: ["He", "Walked", "Slowly", "Road"], answer: "Slowly" },
       { question: "A verb for your brain is ___?", options: ["Run", "Think", "Eat", "Sleep"], answer: "Think" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "A verb is a word that shows an ___?", options: ["Action", "Item"], answer: "Action" },
+  { question: "An adverb usually ends with which letters?", options: ["-ly", "-abc"], answer: "-ly" },
+  { question: "In 'He ran quickly,' which word is the adverb?", options: ["Quickly", "Ran"], answer: "Quickly" },
+  { question: "Which word is a verb (action)?", options: ["Jump", "Soft"], answer: "Jump" },
+  { question: "Adverbs tell us ___ an action is done.", options: ["How", "Why"], answer: "How" }
+]
   }
 ]
 };

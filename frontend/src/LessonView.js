@@ -129,24 +129,35 @@ const LessonView = ({ chapter, onBack, onStartQuiz, onStartFlashcards }) => {
               </button>
 
               <p style={{ margin: 0, flex: 1 }}>
-                {sentence.split(" ").map((word, wIdx) => (
-                  /* 🚀 KEY CHANGE: We pass the 'word' itself to the tracker! */
-                  <LessonDwellTracker key={wIdx} wordId={word.replace(/[.,!?]/g, "")}>
-                    <span 
-                      style={{
-                        backgroundColor: (activeSentence === sIdx && highlightIdx === wIdx) ? "#FACC15" : "transparent",
-                        color: (activeSentence === sIdx && highlightIdx === wIdx) ? "black" : "inherit",
-                        borderRadius: "4px",
-                        padding: "0 2px",
-                        transition: "background-color 0.1s",
-                        display: "inline-block" 
-                      }}
-                    >
-                      {word}{" "}
-                    </span>
-                  </LessonDwellTracker>
-                ))}
-              </p>
+  {sentence.split(" ").map((word, wIdx) => {
+    // 1. Check if the word has stars like **WATER**
+    const isBold = word.startsWith("**") && word.endsWith("**");
+    
+    // 2. Clean the word for the tracker and display
+    // This removes the stars so the student doesn't see them!
+    const cleanDisplayWord = word.replace(/\*\*/g, ""); 
+    const trackerId = cleanDisplayWord.replace(/[.,!?]/g, "");
+
+    return (
+      <LessonDwellTracker key={wIdx} wordId={trackerId}>
+        <span 
+          style={{
+            backgroundColor: (activeSentence === sIdx && highlightIdx === wIdx) ? "#FACC15" : "transparent",
+            color: (activeSentence === sIdx && highlightIdx === wIdx) ? "black" : "inherit",
+            borderRadius: "4px",
+            padding: "0 2px",
+            transition: "background-color 0.1s",
+            display: "inline-block",
+            // 3. If it had stars, make it bold!
+            fontWeight: isBold ? "800" : "normal" 
+          }}
+        >
+          {cleanDisplayWord}{" "}
+        </span>
+      </LessonDwellTracker>
+    );
+  })}
+</p>
             </div>
           ))}
         </div>

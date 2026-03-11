@@ -24,7 +24,15 @@ Science: [
       { question: "Can you usually see gas?", options: ["Yes, always", "No, usually invisible", "Only on Tuesdays", "Yes, it's green"], answer: "No, usually invisible" },
       { question: "What do you add to matter to change its state?", options: ["Cold only", "Heat or Energy", "Salt", "Nothing"], answer: "Heat or Energy" },
       { question: "A brick is an example of a ___?", options: ["Liquid", "Gas", "Solid", "Plasma"], answer: "Solid" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "Which state of matter is hard and keeps its shape?", options: ["Solid", "Liquid"], answer: "Solid" },
+  { question: "What does ice turn into when it melts?", options: ["Liquid water", "Air"], answer: "Liquid water" },
+  { question: "Which state of matter is usually invisible, like air?", options: ["Gas", "Solid"], answer: "Gas" },
+  { question: "What do you add to an ice cube to make it melt?", options: ["Heat", "Cold"], answer: "Heat" },
+  { question: "Everything in the world is made of ___?", options: ["Matter", "Magic"], answer: "Matter" }
+]
+    
   },
   {
     id: "l4_sci_2",
@@ -49,7 +57,14 @@ Science: [
       { question: "Batteries store ___ energy?", options: ["Wind", "Chemical", "Solar", "Sound"], answer: "Chemical" },
       { question: "Is your body a conductor?", options: ["No", "Yes", "Only when sleeping", "Only when running"], answer: "Yes" },
       { question: "Static electricity happens because of ___?", options: ["Water", "Friction (Rubbing)", "Eating", "Talking"], answer: "Friction (Rubbing)" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "Electricity is the flow of tiny particles called ___?", options: ["Electrons", "Water drops"], answer: "Electrons" },
+  { question: "Which material lets electricity pass through easily?", options: ["Metal (Conductor)", "Rubber (Insulator)"], answer: "Metal (Conductor)" },
+  { question: "A closed loop that electricity travels in is a ___?", options: ["Circuit", "Square"], answer: "Circuit" },
+  { question: "What do we use to turn a light on or off?", options: ["A Switch", "A String"], answer: "A Switch" },
+  { question: "Rubber is an 'insulator.' Does it stop electricity?", options: ["Yes", "No"], answer: "Yes" }
+]
   },
   {
     id: "l4_sci_3",
@@ -74,7 +89,14 @@ Science: [
       { question: "Neptune is very ___?", options: ["Hot", "Small", "Cold", "Bright"], answer: "Cold" },
       { question: "How many moons does Earth have?", options: ["0", "1", "2", "50"], answer: "1" },
       { question: "A 'Gas Giant' is made of ___?", options: ["Rock", "Ice", "Gas", "Metal"], answer: "Gas" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "What is the big star at the center of our Solar System?", options: ["The Sun", "The Moon"], answer: "The Sun" },
+  { question: "How many planets orbit the Sun?", options: ["8", "20"], answer: "8" },
+  { question: "Which planet is famous for having life (us!)?", options: ["Earth", "Mars"], answer: "Earth" },
+  { question: "What is the force that pulls everything toward the ground?", options: ["Gravity", "Wind"], answer: "Gravity" },
+  { question: "Which planet is known as the 'Red Planet'?", options: ["Mars", "Venus"], answer: "Mars" }
+]
   },
   {
     id: "l4_sci_4",
@@ -99,7 +121,14 @@ Science: [
       { question: "A rainbow appears when light hits ___?", options: ["Dust", "Raindrops", "Trees", "Rocks"], answer: "Raindrops" },
       { question: "You see your face in a mirror because of ___?", options: ["Shadows", "Reflection", "Refraction", "Glass"], answer: "Reflection" },
       { question: "Can light travel through a brick wall?", options: ["Yes", "No", "Only on sunny days", "Only at night"], answer: "No" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "How does light travel?", options: ["In a straight line", "In a zig-zag"], answer: "In a straight line" },
+  { question: "When light bounces off a mirror, it is called ___?", options: ["Reflection", "Shadow"], answer: "Reflection" },
+  { question: "What is made when an object blocks the light?", options: ["A Shadow", "A Rainbow"], answer: "A Shadow" },
+  { question: "Can light travel through a solid brick wall?", options: ["No", "Yes"], answer: "No" },
+  { question: "Light bending when it goes through water is called ___?", options: ["Refraction", "Reflection"], answer: "Refraction" }
+]
   },
   {
     id: "l4_sci_5",
@@ -124,7 +153,15 @@ Science: [
       { question: "How many main parts does the brain have?", options: ["1", "3", "10", "100"], answer: "3" },
       { question: "Your brain stays busy when you ___?", options: ["Eat", "Sleep", "Run", "All of these"], answer: "All of these" },
       { question: "The spinal cord is like a ___ for messages?", options: ["Wall", "Highway", "Box", "River"], answer: "Highway" }
-    ]
+    ],
+
+    easierQuestions: [
+  { question: "Which part of your body is like a computer boss?", options: ["The Brain", "The Stomach"], answer: "The Brain" },
+  { question: "What carries messages from your brain to your muscles?", options: ["Nerves", "Hair"], answer: "Nerves" },
+  { question: "The hard bone that protects your brain is the ___?", options: ["Skull", "Rib"], answer: "Skull" },
+  { question: "Does your brain keep working while you are asleep?", options: ["Yes", "No"], answer: "Yes" },
+  { question: "The 'highway' for messages in your back is the ___?", options: ["Spinal Cord", "Arm Bone"], answer: "Spinal Cord" }
+]
   }
 ],
 Math: [
@@ -151,7 +188,14 @@ Math: [
       { question: "Where is the 'Tenths' place?", options: ["Left of the dot", "Right of the dot", "In the trash", "Under the dot"], answer: "Right of the dot" },
       { question: "What is 1.0 - 0.1?", options: ["0.8", "0.9", "0.1", "1.1"], answer: "0.9" },
       { question: "Decimals are like ___?", options: ["Fractions", "Multiplication", "Subtraction", "History"], answer: "Fractions" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "Which decimal is the same as one half (1/2)?", options: ["0.5", "0.1"], answer: "0.5" },
+  { question: "The dot in $1.50 is called the decimal ___?", options: ["Point", "Comma"], answer: "Point" },
+  { question: "Which number is bigger?", options: ["0.9", "0.2"], answer: "0.9" },
+  { question: "Is $1.10 more than $1.00?", options: ["Yes", "No"], answer: "Yes" },
+  { question: "Decimal numbers are smaller than ___?", options: ["One whole", "Zero"], answer: "One whole" }
+],
   },
   {
     id: "l4_math_2",
@@ -176,7 +220,14 @@ Math: [
       { question: "180 degrees looks like a ___?", options: ["Square", "Straight Line", "Circle", "Triangle"], answer: "Straight Line" },
       { question: "Two 45° angles together make a ___ angle?", options: ["Obtuse", "Right", "Acute", "Straight"], answer: "Right" },
       { question: "An angle smaller than 90° is 'cute', so it's ___?", options: ["Obtuse", "Right", "Acute", "Square"], answer: "Acute" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "An angle that looks like a perfect square corner is ___?", options: ["Right (90°)", "Acute"], answer: "Right (90°)" },
+  { question: "A very small, 'sharp' angle is called ___?", options: ["Acute", "Obtuse"], answer: "Acute" },
+  { question: "What tool do we use to measure how wide an angle is?", options: ["Protractor", "Ruler"], answer: "Protractor" },
+  { question: "A very wide angle (bigger than a square) is ___?", options: ["Obtuse", "Acute"], answer: "Obtuse" },
+  { question: "We measure angles in units called ___?", options: ["Degrees", "Inches"], answer: "Degrees" }
+],
   },
   {
     id: "l4_math_3",
@@ -201,7 +252,14 @@ Math: [
       { question: "If the area is 20 and width is 4, what is the length?", options: ["5", "10", "16", "24"], answer: "5" },
       { question: "Perimeter of a rectangle (L=2, W=3)?", options: ["5", "6", "10", "12"], answer: "10" },
       { question: "Area of a 10x10 square?", options: ["20", "40", "100", "1000"], answer: "100" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "The distance AROUND the outside of a shape is the ___?", options: ["Perimeter", "Area"], answer: "Perimeter" },
+  { question: "The space INSIDE a shape is the ___?", options: ["Area", "Perimeter"], answer: "Area" },
+  { question: "To find the Area of a rectangle, you multiply Length x ___?", options: ["Width", "Height"], answer: "Width" },
+  { question: "If a square has sides of 2, the perimeter is 2+2+2+2. What is it?", options: ["8", "4"], answer: "8" },
+  { question: "Area is measured in ___ units?", options: ["Square", "Circle"], answer: "Square" }
+],
   },
   {
     id: "l4_math_4",
@@ -226,7 +284,14 @@ Math: [
       { question: "Walking backward 3 steps is like ___?", options: ["+3", "-3", "0", "33"], answer: "-3" },
       { question: "What is between -1 and 1?", options: ["-2", "2", "0", "0.5"], answer: "0" },
       { question: "Is -0 a real number?", options: ["Yes", "No (just 0)", "Only in space", "Sometimes"], answer: "No (just 0)" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "Which number is smaller than zero?", options: ["-5", "5"], answer: "-5" },
+  { question: "On a number line, negative numbers are to the ___ of zero?", options: ["Left", "Right"], answer: "Left" },
+  { question: "Is -1 warmer than -10 on a thermometer?", options: ["Yes", "No"], answer: "Yes" },
+  { question: "A negative number always has a ___ sign in front?", options: ["Minus (-)", "Plus (+)"], answer: "Minus (-)" },
+  { question: "What is 0 minus 1?", options: ["-1", "1"], answer: "-1" }
+],
   },
   {
     id: "l4_math_5",
@@ -251,7 +316,14 @@ Math: [
       { question: "If you cut a circle in half, is it symmetrical?", options: ["Yes", "No", "Only on the top", "Only on the bottom"], answer: "Yes" },
       { question: "Symmetry makes things look ___?", options: ["Messy", "Balanced/Equal", "Small", "Invisible"], answer: "Balanced/Equal" },
       { question: "How many lines of symmetry does a human face have?", options: ["0", "1", "2", "5"], answer: "1" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "If both sides of a shape match perfectly when folded, it is ___?", options: ["Symmetrical", "Lopsided"], answer: "Symmetrical" },
+  { question: "Which shape has a perfect line of symmetry?", options: ["A Heart", "The letter F"], answer: "A Heart" },
+  { question: "Can a circle be folded in half to match?", options: ["Yes", "No"], answer: "Yes" },
+  { question: "The imaginary 'fold' line is the Line of ___?", options: ["Symmetry", "Gravity"], answer: "Symmetry" },
+  { question: "Which letter is symmetrical?", options: ["A", "G"], answer: "A" }
+]
   }
 ],
 English: [
@@ -278,7 +350,14 @@ English: [
       { question: "When you 'miss the boat', you ___?", options: ["Go swimming", "Are too late", "Catch a fish", "Buy a ticket"], answer: "Are too late" },
       { question: "To 'break the ice' means to ___?", options: ["Start a conversation", "Go skating", "Build a snowman", "Freeze up"], answer: "Start a conversation" },
       { question: "Idioms should be taken ___?", options: ["Literally", "By their secret meaning", "By the words only", "With salt"], answer: "By their secret meaning" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "If someone says it is 'raining cats and dogs', is it actually raining animals?", options: ["No, it just means heavy rain", "Yes"], answer: "No, it just means heavy rain" },
+  { question: "What does a 'piece of cake' mean?", options: ["Something very easy", "A yummy snack"], answer: "Something very easy" },
+  { question: "If you are 'under the weather', how do you feel?", options: ["Sick", "Happy"], answer: "Sick" },
+  { question: "Does an idiom have a secret meaning?", options: ["Yes", "No"], answer: "Yes" },
+  { question: "What does 'Break a leg' mean?", options: ["Good luck", "Get hurt"], answer: "Good luck" }
+],
   },
   {
     id: "l4_eng_2",
@@ -303,7 +382,14 @@ English: [
       { question: "Which sentence uses quotes for a title?", options: ["He read \"A Book\"", "He said \"A Book\"", "The \"Book\" is red", "None"], answer: "He read \"A Book\"" },
       { question: "If a new person talks, you start a new ___?", options: ["Book", "Paragraph", "Chapter", "Sentence"], answer: "Paragraph" },
       { question: "Quotes help the reader know who is ___?", options: ["Sleeping", "Speaking", "Running", "Thinking"], answer: "Speaking" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "What marks do we use to show someone is speaking?", options: ["Quotation Marks (\" \")", "Parentheses ( )"], answer: "Quotation Marks (\" \")" },
+  { question: "Where does the period go in a sentence with quotes?", options: ["Inside the marks", "Outside the marks"], answer: "Inside the marks" },
+  { question: "Dialogue is a word for characters ___?", options: ["Talking", "Sleeping"], answer: "Talking" },
+  { question: "Which looks correct?", options: ["\"Hello!\"", "Hello!"], answer: "\"Hello!\"" },
+  { question: "Do quotes help us know who is speaking?", options: ["Yes", "No"], answer: "Yes" }
+],
   },
   {
     id: "l4_eng_3",
@@ -328,7 +414,14 @@ English: [
       { question: "A 'disagree' means you ___?", options: ["Agree again", "Do not agree", "Agree before", "Agree wrongly"], answer: "Do not agree" },
       { question: "Which suffix makes a word an action?", options: ["-ness", "-ly", "-ing", "-ful"], answer: "-ing" },
       { question: "Prefixes are added to the ___ of a word.", options: ["Middle", "Start", "End", "Top"], answer: "Start" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "A prefix is added to the ___ of a word.", options: ["Beginning", "End"], answer: "Beginning" },
+  { question: "If 'un-' means 'not', what does 'unhappy' mean?", options: ["Not happy", "Very happy"], answer: "Not happy" },
+  { question: "A suffix is added to the ___ of a word.", options: ["End", "Beginning"], answer: "End" },
+  { question: "What does 're-heat' mean?", options: ["Heat it again", "Heat it before"], answer: "Heat it again" },
+  { question: "The word 'fearless' means ___ fear.", options: ["Without", "Full of"], answer: "Without" }
+],
   },
   {
     id: "l4_eng_4",
@@ -353,7 +446,14 @@ English: [
       { question: "The person who writes a poem is a ___?", options: ["Author", "Poet", "Painter", "Singer"], answer: "Poet" },
       { question: "Repeating sounds is called ___?", options: ["Rhyme", "Alliteration", "Stanza", "Poetry"], answer: "Alliteration" },
       { question: "Which word rhymes with 'Cake'?", options: ["Bake", "Cook", "Eat", "Plate"], answer: "Bake" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "Words that sound the same at the end (like cat and hat) are ___?", options: ["Rhymes", "Numbers"], answer: "Rhymes" },
+  { question: "A 'paragraph' in a poem is called a ___?", options: ["Stanza", "Chapter"], answer: "Stanza" },
+  { question: "The 'beat' or music of a poem is the ___?", options: ["Rhythm", "Color"], answer: "Rhythm" },
+  { question: "Do all poems have to rhyme?", options: ["No", "Yes"], answer: "No" },
+  { question: "A person who writes poems is a ___?", options: ["Poet", "Pilot"], answer: "Poet" }
+],
   },
   {
     id: "l4_eng_5",
@@ -378,7 +478,14 @@ English: [
       { question: "Which word usually signals a fact?", options: ["Think", "Believe", "Proven", "Pretty"], answer: "Proven" },
       { question: "Can two people have different opinions?", options: ["Yes", "No", "Only if they fight", "Never"], answer: "Yes" },
       { question: "Which is a fact about the Sun?", options: ["It is a star", "It is pretty", "It is friendly", "It is the best"], answer: "It is a star" }
-    ]
+    ],
+    easierQuestions: [
+  { question: "Which one can you PROVE is true?", options: ["A Fact", "An Opinion"], answer: "A Fact" },
+  { question: "Is 'Pizza is the best food' a fact or an opinion?", options: ["An Opinion", "A Fact"], answer: "An Opinion" },
+  { question: "Which one tells how you feel or think?", options: ["An Opinion", "A Fact"], answer: "An Opinion" },
+  { question: "Is 'The Sun is a star' a fact?", options: ["Yes", "No"], answer: "Yes" },
+  { question: "Can people have different opinions about the same thing?", options: ["Yes", "No"], answer: "Yes" }
+]
   }
 ],
 
@@ -406,7 +513,14 @@ English: [
         { question: "Ancient people built these without ___?", options: ["Tools", "Computers/Engines", "Hands", "Rocks"], answer: "Computers/Engines" },
         { question: "Chichen Itza was built by the ___?", options: ["Mayans", "Romans", "Greeks", "Vikings"], answer: "Mayans" },
         { question: "Wonders are protected by ___?", options: ["NASA", "UNESCO", "The Police", "The Army"], answer: "UNESCO" }
-      ]
+      ],
+      easierQuestions: [
+  { question: "In which country can you find the Taj Mahal?", options: ["India", "USA"], answer: "India" },
+  { question: "Which wonder is famous for being a giant wall?", options: ["The Great Wall of China", "The Brick Wall"], answer: "The Great Wall of China" },
+  { question: "The Great Pyramids are found in which country?", options: ["Egypt", "China"], answer: "Egypt" },
+  { question: "Did ancient people have computers to help them build?", options: ["No", "Yes"], answer: "No" },
+  { question: "Are there 7 'New' Wonders of the World?", options: ["Yes", "No"], answer: "Yes" }
+]
     },
     {
       id: "l4_gk_2",
@@ -431,7 +545,14 @@ English: [
         { question: "Which continent has no permanent residents?", options: ["Africa", "Australia", "Antarctica", "Europe"], answer: "Antarctica" },
         { question: "The Himalayan Mountains are in ___?", options: ["Asia", "Africa", "Australia", "Europe"], answer: "Asia" },
         { question: "Brazil is in which continent?", options: ["North America", "South America", "Europe", "Africa"], answer: "South America" }
-      ]
+      ],
+      easierQuestions: [
+  { question: "How many continents are there on Earth?", options: ["7", "100"], answer: "7" },
+  { question: "Which continent is the biggest of all?", options: ["Asia", "Europe"], answer: "Asia" },
+  { question: "Which continent is covered in ice and very cold?", options: ["Antarctica", "Africa"], answer: "Antarctica" },
+  { question: "Which continent is also a country and is the smallest?", options: ["Australia", "North America"], answer: "Australia" },
+  { question: "Brazil is located in which continent?", options: ["South America", "Asia"], answer: "South America" }
+]
     },
     {
       id: "l4_gk_3",
@@ -456,7 +577,15 @@ English: [
         { question: "The Southern Ocean is near ___?", options: ["The North Pole", "The South Pole", "The Equator", "USA"], answer: "The South Pole" },
         { question: "Oceans move in giant loops called ___?", options: ["Wind", "Currents", "Circles", "Waves"], answer: "Currents" },
         { question: "Whales live in the ___?", options: ["Forest", "Desert", "Ocean", "Sky"], answer: "Ocean" }
-      ]
+      ],
+      easierQuestions: [
+  { question: "Which is the largest and deepest ocean?", options: ["Pacific Ocean", "Arctic Ocean"], answer: "Pacific Ocean" },
+  { question: "Is ocean water fresh like a lake or salty?", options: ["Salty", "Fresh"], answer: "Salty" },
+  { question: "Does water cover more than half of our planet?", options: ["Yes (70%)", "No"], answer: "Yes (70%)" },
+  { question: "Which ocean is at the very top (North Pole)?", options: ["Arctic Ocean", "Indian Ocean"], answer: "Arctic Ocean" },
+  { question: "Do whales and fish live in the ocean?", options: ["Yes", "No"], answer: "Yes" }
+]
+      
     },
     {
       id: "l4_gk_4",
@@ -481,7 +610,14 @@ English: [
         { question: "What invention lets us see far into space?", options: ["Microscope", "Telescope", "Glasses", "Mirror"], answer: "Telescope" },
         { question: "What invention lets us see tiny germs?", options: ["Telescope", "Microscope", "Camera", "TV"], answer: "Microscope" },
         { question: "Who discovered Penicillin?", options: ["Alexander Fleming", "Edison", "Bell", "Einstein"], answer: "Alexander Fleming" }
-      ]
+      ],
+      easierQuestions: [
+  { question: "Who is famous for inventing the lightbulb?", options: ["Thomas Edison", "The Wright Brothers"], answer: "Thomas Edison" },
+  { question: "What did Alexander Graham Bell invent to help us talk?", options: ["The Telephone", "The Car"], answer: "The Telephone" },
+  { question: "The Wright Brothers were the first to fly a ___?", options: ["Airplane", "Boat"], answer: "Airplane" },
+  { question: "A person who creates a new idea or tool is an ___?", options: ["Inventor", "Actor"], answer: "Inventor" },
+  { question: "What tool helps us see stars far away in space?", options: ["Telescope", "Microscope"], answer: "Telescope" }
+]
     },
     {
       id: "l4_gk_5",
@@ -506,7 +642,14 @@ English: [
         { question: "To 'Vote' means to ___?", options: ["Run", "Choose", "Sleep", "Eat"], answer: "Choose" },
         { question: "Who was a famous Queen of England?", options: ["Elizabeth", "Mary", "Diana", "Sarah"], answer: "Elizabeth" },
         { question: "Good leaders listen to the ___?", options: ["Birds", "People", "Wind", "Trees"], answer: "People" }
-      ]
+      ],
+      easierQuestions: [
+  { question: "Which leader used peace to help free India?", options: ["Mahatma Gandhi", "Nelson Mandela"], answer: "Mahatma Gandhi" },
+  { question: "Abraham Lincoln was a famous leader of which country?", options: ["USA", "France"], answer: "USA" },
+  { question: "To 'Vote' means that you get to ___ a leader.", options: ["Choose", "Fight"], answer: "Choose" },
+  { question: "A good leader should be fair and kind to the people?", options: ["Yes", "No"], answer: "Yes" },
+  { question: "Nelson Mandela fought for fairness in ___?", options: ["South Africa", "England"], answer: "South Africa" }
+]
     }
   ],
  

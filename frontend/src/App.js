@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Dashboard from "./Dashboard";
 import ChapterSelection from "./ChapterSelection";
 import Auth from "./Auth";
@@ -57,6 +57,8 @@ const SuccessScreen = ({ level, onContinue }) => {
 
 function App() {
   const { markModuleComplete, progress, isLevel2Unlocked, isLevel3Unlocked } = useLevelProgress();
+  
+  
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem("current_user");
     return savedUser ? JSON.parse(savedUser) : null;
@@ -69,6 +71,13 @@ function App() {
     const saved = localStorage.getItem("current_chapter_data");
     return saved ? JSON.parse(saved) : null;
   });
+
+  useEffect(() => {
+    localStorage.setItem("current_page", page);
+    localStorage.setItem("current_level", currentLevel);
+    if (subject) localStorage.setItem("current_subject", subject);
+    if (chapterData) localStorage.setItem("current_chapter_data", JSON.stringify(chapterData));
+  }, [page, currentLevel, subject, chapterData]);
 
   const getStarsForLevel = (levelNum) => {
     let dataToSearch;
@@ -220,6 +229,32 @@ function App() {
       />
     ),
 
+    // Add this inside your const views = { ... }
+    // Add this to your views = { ... } list
+    simplifiedQuiz: chapterData && (
+      <div style={{ textAlign: "center", padding: "40px" }}>
+        <div style={{ 
+          backgroundColor: "#FFF3E0", 
+          padding: "20px", 
+          borderRadius: "15px", 
+          marginBottom: "20px",
+          border: "2px dashed #FF9F43" 
+        }}>
+          <h2 style={{ color: "#E67E22", margin: 0 }}>🌟 Practice Mode 🌟</h2>
+          <p>Let's try some easier ones together!</p>
+        </div>
+
+        <QuizWrapper 
+          /* This looks for an 'easierQuestions' list in your data */
+          chapterData={{ 
+            ...chapterData, 
+            questions: chapterData.easierQuestions || chapterData.questions 
+          }} 
+          onFinish={() => setPage("chapterSelection")} 
+          onBackToLesson={() => setPage("chapterSelection")} 
+        />
+      </div>
+    ),
 
 
     profile: (
@@ -270,11 +305,16 @@ function App() {
     <h2>Searching for your questions... 🔍</h2>
     <button onClick={() => setPage("chapterSelection")}>Go Back and Try Again</button>
   </div>
+  
 ),
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", backgroundColor: Theme.background, fontFamily: Theme.fontFamily }}>
+   <div style={{ 
+  display: "flex", 
+  minHeight: "100vh", 
+  fontFamily: Theme.fontFamily,
+}}>
       <div style={{ width: "280px", backgroundColor: "#1E293B", color: "white", display: "flex", flexDirection: "column", padding: "30px 20px" }}>
         
         <div 
@@ -372,7 +412,31 @@ function App() {
   })}
 </nav>
       </div>
-      <div style={{ flex: 1, overflowY: "auto" }}>
+      <div style={{ flex: 1, overflowY: "auto", position: "relative" }}>
+        
+        {/* 🆘 The Struggling Button - Only shows during a real quiz */}
+        {page === "quiz" && currentLevel >=3 && (
+          <button 
+            onClick={() => setPage("simplifiedQuiz")}
+            style={{
+              position: "absolute",
+              top: "20px",
+              right: "20px",
+              backgroundColor: "#ff9f43",
+              color: "white",
+              padding: "10px 20px",
+              borderRadius: "50px",
+              border: "none",
+              fontWeight: "bold",
+              cursor: "pointer",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+              zIndex: 10
+            }}
+          >
+            I'm Struggling 🆘
+          </button>
+        )}
+
         {views[page] || <div>Loading...</div>}
       </div>
     </div>

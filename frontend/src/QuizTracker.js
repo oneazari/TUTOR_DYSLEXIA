@@ -1,15 +1,15 @@
 import React, { useRef } from 'react';
-import Quiz from "./Quiz";
+import Quiz from "./QuizView"; // This is the file we added the timer to!
 import useTracker from "./useTracker";
 
 // --- VERSION 1: The Main Quiz View (Used in App.js) ---
 const QuizWrapper = ({ chapterData, onFinish, onBackToLesson }) => {
-  // This tells the tracker which chapter we are working on
   const metrics = useTracker(chapterData.id);
 
   return (
     <Quiz 
-      chapterData={chapterData} 
+      /* 🚨 CHANGE THIS LINE BELOW 🚨 */
+      questions={chapterData.questions} 
       onFinish={onFinish} 
       onBackToLesson={onBackToLesson} 
       trackingMetrics={metrics}
@@ -18,6 +18,8 @@ const QuizWrapper = ({ chapterData, onFinish, onBackToLesson }) => {
 };
 
 export default QuizWrapper;
+
+
 
 // --- VERSION 2: The Click Timer (Used inside Quiz questions) ---
 export const QuizClickTracker = ({ children, questionId }) => {

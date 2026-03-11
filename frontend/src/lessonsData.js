@@ -4,30 +4,16 @@ export const lessonsData = {
     {
       id: "l1_sci_1",
       title: "Introduction to Plants",
-      text: "Plants are living organisms that make their own food through photosynthesis. They have roots, stems, leaves, and flowers.",
+      text: "Plants are living organisms belonging to kingdom ANIMALIA. They are mostly green in colour and make their own food through photosynthesis. They have roots, stems, leaves, and flowers. Flowers are the colourful part. Seed is the starting stage of a plant",
       imageUrl: "https://cdn.pixabay.com/photo/2016/02/19/10/00/tree-1209809_1280.jpg",
-    flashcards: [
-  { 
-    word: "Leaf", 
-    img: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=400&auto=format&fit=crop"
-  },
-  { 
-    word: "Flower", 
-    img: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?q=80&w=400&auto=format&fit=crop" 
-  },
-  { 
-    word: "Root", 
-    img: "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=400&auto=format&fit=crop" 
-  },
-  { 
-    word: "Stem", 
-    img: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=400&auto=format&fit=crop" 
-  },
-  { 
-    word: "Photosynthesis", 
-    img: "https://images.unsplash.com/photo-1501746790748-4033b49743c8?q=80&w=400&auto=format&fit=crop"
-  }
-],
+      flashcards: [
+      { front: "The green plant part that makes food from the sun! ☀️", back: "Leaf" },
+      { front: "The colorful part that makes seeds. 🌸", back: "Flower" },
+      { front: "The feet of the plant that drink water from the ground. 💧", back: "Root" },
+      { front: "A big word for 'Plants making their own lunch!'", back: "Photosynthesis" },
+      { front: "  A tiny baby plant waiting to grow. 🌱", back: "Seed" }
+    ],
+    
       questions: [
         { question: "Plants make their food through?", options: ["Photosynthesis", "Respiration", "Digestion", "Evaporation"], answer: "Photosynthesis" },
         { question: "Which part absorbs water?", options: ["Leaf", "Root", "Stem", "Flower"], answer: "Root" },
@@ -46,13 +32,14 @@ export const lessonsData = {
       title: "Plant Parts and Functions",
       text: "Roots anchor plants and absorb water. Stems support leaves and flowers. Leaves make food. Flowers help in reproduction.",
       imageUrl: "https://via.placeholder.com/400x200?text=Plant+Parts",
-      flashcards: [
-        { word: "Roots", img: "https://via.placeholder.com/100?text=Roots" },
-        { word: "Stems", img: "https://via.placeholder.com/100?text=Stems" },
-        { word: "Leaves", img: "https://via.placeholder.com/100?text=Leaves" },
-        { word: "Flowers", img: "https://via.placeholder.com/100?text=Flowers" },
-        { word: "Photosynthesis", img: "https://via.placeholder.com/100?text=Sun" }
-      ],
+       flashcards: [
+      { front: "They anchor the plant in the dirt so it doesn't fall over.", back: "Root" },
+      { front: "They carry water and 'od up and down the plant.", back: "Stem" },
+      { front: "They are the 'kitchen' where the food is made.", back: "Leaf" },
+      { front: "A big word for 'Plants making their own lunch!'", back: "Photosynthesis" },
+      { front: "  A tiny baby plant waiting to grow. 🌱", back: "Flowers" }
+    ],
+     
       questions: [
         { question: "Roots anchor plants?", options: ["Yes", "No"], answer: "Yes" },
         { question: "Leaves make food by?", options: ["Photosynthesis", "Respiration", "Digestion", "Evaporation"], answer: "Photosynthesis" },
@@ -71,13 +58,13 @@ export const lessonsData = {
       title: "Photosynthesis Process",
       text: "Photosynthesis is how plants make food using sunlight, water, and carbon dioxide. Oxygen is released as a by-product.",
       imageUrl: "https://via.placeholder.com/400x200?text=Photosynthesis",
-      flashcards: [
-        { word: "Sunlight", img: "https://via.placeholder.com/100?text=Sun" },
-        { word: "Water", img: "https://via.placeholder.com/100?text=Water" },
-        { word: "Carbon Dioxide", img: "https://via.placeholder.com/100?text=CO2" },
-        { word: "Oxygen", img: "https://via.placeholder.com/100?text=O2" },
-        { word: "Glucose", img: "https://via.placeholder.com/100?text=Glucose" }
-      ],
+       flashcards: [
+      { front: "The power source for making food.", back: "Sunlight" },
+      { front: "Collected by roots from the soil.", back: "Water" },
+      { front: "The air that plants breathe in.", back: "Carbon dioxide" },
+      { front: "The fresh air that plants breathe out for us.", back: "Oxygen" },
+      { front: " The special sugar plants eat to stay strong", back: "Glucose" }
+    ],
       questions: [
         { question: "Photosynthesis produces?", options: ["Food", "Water", "Air", "None"], answer: "Food" },
         { question: "Sunlight is required?", options: ["Yes", "No"], answer: "Yes" },
@@ -96,13 +83,13 @@ export const lessonsData = {
       title: "Plant Growth and Development",
       text: "Plants grow from seeds. They need water, sunlight, and nutrients from soil. Growth occurs in roots, stems, and leaves.",
       imageUrl: "https://via.placeholder.com/400x200?text=Plant+Growth",
-      flashcards: [
-        { word: "Seed", img: "https://via.placeholder.com/100?text=Seed" },
-        { word: "Soil", img: "https://via.placeholder.com/100?text=Soil" },
-        { word: "Sunlight", img: "https://via.placeholder.com/100?text=Sun" },
-        { word: "Water", img: "https://via.placeholder.com/100?text=Water" },
-        { word: "Nutrients", img: "https://via.placeholder.com/100?text=Nutrients" }
-      ],
+       flashcards: [
+      { front: "The food found in the dirt that helps plants stay healthy.", back: "Nutrients" },
+      { front: "Where plants get their vitamins (nutrients).", back: "Soil" },
+      { front: "Helps the plant grow towards the sky.", back: "Sunlight" },
+      { front: "Essential for keeping the plant alive and growing.", back: "Water" },
+      { front: "  A tiny baby plant waiting to grow. ", back: "Seed" }
+    ],
       questions: [
         { question: "Plants grow from?", options: ["Seeds", "Leaves", "Roots", "Flowers"], answer: "Seeds" },
         { question: "Growth needs?", options: ["Water", "Sunlight", "Soil", "All"], answer: "All" },
@@ -119,15 +106,15 @@ export const lessonsData = {
     {
       id: "l1_sci_5",
       title: "Plant Reproduction",
-      text: "Plants reproduce by seeds, spores, or cuttings. Flowers produce seeds. Some plants reproduce asexually.",
+      text: "Plants reproduce by seeds, spores, or cuttings. Flowers produce seeds. Some plants reproduce asexually. Pollination helps in sexual reproduction.",
       imageUrl: "https://via.placeholder.com/400x200?text=Plant+Reproduction",
-      flashcards: [
-        { word: "Seeds", img: "https://via.placeholder.com/100?text=Seeds" },
-        { word: "Spores", img: "https://via.placeholder.com/100?text=Spores" },
-        { word: "Cuttings", img: "https://via.placeholder.com/100?text=Cuttings" },
-        { word: "Flowers", img: "https://via.placeholder.com/100?text=Flowers" },
-        { word: "Pollination", img: "https://via.placeholder.com/100?text=Pollination" }
-      ],
+       flashcards: [
+      { front: "What grows into a brand new plant.", back: "Seeds" },
+      { front: "Tiny dust-like bits that some plants use to reproduce.", back: "Spores" },
+      { front: "When a small piece of a plant is used to grow a new one.", back: "Cuttings" },
+      { front: "The place where seeds are created.", back: "Flowers" },
+      { front: "When dust (pollen) moves from flower to flower to help make seeds.", back: "Pollination" }
+    ],
       questions: [
         { question: "Plants reproduce by?", options: ["Seeds", "Spores", "Cuttings", "All"], answer: "All" },
         { question: "Flowers produce?", options: ["Leaves", "Stems", "Seeds", "Roots"], answer: "Seeds" },
