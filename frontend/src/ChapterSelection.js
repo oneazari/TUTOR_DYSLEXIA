@@ -1,28 +1,15 @@
 import React from "react";
-import { Theme } from "./Theme";
 import { useLevelProgress } from "./LevelProgressContext";
 
-const ChapterSelection = ({ subject, chapters, onSelectChapter, onBack, currentLevel }) => {
+const ChapterSelection = ({ subject, chapters, onSelectChapter, onBack, activeTheme, currentLevel }) => {
   const { progress } = useLevelProgress();
   
-  // 1. We added "GK" to the list so it can count stars for Level 4!
-  /*  const subjects = ["Science", "Math", "English", "GK"];
-  
-  const totalStars = subjects.reduce((acc, sub) => {
-    const scores = Object.values(progress[sub] || {});
-    return acc + scores.filter(s => s >= 7).length;
-  }, 0);
-
-  // 2. Level 4 has 20 stars total (5 per subject x 4 subjects)
-  const goal = currentLevel === 4 ? 20 : 15;
-  //const percent = Math.min(Math.round((totalStars / goal) * 100), 100);
-*/
-  // 3. THE SAFETY NET: If chapters are missing, show this instead of crashing!
+  // 2. Safety Net - Fixed all the names inside here too!
   if (!chapters) {
     return (
-      <div style={{ padding: "40px", textAlign: "center", fontFamily: Theme.fontFamily }}>
-        <h2 style={{ color: Theme.textMain }}>Oops! Chapters not found.</h2>
-        <p style={{ color: Theme.textMuted }}>Check if the subject name matches in level4Data.js</p>
+      <div style={{ padding: "40px", backgroundColor: activeTheme.background, textAlign: "center", fontFamily: activeTheme.fontFamily }}>
+        <h2 style={{ color: activeTheme.textMain }}>Oops! Chapters not found.</h2>
+        <p style={{ color: activeTheme.textMuted }}>Check if the subject name matches in level4Data.js</p>
         <button onClick={onBack} style={{ padding: "10px 20px", cursor: "pointer", borderRadius: "8px" }}>
           Go Back
         </button>
@@ -31,22 +18,33 @@ const ChapterSelection = ({ subject, chapters, onSelectChapter, onBack, currentL
   }
 
   return (
-    <div style={{ padding: "40px", backgroundColor: Theme.background, minHeight: "100vh", fontFamily: Theme.fontFamily }}>
+    <div style={{ 
+      padding: "40px", 
+      backgroundColor: activeTheme.background, // 🚀 Now it matches!
+      minHeight: "100vh", 
+      fontFamily: activeTheme.fontFamily 
+    }}>
       <div style={{ maxWidth: "900px", margin: "0 auto" }}>
         
-        <button onClick={onBack} style={{ color: Theme.accent, background: "none", border: "none", cursor: "pointer", fontWeight: "bold", marginBottom: "20px", fontSize: "18px" }}>
+        <button onClick={onBack} style={{ 
+          color: activeTheme.accent, 
+          background: "none", 
+          border: "none", 
+          cursor: "pointer", 
+          fontWeight: "bold", 
+          marginBottom: "20px", 
+          fontSize: "18px",
+          fontFamily: activeTheme.fontFamily
+        }}>
           ← Back to Dashboard
         </button>
 
-        
-
-        <h2 style={{ color: Theme.textMain, marginBottom: "30px", fontSize: "32px" }}>
-          Select a <span style={{ color: Theme.accent }}>{subject}</span> Chapter
+        <h2 style={{ color: activeTheme.textMain, marginBottom: "30px", fontSize: "32px", fontFamily: activeTheme.fontFamily }}>
+          Select a <span style={{ color: activeTheme.accent }}>{subject}</span> Chapter
         </h2>
 
         <div style={{ display: "flex", gap: "25px", flexWrap: "wrap" }}>
           {chapters.map((ch) => {
-            // Check if this specific chapter is finished
             const isDone = (progress[subject] || {})[ch.id] >= 7;
             
             return (
@@ -56,11 +54,11 @@ const ChapterSelection = ({ subject, chapters, onSelectChapter, onBack, currentL
                 style={{ 
                   width: "260px", 
                   height: "150px", 
-                  borderRadius: Theme.borderRadius, 
+                  borderRadius: activeTheme.borderRadius, 
                   backgroundColor: isDone ? "#f0fff4" : "white", 
                   border: isDone ? "2px solid #2ecc71" : "none", 
-                  boxShadow: Theme.cardShadow, 
-                  borderTop: `8px solid ${isDone ? "#2ecc71" : Theme.accent}`, 
+                  boxShadow: activeTheme.cardShadow, 
+                  borderTop: `8px solid ${isDone ? "#2ecc71" : activeTheme.accent}`, 
                   cursor: "pointer", 
                   position: "relative",
                   display: "flex",
@@ -68,12 +66,13 @@ const ChapterSelection = ({ subject, chapters, onSelectChapter, onBack, currentL
                   alignItems: "center",
                   justifyContent: "center",
                   transition: "transform 0.2s, box-shadow 0.2s",
-                  padding: "15px"
+                  padding: "15px",
+                  fontFamily: activeTheme.fontFamily // 🚀 Keeps text easy to read!
                 }}
                 onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
                 onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
               >
-                <span style={{ fontSize: "20px", fontWeight: "bold", color: Theme.textMain, textAlign: "center" }}>
+                <span style={{ fontSize: "20px", fontWeight: "bold", color: activeTheme.textMain, textAlign: "center" }}>
                   {ch.title}
                 </span>
                 

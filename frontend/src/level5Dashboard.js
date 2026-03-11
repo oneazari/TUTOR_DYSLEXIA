@@ -2,7 +2,7 @@ import React from "react";
 import { Theme } from "./Theme";
 import { useLevelProgress } from "./LevelProgressContext";
 
-const Level5Dashboard = ({ user, onSelectSubject, onBackToLevel4 }) => {
+const Level5Dashboard = ({ user, onSelectSubject, onBackToLevel4, activeTheme }) => {
   const { progress } = useLevelProgress();
   
   // 🎨 Step 1: New colors and icons for the final level!
@@ -32,7 +32,7 @@ const Level5Dashboard = ({ user, onSelectSubject, onBackToLevel4 }) => {
   const isAllComplete = totalStars >= goal;
 
   return (
-    <div style={{ padding: "40px", backgroundColor: Theme.background, minHeight: "100vh", fontFamily: Theme.fontFamily }}>
+    <div style={{ padding: "40px", backgroundColor: activeTheme.background, minHeight: "100vh", fontFamily: Theme.fontFamily }}>
       <div style={{ maxWidth: "900px", margin: "0 auto" }}>
         
         {/* HEADER */}
@@ -43,7 +43,7 @@ const Level5Dashboard = ({ user, onSelectSubject, onBackToLevel4 }) => {
           marginBottom: "30px",
           backgroundColor: "white",
           padding: "20px 30px",
-          borderRadius: Theme.borderRadius,
+          borderRadius: activeTheme.borderRadius,
           boxShadow: Theme.cardShadow,
           borderLeft: `10px solid #FFD700` // Gold for Level 5
         }}>
@@ -58,7 +58,7 @@ const Level5Dashboard = ({ user, onSelectSubject, onBackToLevel4 }) => {
               {user.avatar || "🏆"}
             </div>
             <div>
-              <h1 style={{ color: Theme.textMain, margin: 0, fontSize: "32px" }}>The Ultimate Explorer, {user.username}!</h1>
+              <h1 style={{ color: activeTheme.textMain, margin: 0, fontSize: "32px" }}>The Ultimate Explorer, {user.username}!</h1>
               <p style={{ color: Theme.textMuted, margin: "5px 0 0 0", fontSize: "20px" }}>Grandmaster · Level 5</p>
             </div>
           </div>
@@ -75,9 +75,9 @@ const Level5Dashboard = ({ user, onSelectSubject, onBackToLevel4 }) => {
         </div>
 
         {/* PROGRESS CARD */}
-        <div style={{ backgroundColor: "white", padding: "25px", borderRadius: Theme.borderRadius, boxShadow: Theme.cardShadow, marginBottom: "40px" }}>
+        <div style={{ backgroundColor: "white", padding: "25px", borderRadius: activeTheme.borderRadius, boxShadow: activeTheme.cardShadow, marginBottom: "40px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "15px", fontSize: "20px", fontWeight: "bold" }}>
-               <span style={{ color: Theme.textMain }}>Final Mastery Progress</span>
+               <span style={{ color: activeTheme.textMain }}>Final Mastery Progress</span>
                <span style={{ color: "#FFD700" }}>{displayStars} / {goal} Stars</span>
             </div>
             <div style={{ width: "100%", height: "24px", backgroundColor: "#f0f0f0", borderRadius: "12px", overflow: "hidden" }}>
@@ -91,13 +91,13 @@ const Level5Dashboard = ({ user, onSelectSubject, onBackToLevel4 }) => {
             <button key={sub.name} onClick={() => onSelectSubject(sub.name)} 
               style={{ 
                 display: "flex", flexDirection: "column", alignItems: "center", padding: "30px 20px",
-                borderRadius: Theme.borderRadius, border: "none", backgroundColor: "white", 
-                boxShadow: Theme.cardShadow, borderBottom: `10px solid ${sub.color}`, cursor: "pointer", transition: "0.2s" 
+                borderRadius: activeTheme.borderRadius, border: "none", backgroundColor: "white", 
+                boxShadow: activeTheme.cardShadow, borderBottom: `10px solid ${sub.color}`, cursor: "pointer", transition: "0.2s" 
               }}
               onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
               onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}>
               <span style={{ fontSize: "60px", marginBottom: "10px" }}>{sub.icon}</span>
-              <span style={{ fontSize: "22px", fontWeight: "bold", color: Theme.textMain }}>{sub.name}</span>
+              <span style={{ fontSize: "22px", fontWeight: "bold", color: activeTheme.textMain }}>{sub.name}</span>
             </button>
           ))}
         </div>
@@ -106,7 +106,7 @@ const Level5Dashboard = ({ user, onSelectSubject, onBackToLevel4 }) => {
         {isAllComplete && (
           <div style={{ 
             textAlign: "center", padding: "35px", backgroundColor: "#dcfce7", 
-            borderRadius: Theme.borderRadius, border: `3px solid #22c55e`, boxShadow: Theme.cardShadow
+            borderRadius: activeTheme.borderRadius, border: `3px solid #22c55e`, boxShadow: activeTheme.cardShadow
           }}>
             <h2 style={{ color: "#166534", margin: 0, fontSize: "30px" }}>🎉 You've Completed Everything!</h2>
             <p style={{ color: "#166534", marginTop: "12px", fontSize: "19px" }}>

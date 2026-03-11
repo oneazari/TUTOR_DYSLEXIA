@@ -2,7 +2,7 @@ import React from "react";
 import { Theme } from "./Theme";
 import { useLevelProgress } from "./LevelProgressContext";
 
-const Dashboard = ({ user, onSelectSubject }) => {
+const Dashboard = ({ user, onSelectSubject, activeTheme }) => {
   const { progress, isLevel2Unlocked } = useLevelProgress();
   
   const subjects = [
@@ -36,7 +36,7 @@ const Dashboard = ({ user, onSelectSubject }) => {
   const unlocked = isLevel2Unlocked();
 
   return (
-    <div style={{ padding: "40px", backgroundColor: Theme.background, minHeight: "100vh", fontFamily: Theme.fontFamily }}>
+    <div style={{ padding: "40px", backgroundColor: activeTheme.background, minHeight: "100vh", fontFamily: activeTheme.fontFamily }}>
       <div style={{ maxWidth: "900px", margin: "0 auto" }}>
         
         {/* PERSONALIZED HEADER */}

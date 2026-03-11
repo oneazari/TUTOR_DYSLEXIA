@@ -2,7 +2,7 @@ import React from "react";
 import { Theme } from "./Theme";
 import { useLevelProgress } from "./LevelProgressContext";
 
-const Level2Dashboard = ({ user, onSelectSubject, onBackToLevel1 }) => {
+const Level2Dashboard = ({ user, onSelectSubject, onBackToLevel1 , activeTheme}) => {
   const { progress } = useLevelProgress();
   
   // Subject configuration for Level 2 - Evolution of icons
@@ -35,7 +35,7 @@ const Level2Dashboard = ({ user, onSelectSubject, onBackToLevel1 }) => {
   const isLevel3Unlocked = rawStars >= goal;
 
   return (
-    <div style={{ padding: "40px", backgroundColor: Theme.background, minHeight: "100vh", fontFamily: Theme.fontFamily }}>
+    <div style={{ padding: "40px", backgroundColor: activeTheme.background, minHeight: "100vh", fontFamily: Theme.fontFamily }}>
       <div style={{ maxWidth: "900px", margin: "0 auto" }}>
         
         {/* PERSONALIZED HEADER WITH AVATAR */}
@@ -46,8 +46,8 @@ const Level2Dashboard = ({ user, onSelectSubject, onBackToLevel1 }) => {
           marginBottom: "30px",
           backgroundColor: "white",
           padding: "20px 30px",
-          borderRadius: Theme.borderRadius,
-          boxShadow: Theme.cardShadow,
+          borderRadius: activeTheme.borderRadius,
+          boxShadow: activeTheme.cardShadow,
           borderLeft: `10px solid #9b59b6` // Distinct Level 2 color
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
@@ -61,7 +61,7 @@ const Level2Dashboard = ({ user, onSelectSubject, onBackToLevel1 }) => {
               {user.avatar || "🦊"}
             </div>
             <div>
-              <h1 style={{ color: Theme.textMain, margin: 0, fontSize: "32px" }}>Keep it up, {user.username}!</h1>
+              <h1 style={{ color: activeTheme.textMain, margin: 0, fontSize: "32px" }}>Keep it up, {user.username}!</h1>
               <p style={{ color: Theme.textMuted, margin: "5px 0 0 0", fontSize: "20px" }}>Intermediate · Level 2</p>
             </div>
           </div>

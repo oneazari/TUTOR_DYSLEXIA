@@ -14,33 +14,38 @@ import { level2Data } from "./level2Data";
 import { level3Data } from "./level3Data";
 import { level4Data } from "./level4Data";
 import { Theme } from "./Theme";
+import Certificate from "./Certificate";
+import Confetti from 'react-confetti';
 
 import QuizWrapper from "./QuizTracker";
 import LessonWrapper from "./LessonTracker";
 import FlashcardsWrapper from "./FlashcardsTracker";
 
-const SuccessScreen = ({ level, onContinue }) => {
-  const isLevel3 = level === 3;
-  const mainColor = isLevel3 ? "#8e44ad" : Theme.success;
-  const medal = isLevel3 ? "👑" : (level === 2 ? "🎖️" : "🏆");
-  const title = isLevel3 ? "Grand Master Accomplished!" : `Level ${level} Mastered!`;
+
+const SuccessScreen = ({ level, onContinue, activeTheme }) => {
+  // 🎊 Get the screen size for the confetti
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  const theme = activeTheme || Theme;
+  const isLevel5 = level === 5;
+  const mainColor = isLevel5 ? "#00d2ff" : "#2ecc71";
+  const medal = isLevel5 ? "💎" : "🏆";
 
   return (
     <div style={{ 
       display: "flex", justifyContent: "center", alignItems: "center", 
-      height: "100vh", backgroundColor: Theme.background, textAlign: "center", padding: "20px" 
+      height: "100vh", backgroundColor: activeTheme.background, textAlign: "center", padding: "20px" 
     }}>
+      {/* 🥳 The Confetti Layer! */}
+      <Confetti width={width} height={height} numberOfPieces={200} recycle={false} />
+
       <div style={{ 
-        backgroundColor: "white", padding: "60px", borderRadius: Theme.borderRadius, 
-        boxShadow: Theme.cardShadow, maxWidth: "600px", border: `8px solid ${mainColor}` 
+        backgroundColor: "white", padding: "60px", borderRadius: activeTheme.borderRadius, 
+        boxShadow: activeTheme.cardShadow, maxWidth: "600px", border: `8px solid ${mainColor}`,
+        position: "relative", zIndex: 10 // This keeps the card on top of the sparkles
       }}>
         <div style={{ fontSize: "100px", marginBottom: "20px" }}>{medal}</div>
-        <h1 style={{ fontSize: "42px", color: Theme.textMain, fontFamily: Theme.fontFamily }}>{title}</h1>
-        <p style={{ fontSize: "22px", color: Theme.textMuted, marginBottom: "40px", fontFamily: Theme.fontFamily }}>
-          {isLevel3 
-            ? "You have completed the highest level of the Academy! You are a true genius." 
-            : "Incredible work! You have collected all 15 stars."}
-        </p>
+        <h1 style={{ fontSize: "42px", color: activeTheme.textMain }}>Level {level} Mastered!</h1>
         <button 
           onClick={onContinue}
           style={{ 
@@ -48,7 +53,7 @@ const SuccessScreen = ({ level, onContinue }) => {
             borderRadius: "50px", border: "none", fontSize: "24px", fontWeight: "bold", cursor: "pointer"
           }}
         >
-          {isLevel3 ? "Back to Dashboard" : "Continue to Next Level →"}
+          Continue →
         </button>
       </div>
     </div>
@@ -57,13 +62,17 @@ const SuccessScreen = ({ level, onContinue }) => {
 
 function App() {
   const { markModuleComplete, progress, isLevel2Unlocked, isLevel3Unlocked } = useLevelProgress();
-  
+  const [currentBg, setCurrentBg] = useState(Theme.background);
+  const activeTheme = {
+    ...Theme,
+    background: currentBg
+  };
   
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem("current_user");
     return savedUser ? JSON.parse(savedUser) : null;
   });
-
+ 
   const [page, setPage] = useState(() => localStorage.getItem("current_page") || "dashboard");
   const [subject, setSubject] = useState(() => localStorage.getItem("current_subject") || null);
   const [currentLevel, setCurrentLevel] = useState(() => parseInt(localStorage.getItem("current_level")) || 1);
@@ -102,7 +111,7 @@ function App() {
     });
     return totalStars;
   };
-
+  
   const handleLogin = async (userData) => {
     // 🕵️ Step 1: Figure out if userData is a string or an object
     console.log("🕵️ What did the Auth component send me?", userData);
@@ -176,58 +185,70 @@ function App() {
     lessonsData;
 
   const views = {
-    dashboard: (
-      <Dashboard 
-        user={user} 
-        onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
-        onOpenProfile={() => setPage("profile")} 
-      />
-    ),
+  dashboard: (
+  <Dashboard 
+    user={user} 
+    activeTheme={activeTheme} // 🚀 Pass the magic paint here!
+    onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
+    onOpenProfile={() => setPage("profile")} 
+  />
+),
     level2Dashboard: (
-      <Level2Dashboard 
-        user={user} 
-        onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
-        onBackToLevel1={() => { setCurrentLevel(1); setPage("dashboard"); }} 
-        onOpenProfile={() => setPage("profile")} 
-      />
-    ),
+  <Level2Dashboard 
+    user={user} 
+    activeTheme={activeTheme} // 🚀 Pass the theme here!
+    onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
+    onBackToLevel1={() => { setCurrentLevel(1); setPage("dashboard"); }} 
+    onOpenProfile={() => setPage("profile")} 
+  />
+),
     level3Dashboard: (
-      <Level3Dashboard 
-        user={user} 
-        onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
-        onBackToLevel1={() => { setCurrentLevel(1); setPage("dashboard"); }} 
-      />
-    ),
+  <Level3Dashboard 
+    user={user} 
+    activeTheme={activeTheme} // 🚀 Passing the magic!
+    onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
+    onBackToLevel2={() => { setCurrentLevel(2); setPage("level2Dashboard"); }} 
+  />
+),
     level4Dashboard: (
-      <Level4Dashboard 
-        user={user} 
-        onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
-        onBackToLevel3={() => { setCurrentLevel(3); setPage("level3Dashboard"); }} 
-      />
-    ),
+  <Level4Dashboard 
+    user={user} 
+    activeTheme={activeTheme} // 👈 Make sure this is here!
+    onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
+    onBackToLevel3={() => { setCurrentLevel(3); setPage("level3Dashboard"); }} 
+  />
+),
     level5Dashboard: (
-        <Level5Dashboard 
-          user={user} 
-          onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
-          onBackToLevel4={() => { setCurrentLevel(4); setPage("level4Dashboard"); }} 
-        />
-      ),
+  <Level5Dashboard 
+    user={user} 
+    activeTheme={activeTheme} // 👈 This is the secret sauce!
+    onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
+    onBackToLevel4={() => { setCurrentLevel(4); setPage("level4Dashboard"); }} 
+  />
+),
     
-      level1Success: <SuccessScreen level={1} onContinue={() => { setCurrentLevel(2); setPage("level2Dashboard"); }} />,
-    level2Success: <SuccessScreen level={2} onContinue={() => { setCurrentLevel(3); setPage("level3Dashboard"); }} />,
-    level3Success: <SuccessScreen level={3} onContinue={() => { setPage("level3Dashboard"); }} />,
-    level4Success: <SuccessScreen level={4} onContinue={() => { setCurrentLevel(5); setPage("level5Dashboard"); }} />,
-    
+    level1Success: <SuccessScreen level={1} activeTheme={activeTheme} onContinue={() => { setCurrentLevel(2); setPage("level2Dashboard"); }} />,
+level2Success: <SuccessScreen level={2} activeTheme={activeTheme} onContinue={() => { setCurrentLevel(3); setPage("level3Dashboard"); }} />,
+level3Success: <SuccessScreen level={3} activeTheme={activeTheme} onContinue={() => { setPage("level3Dashboard"); }} />,
+level4Success: <SuccessScreen level={4} activeTheme={activeTheme} onContinue={() => { setCurrentLevel(5); setPage("level5Dashboard"); }} />,
     // 🏆 ADD THIS ONE HERE!
     level5Success: (
-      <SuccessScreen 
-        level={5} 
-        onContinue={() => { 
-          setCurrentLevel(5); 
-          setPage("level5Dashboard"); 
-        }} 
-      />
-    ),
+  <SuccessScreen 
+    level={5} 
+    activeTheme={activeTheme} // 👈 This is the missing piece!
+    onContinue={() => { 
+      setCurrentLevel(5); 
+      setPage("level5Dashboard"); 
+    }} 
+  />
+),
+    certificate: (
+  <Certificate 
+    user={user} 
+    activeTheme={activeTheme} 
+    onBack={() => setPage("level5Dashboard")} 
+  />
+),
 
     // Add this inside your const views = { ... }
     // Add this to your views = { ... } list
@@ -272,19 +293,21 @@ function App() {
   />
 ),
     chapterSelection: (
-      <ChapterSelection 
-        subject={subject} 
-        currentLevel={currentLevel} 
-        chapters={activeDataSource[subject]} 
-        onSelectChapter={(ch) => { setChapterData(ch); setPage("lesson"); }} 
-        onBack={() => {
-          if (currentLevel === 4) setPage("level4Dashboard");
-          else if (currentLevel === 3) setPage("level3Dashboard");
-          else if (currentLevel === 2) setPage("level2Dashboard");
-          else setPage("dashboard");
-        }} 
-      />
-    ),
+  <ChapterSelection 
+    subject={subject} 
+    currentLevel={currentLevel} 
+    chapters={activeDataSource[subject]} 
+    activeTheme={activeTheme} // 👈 ADD THIS LINE!
+    onSelectChapter={(ch) => { setChapterData(ch); setPage("lesson"); }} 
+    onBack={() => {
+      if (currentLevel === 5) setPage("level5Dashboard"); // Added level 5 back button too!
+      else if (currentLevel === 4) setPage("level4Dashboard");
+      else if (currentLevel === 3) setPage("level3Dashboard");
+      else if (currentLevel === 2) setPage("level2Dashboard");
+      else setPage("dashboard");
+    }} 
+  />
+),
     lesson: chapterData && (
       <LessonWrapper 
         chapter={chapterData} 
@@ -313,7 +336,8 @@ function App() {
    <div style={{ 
   display: "flex", 
   minHeight: "100vh", 
-  fontFamily: Theme.fontFamily,
+  fontFamily: activeTheme.fontFamily,
+  backgroundColor: activeTheme.background
 }}>
       <div style={{ width: "280px", backgroundColor: "#1E293B", color: "white", display: "flex", flexDirection: "column", padding: "30px 20px" }}>
         
@@ -327,7 +351,7 @@ function App() {
           }}
         >
           <div style={{ 
-            fontSize: "35px", backgroundColor: "white", width: "55px", height: "55px", 
+            fontSize: "35px", backgroundColor: "rgba(255, 255, 255, 0.8)", width: "55px", height: "55px", 
             display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%" 
           }}>
             {user.avatar || "👤"}
@@ -343,7 +367,23 @@ function App() {
         </div>
 
         <h2 style={{ fontSize: "20px", marginBottom: "30px", textAlign: "center", color: Theme.accent, letterSpacing: "1px" }}>MY ACADEMY</h2>
-        
+        {/* 🌈 PASTE THE COLOR CANDY BUTTONS HERE: */}
+<div style={{ marginBottom: "20px", display: "flex", gap: "10px", justifyContent: "center" }}>
+  {["#FDFBF7", "#E3F2FD", "#E8F5E9", "#FFEBEE"].map((color) => (
+    <button
+      key={color}
+      onClick={() => setCurrentBg(color)} 
+      style={{
+        width: "25px",
+        height: "25px",
+        borderRadius: "50%",
+        backgroundColor: color,
+        border: "2px solid rgba(255,255,255,0.2)",
+        cursor: "pointer"
+      }}
+    />
+  ))}
+</div>
           <button 
   onClick={handleLogout}
   style={{
@@ -412,7 +452,13 @@ function App() {
   })}
 </nav>
       </div>
-      <div style={{ flex: 1, overflowY: "auto", position: "relative" }}>
+      <div style={{ 
+  flex: 1, 
+  overflowY: "auto", 
+  position: "relative", 
+  backgroundColor: activeTheme.background, // 🚀 This makes the main area change!
+  transition: "background-color 0.4s ease" // Makes the change feel smooth like butter
+}}>
         
         {/* 🆘 The Struggling Button - Only shows during a real quiz */}
         {page === "quiz" && currentLevel >=3 && (
