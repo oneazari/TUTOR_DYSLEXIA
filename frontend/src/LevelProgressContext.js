@@ -15,6 +15,12 @@ export const LevelProgressProvider = ({ children }) => {
 
   // 2. The "Star Counter" that knows how to check specific levels
   const getStarsForLevel = (levelNum) => {
+    // --- TEMPORARY OVERRIDE FOR LEVELS 1-3 ---
+    if (levelNum === 1) return 15; // Full stars for Level 1
+    if (levelNum === 2) return 15; // Full stars for Level 2
+    if (levelNum === 3) return 20; // Full stars for Level 3
+    // -----------------------------------------
+
     let dataToSearch;
     if (levelNum === 1) dataToSearch = lessonsData;
     if (levelNum === 2) dataToSearch = level2Data;

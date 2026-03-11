@@ -215,47 +215,63 @@ function App() {
     currentLevel === 2 ? level2Data : 
     lessonsData;
 
+  const earnedStars = getStarsForLevel(currentLevel);
+  const starsNeeded = (currentLevel === 1 || currentLevel === 2) ? 15 : 20;
+  const isLevelComplete = earnedStars >= starsNeeded;
+
+
+
   const views = {
   dashboard: (
-  <Dashboard 
-    user={user} 
-    activeTheme={activeTheme} // 🚀 Pass the magic paint here!
-    onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
-    onOpenProfile={() => setPage("profile")} 
-  />
+  <div>
+    <Dashboard 
+      user={user} 
+      activeTheme={activeTheme} // 🚀 Pass the magic paint here!
+      onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
+      onOpenProfile={() => setPage("profile")} 
+    />
+  </div>
 ),
     level2Dashboard: (
-  <Level2Dashboard 
-    user={user} 
-    activeTheme={activeTheme} // 🚀 Pass the theme here!
-    onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
-    onBackToLevel1={() => { setCurrentLevel(1); setPage("dashboard"); }} 
-    onOpenProfile={() => setPage("profile")} 
-  />
+  <div>
+    <Level2Dashboard 
+      user={user} 
+      activeTheme={activeTheme} // 🚀 Pass the theme here!
+      onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
+      onBackToLevel1={() => { setCurrentLevel(1); setPage("dashboard"); }} 
+      onOpenProfile={() => setPage("profile")} 
+    />
+  </div>
 ),
     level3Dashboard: (
-  <Level3Dashboard 
-    user={user} 
-    activeTheme={activeTheme} // 🚀 Passing the magic!
-    onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
-    onBackToLevel2={() => { setCurrentLevel(2); setPage("level2Dashboard"); }} 
-  />
+  <div>
+    <Level3Dashboard 
+      user={user} 
+      activeTheme={activeTheme} // 🚀 Passing the magic!
+      onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
+      onBackToLevel2={() => { setCurrentLevel(2); setPage("level2Dashboard"); }} 
+    />
+  </div>
 ),
     level4Dashboard: (
-  <Level4Dashboard 
-    user={user} 
-    activeTheme={activeTheme} // 👈 Make sure this is here!
-    onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
-    onBackToLevel3={() => { setCurrentLevel(3); setPage("level3Dashboard"); }} 
-  />
+  <div>
+    <Level4Dashboard 
+      user={user} 
+      activeTheme={activeTheme} // 👈 Make sure this is here!
+      onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
+      onBackToLevel3={() => { setCurrentLevel(3); setPage("level3Dashboard"); }} 
+    />
+  </div>
 ),
     level5Dashboard: (
-  <Level5Dashboard 
-    user={user} 
-    activeTheme={activeTheme} // 👈 This is the secret sauce!
-    onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
-    onBackToLevel4={() => { setCurrentLevel(4); setPage("level4Dashboard"); }} 
-  />
+  <div>
+    <Level5Dashboard 
+      user={user} 
+      activeTheme={activeTheme} // 👈 This is the secret sauce!
+      onSelectSubject={(subj) => { setSubject(subj); setPage("chapterSelection"); }} 
+      onBackToLevel4={() => { setCurrentLevel(4); setPage("level4Dashboard"); }} 
+    />
+  </div>
 ),
     
     level1Success: <SuccessScreen level={1} activeTheme={activeTheme} onContinue={() => { setCurrentLevel(2); setPage("level2Dashboard"); }} />,
@@ -435,12 +451,10 @@ level4Success: <SuccessScreen level={4} activeTheme={activeTheme} onContinue={()
 
       <nav style={{ flex: 1 }}>
   {[1, 2, 3, 4, 5].map((lvl) => {
-    // 1. Check if the level is unlocked based on your game rules
-    const unlocked = lvl === 1 || 
-      (lvl === 2 && isLevel2Unlocked()) || 
-      (lvl === 3 && isLevel3Unlocked()) ||
-      (lvl === 4 && isLevel4Unlocked()) || 
-      (lvl === 5 && isLevel5Unlocked());
+    // Lock only level 5 for now, keep 1-4 unlocked
+    let unlocked = true;
+    if (lvl === 5) unlocked = isLevel5Unlocked();
+
 
     return (
       <div 
@@ -517,5 +531,4 @@ level4Success: <SuccessScreen level={4} activeTheme={activeTheme} onContinue={()
     </div>
   );
 } 
-
 export default App;

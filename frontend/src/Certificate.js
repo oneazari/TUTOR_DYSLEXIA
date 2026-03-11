@@ -67,22 +67,46 @@ const Certificate = ({ user, activeTheme, onBack }) => {
         </div>
       </div>
 
-      <button 
-        onClick={onBack} 
-        style={{ 
-          marginTop: "40px", 
-          padding: "15px 30px", 
-          borderRadius: "30px", 
-          border: "none", 
-          backgroundColor: activeTheme.accent, 
-          color: "white", 
-          fontWeight: "bold", 
-          cursor: "pointer",
-          fontSize: "18px",
-          zIndex: 20 // 🪜 Keeps the button at the very top
-        }}>
-        Back to Academy
-      </button>
+      <div className="no-print" style={{ display: "flex", gap: "20px", marginTop: "40px", zIndex: 20 }}>
+        <button 
+          onClick={onBack} 
+          style={{ 
+            padding: "15px 30px", 
+            borderRadius: "30px", 
+            border: "none", 
+            backgroundColor: "#64748b", 
+            color: "white", 
+            fontWeight: "bold", 
+            cursor: "pointer",
+            fontSize: "18px",
+          }}>
+          Back to Academy
+        </button>
+
+        <button 
+          onClick={() => window.print()} 
+          style={{ 
+            padding: "15px 30px", 
+            borderRadius: "30px", 
+            border: "none", 
+            backgroundColor: "#FFD700", 
+            color: "#000", 
+            fontWeight: "bold", 
+            cursor: "pointer",
+            fontSize: "18px",
+            boxShadow: "0 4px 10px rgba(0,0,0,0.1)"
+          }}>
+          Download / Print ⬇️
+        </button>
+      </div>
+
+      <style>{`
+        @media print {
+          .no-print { display: none !important; }
+          body { background: white !important; }
+          div { box-shadow: none !important; border-radius: 0 !important; }
+        }
+      `}</style>
     </div>
   );
 };

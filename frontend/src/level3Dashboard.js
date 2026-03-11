@@ -3,45 +3,34 @@ import { Theme } from "./Theme";
 import { useLevelProgress } from "./LevelProgressContext";
 
 const Level3Dashboard = ({ user, onSelectSubject, onBackToLevel2, activeTheme }) => {
-  const { progress } = useLevelProgress();
-  
+  const { progress, getStarsForLevel } = useLevelProgress();
+
   // Subject configuration for Level 3 - Advanced Icons
   const subjectData = [
-    { name: "Science", icon: "🚀", color: "#9b59b6" }, 
+    { name: "Science", icon: "🚀", color: "#9b59b6" },
     { name: "Math", icon: "🧮", color: "#3498db" },
     { name: "English", icon: "📖", color: "#e67e22" }
   ];
 
-  // 🕵️ Step 1: Count all actual stars earned
- // 🕵️ Step 1: Calculate Stars (using the 'totalStars' name)
-// 🕵️ Step 1: Calculate Stars (Change the name to totalStars here!)
-  const totalStars = subjectData.reduce((acc, sub) => {
-    const subjectProgress = progress[sub.name] || {};
-    
-    // Filter for IDs starting with 'l3'
-    const level3Scores = Object.entries(subjectProgress).filter(([quizId, score]) => 
-      quizId.startsWith("l3") && score >= 7
-    );
-    
-    return acc + level3Scores.length;
-  }, 0);
+  // 🕵️ Step 1: Use the global star counter!
+  const totalStars = getStarsForLevel(3);
 
   // 🕵️ Step 2: Now these lines will work perfectly!
   const goal = 15;
-  const displayStars = Math.min(totalStars, goal); 
+  const displayStars = Math.min(totalStars, goal);
   const percent = Math.min(Math.round((displayStars / goal) * 100), 100);
-  
+
   // 🕵️ Step 3: Check for unlock
   const isLevel4Unlocked = totalStars >= goal;
 
   return (
     <div style={{ padding: "40px", backgroundColor: activeTheme.background, minHeight: "100vh", fontFamily: activeTheme.fontFamily }}>
       <div style={{ maxWidth: "900px", margin: "0 auto" }}>
-        
+
         {/* PERSONALIZED HEADER */}
-        <div style={{ 
-          display: "flex", 
-          alignItems: "center", 
+        <div style={{
+          display: "flex",
+          alignItems: "center",
           justifyContent: "space-between",
           marginBottom: "30px",
           backgroundColor: "white",
@@ -51,9 +40,9 @@ const Level3Dashboard = ({ user, onSelectSubject, onBackToLevel2, activeTheme })
           borderLeft: `10px solid #e67e22` // Orange for Level 3
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-            <div style={{ 
-              fontSize: "60px", 
-              backgroundColor: "#f1f5f9", 
+            <div style={{
+              fontSize: "60px",
+              backgroundColor: "#f1f5f9",
               width: "100px", height: "100px",
               display: "flex", alignItems: "center", justifyContent: "center",
               borderRadius: "50%"
@@ -65,12 +54,12 @@ const Level3Dashboard = ({ user, onSelectSubject, onBackToLevel2, activeTheme })
               <p style={{ color: activeTheme.textMuted, margin: "5px 0 0 0", fontSize: "20px" }}>Advanced · Level 3</p>
             </div>
           </div>
-          
-          <button 
-            onClick={onBackToLevel2} 
-            style={{ 
-              padding: "12px 24px", borderRadius: "12px", border: `2px solid ${activeTheme.sidebar}`, 
-              background: "white", color: activeTheme.sidebar, fontWeight: "bold", cursor: "pointer" 
+
+          <button
+            onClick={onBackToLevel2}
+            style={{
+              padding: "12px 24px", borderRadius: "12px", border: `2px solid ${activeTheme.sidebar}`,
+              background: "white", color: activeTheme.sidebar, fontWeight: "bold", cursor: "pointer"
             }}
           >
             ← Level 2
@@ -79,23 +68,23 @@ const Level3Dashboard = ({ user, onSelectSubject, onBackToLevel2, activeTheme })
 
         {/* PROGRESS CARD (UNLOCKS LEVEL 4) */}
         <div style={{ backgroundColor: "white", padding: "25px", borderRadius: activeTheme.borderRadius, boxShadow: activeTheme.cardShadow, marginBottom: "40px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "15px", fontSize: "20px", fontWeight: "bold" }}>
-               <span style={{ color: activeTheme.textMain }}>{isLevel4Unlocked ? "Mastery Achieved!" : "Level 4 Unlock Progress"}</span>
-               <span style={{ color: "#e67e22" }}>{displayStars} / {goal} Stars</span>
-            </div>
-            <div style={{ width: "100%", height: "24px", backgroundColor: "#f0f0f0", borderRadius: "12px", overflow: "hidden" }}>
-               <div style={{ width: `${percent}%`, height: "100%", backgroundColor: "#e67e22", transition: "width 1s ease-out" }} />
-            </div>
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "15px", fontSize: "20px", fontWeight: "bold" }}>
+            <span style={{ color: activeTheme.textMain }}>{isLevel4Unlocked ? "Mastery Achieved!" : "Level 4 Unlock Progress"}</span>
+            <span style={{ color: "#e67e22" }}>{displayStars} / {goal} Stars</span>
+          </div>
+          <div style={{ width: "100%", height: "24px", backgroundColor: "#f0f0f0", borderRadius: "12px", overflow: "hidden" }}>
+            <div style={{ width: `${percent}%`, height: "100%", backgroundColor: "#e67e22", transition: "width 1s ease-out" }} />
+          </div>
         </div>
 
         {/* SUBJECT CARDS */}
         <div style={{ display: "flex", gap: "25px", marginBottom: "40px" }}>
           {subjectData.map(sub => (
-            <button key={sub.name} onClick={() => onSelectSubject(sub.name)} 
-              style={{ 
+            <button key={sub.name} onClick={() => onSelectSubject(sub.name)}
+              style={{
                 flex: 1, display: "flex", flexDirection: "column", alignItems: "center", padding: "45px 20px",
-                borderRadius: activeTheme.borderRadius, border: "none", backgroundColor: "white", 
-                boxShadow: activeTheme.cardShadow, borderBottom: `10px solid ${sub.color}`, cursor: "pointer", transition: "0.2s" 
+                borderRadius: activeTheme.borderRadius, border: "none", backgroundColor: "white",
+                boxShadow: activeTheme.cardShadow, borderBottom: `10px solid ${sub.color}`, cursor: "pointer", transition: "0.2s"
               }}
               onMouseOver={(e) => e.currentTarget.style.transform = "translateY(-10px)"}
               onMouseOut={(e) => e.currentTarget.style.transform = "translateY(0)"}>
@@ -107,8 +96,8 @@ const Level3Dashboard = ({ user, onSelectSubject, onBackToLevel2, activeTheme })
 
         {/* CONGRATS FOR LEVEL 4 */}
         {isLevel4Unlocked ? (
-          <div style={{ 
-            textAlign: "center", padding: "35px", backgroundColor: "#fef3c7", 
+          <div style={{
+            textAlign: "center", padding: "35px", backgroundColor: "#fef3c7",
             borderRadius: activeTheme.borderRadius, border: `3px solid #f59e0b`, boxShadow: activeTheme.cardShadow
           }}>
             <h2 style={{ color: "#92400e", margin: 0, fontSize: "30px" }}>👑 Level 4 Unlocked!</h2>

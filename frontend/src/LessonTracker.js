@@ -54,12 +54,12 @@ export const LessonDwellTracker = ({ children, wordId }) => {
     };
 
     return (
-      <div 
+      <span 
           onMouseEnter={startTracking} 
           onMouseLeave={stopTracking}
           style={{ cursor: 'pointer', display: 'inline-block' }}
       >
           {children}
-      </div>
+      </span>
     );
 };
