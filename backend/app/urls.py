@@ -1,10 +1,11 @@
 from django.urls import path
-from .views import get_lessons, get_lesson, log_interaction, login_user, handle_struggle
+from .views import get_lessons, get_lesson, log_interaction, login_user, handle_struggle, save_user_state
 from .quiz import add_quiz, get_quiz, submit_quiz
 
 urlpatterns = [
     # Auth
     path('login/', login_user, name='login_user'), 
+    path('save-state/', save_user_state, name='save_user_state'),
 
     # Content
     path("lessons/", get_lessons, name="get_lessons"),

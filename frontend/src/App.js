@@ -61,7 +61,7 @@ const SuccessScreen = ({ level, onContinue, activeTheme }) => {
 };
 
 function App() {
-  const { markModuleComplete, progress, isLevel2Unlocked, isLevel3Unlocked } = useLevelProgress();
+  const { markModuleComplete, progress, isLevel2Unlocked, isLevel3Unlocked, isLevel4Unlocked, isLevel5Unlocked, hydrateProgress, getStarsForLevel } = useLevelProgress();
   const [currentBg, setCurrentBg] = useState(Theme.background);
   const activeTheme = {
     ...Theme,
@@ -81,37 +81,41 @@ function App() {
     return saved ? JSON.parse(saved) : null;
   });
 
+  const saveStateToBackend = async (currentState) => {
+    if (!user) {
+        console.log("⚠️ No user in state, not saving to backend.");
+        return;
+    }
+    console.log("💾 Attempting to save state to backend for user:", user.username, "State:", currentState);
+    try {
+      const resp = await fetch('http://127.0.0.1:8000/api/save-state/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: user.username,
+          state: currentState
+        })
+      });
+      const data = await resp.json();
+      console.log("📥 Backend save response:", data);
+    } catch (err) {
+      console.error("❌ Failed to save state to backend", err);
+    }
+  };
+
   useEffect(() => {
     localStorage.setItem("current_page", page);
     localStorage.setItem("current_level", currentLevel);
     if (subject) localStorage.setItem("current_subject", subject);
     if (chapterData) localStorage.setItem("current_chapter_data", JSON.stringify(chapterData));
-  }, [page, currentLevel, subject, chapterData]);
+    
+    // Auto sync with backend if logged in
+    if (user) {
+        saveStateToBackend({ page, currentLevel, subject, chapterData, progress });
+    }
+  }, [page, currentLevel, subject, chapterData, progress, user]);
 
-  const getStarsForLevel = (levelNum) => {
-    let dataToSearch;
-    if (levelNum === 1) dataToSearch = lessonsData;
-    if (levelNum === 2) dataToSearch = level2Data;
-    if (levelNum === 3) dataToSearch = level3Data;
-    if (levelNum === 4) dataToSearch = level4Data;
-    if (levelNum === 5) dataToSearch = level5Data;
 
-    const subjects = ["Science", "Math", "English", "GK"];
-    let totalStars = 0;
-
-    subjects.forEach((sub) => {
-      if (dataToSearch && dataToSearch[sub]) {
-        dataToSearch[sub].forEach((chapter) => {
-          const score = (progress[sub] || {})[chapter.id];
-          if (score !== null && score >= 7) {
-            totalStars++;
-          }
-        });
-      }
-    });
-    return totalStars;
-  };
-  
   const handleLogin = async (userData) => {
     // 🕵️ Step 1: Figure out if userData is a string or an object
     console.log("🕵️ What did the Auth component send me?", userData);
@@ -138,7 +142,25 @@ function App() {
       if (response.ok) {
         localStorage.setItem("current_user", JSON.stringify(dataFromMongo));
         setUser(dataFromMongo);
-        setPage("dashboard");
+        
+        // Rehydrate MongoDB state to frontend local context
+        if (dataFromMongo.state) {
+            setPage(dataFromMongo.state.page || "dashboard");
+            setCurrentLevel(dataFromMongo.state.currentLevel || 1);
+            setSubject(dataFromMongo.state.subject || null);
+            setChapterData(dataFromMongo.state.chapterData || null);
+            if (dataFromMongo.state.progress) {
+                // Merge default with backend progress
+                const safeProgress = {
+                    Science: {}, Math: {}, English: {}, GK: {},
+                    ...dataFromMongo.state.progress
+                };
+                hydrateProgress(safeProgress);
+            }
+        } else {
+            setPage("dashboard");
+            hydrateProgress({ Science: {}, Math: {}, English: {}, GK: {} });
+        }
       } else {
         console.error("❌ Django rejected the login:", dataFromMongo);
       }
@@ -150,19 +172,28 @@ function App() {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    if (user) {
+        await saveStateToBackend({ page, currentLevel, subject, chapterData, progress });
+    }
     localStorage.removeItem("current_user");
     setUser(null);
     setPage("dashboard");
   };
 
- const handleComplete = (score) => {
+  const handleComplete = (score) => {
+    console.log(`✅ Module complete! Subj: ${subject}, Chapter: ${chapterData?.id}, Score: ${score}`);
     if (subject && chapterData) {
+      // 🚨 This needs to trigger a re-render!
       markModuleComplete(subject, chapterData.id, score);
-      const levelStars = getStarsForLevel(currentLevel);
       
-      // If they got enough stars (14) and passed the quiz (7/10)
-      if (levelStars >= 14 && score >= 7) { 
+      const levelStars = getStarsForLevel(currentLevel);
+      console.log(`⭐ Total level stars evaluated: ${levelStars}`);
+      
+      const starsNeededToPass = (currentLevel === 1 || currentLevel === 2) ? 15 : 20;
+
+      // If they got enough stars and passed the quiz (7/10)
+      if (levelStars >= starsNeededToPass && score >= 7) { 
         if (currentLevel === 1) setPage("level1Success");
         else if (currentLevel === 2) setPage("level2Success");
         else if (currentLevel === 3) setPage("level3Success");
@@ -405,13 +436,11 @@ level4Success: <SuccessScreen level={4} activeTheme={activeTheme} onContinue={()
       <nav style={{ flex: 1 }}>
   {[1, 2, 3, 4, 5].map((lvl) => {
     // 1. Check if the level is unlocked based on your game rules
-    /*const unlocked = lvl === 1 || 
+    const unlocked = lvl === 1 || 
       (lvl === 2 && isLevel2Unlocked()) || 
       (lvl === 3 && isLevel3Unlocked()) ||
-      (lvl === 4 && getStarsForLevel(3) >= 14) || 
-      (lvl === 5 && getStarsForLevel(4) >= 14); */
-     
-    const unlocked = true;
+      (lvl === 4 && isLevel4Unlocked()) || 
+      (lvl === 5 && isLevel5Unlocked());
 
     return (
       <div 

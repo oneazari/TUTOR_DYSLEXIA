@@ -92,8 +92,44 @@ def login_user(request):
             if user:
                 return JsonResponse(user, status=200)
             else:
-                new_user = {"username": username, "level": "Level 1", "stars": 0}
+                new_user = {
+                    "username": username, 
+                    "level": "Level 1", 
+                    "stars": 0,
+                    "state": {
+                        "page": "dashboard",
+                        "currentLevel": 1,
+                        "subject": None,
+                        "chapterData": None,
+                        "progress": {"Science": {}, "Math": {}, "English": {}, "GK": {}}
+                    }
+                }
                 users_collection.insert_one(new_user.copy())
                 return JsonResponse(new_user, status=201)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+
+# --- 6. SAVE USER STATE ---
+@csrf_exempt
+def save_user_state(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            username = data.get("username")
+            state = data.get("state") # Should be a dictionary
+
+            if not username or not state:
+                return JsonResponse({"error": "Missing username or state data"}, status=400)
+
+            # Update the user's document with the provided state
+            result = users_collection.update_one(
+                {"username": username},
+                {"$set": {"state": state}}
+            )
+
+            if result.matched_count > 0:
+                return JsonResponse({"status": "success", "message": "State saved"}, status=200)
+            else:
+                return JsonResponse({"error": "User not found"}, status=404)
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)

@@ -3,16 +3,13 @@ import React, { createContext, useContext, useState } from "react";
 import { lessonsData } from "./lessonsData";
 import { level2Data } from "./level2Data";
 import { level3Data } from "./level3Data";
+import { level4Data } from "./level4Data";
+import { level5Data } from "./level5Data";
 
 const LevelProgressContext = createContext();
 
 export const LevelProgressProvider = ({ children }) => {
   const [progress, setProgress] = useState(() => {
-    const currentUser = JSON.parse(localStorage.getItem("current_user"));
-    if (currentUser) {
-      const allUsers = JSON.parse(localStorage.getItem("tutor_users") || "{}");
-      return allUsers[currentUser.username]?.progress || { Science: {}, Math: {}, English: {} };
-    }
     return { Science: {}, Math: {}, English: {} };
   });
 
@@ -22,8 +19,10 @@ export const LevelProgressProvider = ({ children }) => {
     if (levelNum === 1) dataToSearch = lessonsData;
     if (levelNum === 2) dataToSearch = level2Data;
     if (levelNum === 3) dataToSearch = level3Data;
+    if (levelNum === 4) dataToSearch = level4Data;
+    if (levelNum === 5) dataToSearch = level5Data;
 
-    const subjects = ["Science", "Math", "English"];
+    const subjects = ["Science", "Math", "English", "GK"];
     let count = 0;
 
     subjects.forEach((sub) => {
@@ -38,37 +37,37 @@ export const LevelProgressProvider = ({ children }) => {
   };
 
   const markModuleComplete = (subject, moduleId, score) => {
-    const currentUser = JSON.parse(localStorage.getItem("current_user"));
-    if (!currentUser) return;
-
     setProgress((prev) => {
       const newProgress = {
         ...prev,
-        [subject]: { ...prev[subject], [moduleId]: score },
+        [subject]: { ...(prev[subject] || {}), [moduleId]: score },
       };
-
-      const allUsers = JSON.parse(localStorage.getItem("tutor_users") || "{}");
-      if (allUsers[currentUser.username]) {
-        allUsers[currentUser.username].progress = newProgress;
-        localStorage.setItem("tutor_users", JSON.stringify(allUsers));
-      }
+      
       return newProgress;
     });
   };
 
-  // 3. The Rules: Level 2 needs Level 1 stars, Level 3 needs Level 2 stars
-  //const isLevel2Unlocked = () => getStarsForLevel(1) >= 15;
- // const isLevel3Unlocked = () => getStarsForLevel(2) >= 15;
-const isLevel2Unlocked = () => true;
-  const isLevel3Unlocked = () => true;
+  // 3. The Rules: Level 2 needs Level 1 stars, Level 3 needs Level 2 stars, etc.
+  const isLevel2Unlocked = () => getStarsForLevel(1) >= 15;
+  const isLevel3Unlocked = () => getStarsForLevel(2) >= 15;
+  const isLevel4Unlocked = () => getStarsForLevel(3) >= 20;
+  const isLevel5Unlocked = () => getStarsForLevel(4) >= 20;
+
+  const hydrateProgress = (newProgress) => {
+    setProgress(newProgress);
+  };
+
   return (
     <LevelProgressContext.Provider 
       value={{ 
         progress, 
         markModuleComplete, 
         isLevel2Unlocked, 
-        isLevel3Unlocked ,
-        getStarsForLevel
+        isLevel3Unlocked,
+        isLevel4Unlocked,
+        isLevel5Unlocked,
+        getStarsForLevel,
+        hydrateProgress
       }}
     >
       {children}
