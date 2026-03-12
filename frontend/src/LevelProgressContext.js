@@ -10,16 +10,11 @@ const LevelProgressContext = createContext();
 
 export const LevelProgressProvider = ({ children }) => {
   const [progress, setProgress] = useState(() => {
-    return { Science: {}, Math: {}, English: {} };
+    return { Science: {}, Math: {}, English: {}, GK: {} };
   });
 
   // 2. The "Star Counter" that knows how to check specific levels
   const getStarsForLevel = (levelNum) => {
-    // --- TEMPORARY OVERRIDE FOR LEVELS 1-3 ---
-    if (levelNum === 1) return 15; // Full stars for Level 1
-    if (levelNum === 2) return 15; // Full stars for Level 2
-    if (levelNum === 3) return 20; // Full stars for Level 3
-    // -----------------------------------------
 
     let dataToSearch;
     if (levelNum === 1) dataToSearch = lessonsData;
@@ -48,7 +43,7 @@ export const LevelProgressProvider = ({ children }) => {
         ...prev,
         [subject]: { ...(prev[subject] || {}), [moduleId]: score },
       };
-      
+
       return newProgress;
     });
   };
@@ -56,7 +51,7 @@ export const LevelProgressProvider = ({ children }) => {
   // 3. The Rules: Level 2 needs Level 1 stars, Level 3 needs Level 2 stars, etc.
   const isLevel2Unlocked = () => getStarsForLevel(1) >= 15;
   const isLevel3Unlocked = () => getStarsForLevel(2) >= 15;
-  const isLevel4Unlocked = () => getStarsForLevel(3) >= 20;
+  const isLevel4Unlocked = () => getStarsForLevel(3) >= 15;
   const isLevel5Unlocked = () => getStarsForLevel(4) >= 20;
 
   const hydrateProgress = (newProgress) => {
@@ -64,11 +59,11 @@ export const LevelProgressProvider = ({ children }) => {
   };
 
   return (
-    <LevelProgressContext.Provider 
-      value={{ 
-        progress, 
-        markModuleComplete, 
-        isLevel2Unlocked, 
+    <LevelProgressContext.Provider
+      value={{
+        progress,
+        markModuleComplete,
+        isLevel2Unlocked,
         isLevel3Unlocked,
         isLevel4Unlocked,
         isLevel5Unlocked,

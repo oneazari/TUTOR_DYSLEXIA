@@ -62,20 +62,34 @@ def log_interaction(request):
     if request.method == "POST":
         try:
             data = json.loads(request.body)
+            username = data.get("username", "student_user")
             value = data.get("value", 0)
-            metric = data.get("metric") # e.g., 'cursorDwellTime'
+            metric = data.get("metric") # e.g., 'cursorDwellTime' or 'userInteraction'
             
-            # Adaptive Thresholds
-            is_struggling = (metric == 'cursorDwellTime' and value > 3000)
+            # 🕵️ Adaptive AI Logic: 
+            # We detect if the student is struggling based on timing metrics
+            is_struggling = False
+            if metric in ['cursorDwellTime', 'userInteraction'] and value > 4000:
+                is_struggling = True
+            elif metric == 'clickLatency' and value > 8000: # Taking more than 8 seconds to answer a quiz question
+                is_struggling = True
             
             log_entry = {
-                "username": data.get("username", "student_user"),
+                "username": username,
                 "metric": metric,
                 "value": value,
                 "is_struggling": is_struggling,
                 "timestamp": datetime.now()
             }
             interaction_collection.insert_one(log_entry)
+
+            # 🛠️ EXTRA POLISH: Update the main USER document too!
+            # This makes sure the "isStruggling" status sticks to the user profile
+            users_collection.update_one(
+                {"username": username},
+                {"$set": {"isStruggling": is_struggling}}
+            )
+
             return JsonResponse({"status": "success", "struggling": is_struggling}, status=201)
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)
@@ -87,13 +101,25 @@ def login_user(request):
         try:
             data = json.loads(request.body)
             username = data.get("username")
+            password = data.get("password")
             user = users_collection.find_one({"username": username}, {"_id": 0})
 
             if user:
-                return JsonResponse(user, status=200)
+                # Check password
+                if "password" in user:
+                    if str(user["password"]) == str(password):
+                        return JsonResponse(user, status=200)
+                    else:
+                        return JsonResponse({"error": "Incorrect password pin"}, status=401)
+                else:
+                    # Legacy user with no password, set it now
+                    users_collection.update_one({"username": username}, {"$set": {"password": password}})
+                    user["password"] = password
+                    return JsonResponse(user, status=200)
             else:
                 new_user = {
-                    "username": username, 
+                    "username": username,
+                    "password": password,
                     "level": "Level 1", 
                     "stars": 0,
                     "state": {
@@ -116,20 +142,29 @@ def save_user_state(request):
         try:
             data = json.loads(request.body)
             username = data.get("username")
-            state = data.get("state") # Should be a dictionary
+            state = data.get("state")
 
             if not username or not state:
                 return JsonResponse({"error": "Missing username or state data"}, status=400)
 
             # Update the user's document with the provided state
+            # We also update top-level 'level' and 'stars' if provided in the state payload
+            update_data = {"state": state}
+            
+            if "levelString" in state:
+                update_data["level"] = state["levelString"]
+            if "totalStars" in state:
+                update_data["stars"] = state["totalStars"]
+
             result = users_collection.update_one(
                 {"username": username},
-                {"$set": {"state": state}}
+                {"$set": update_data}
             )
 
             if result.matched_count > 0:
-                return JsonResponse({"status": "success", "message": "State saved"}, status=200)
+                return JsonResponse({"status": "success", "message": "Progress and state saved"}, status=200)
             else:
                 return JsonResponse({"error": "User not found"}, status=404)
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)
+    return JsonResponse({"error": "Invalid request"}, status=405)

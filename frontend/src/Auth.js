@@ -17,7 +17,7 @@ const Auth = ({ onLogin }) => {
     if (rememberedUser) setUsername(rememberedUser);
   }, []);
 
-  const handleAuth = (e) => {
+  const handleAuth = async (e) => {
     e.preventDefault();
     setError("");
 
@@ -40,10 +40,19 @@ const Auth = ({ onLogin }) => {
           avatar: selectedAvatar,
           progress: { Science: {}, Math: {}, English: {} } 
         };
+        
+        // Try to register on backend first
+        const result = await onLogin(newUser);
+        if (result && !result.success) {
+          setError(result.error);
+          return;
+        }
+
+        // Also save locally for convenience
         allUsers[cleanUsername] = newUser;
         localStorage.setItem("tutor_users", JSON.stringify(allUsers));
         
-        // Show success message, then switch to login mode
+        // Show success message
         setShowSuccess(true);
         setTimeout(() => {
           setShowSuccess(false);
@@ -53,21 +62,19 @@ const Auth = ({ onLogin }) => {
       }
     } else {
       // --- LOGIN LOGIC ---
-      const user = allUsers[cleanUsername];
-      if (user && user.password === password) {
+      const loginPayload = { username: cleanUsername, password: password };
+      
+      console.log("📢 Auth is calling App.js handleLogin for:", cleanUsername);
+      const result = await onLogin(loginPayload); 
+
+      if (result && result.success) {
         if (rememberMe) {
-          localStorage.setItem("tutor_remembered_name", user.username);
+          localStorage.setItem("tutor_remembered_name", cleanUsername);
         } else {
           localStorage.removeItem("tutor_remembered_name");
         }
-
-        // 🚀 THIS IS THE FIX:
-        // We send the user object to App.js, which then calls Django!
-        console.log("📢 Auth is calling App.js handleLogin for:", user.username);
-        onLogin(user); 
-
       } else {
-        setError("Oops! Wrong name or PIN. Try again!");
+        setError(result?.error || "Oops! Wrong name or PIN. Try again!");
       }
     }
   };

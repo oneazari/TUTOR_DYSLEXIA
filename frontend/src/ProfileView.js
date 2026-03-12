@@ -3,7 +3,8 @@ import { Theme } from "./Theme";
 import { lessonsData } from "./lessonsData";
 import { level2Data } from "./level2Data";
 import { level3Data } from "./level3Data"; // New Import
-import { level4Data } from "./level4Data"; // New Import
+import { level4Data } from "./level4Data"; 
+import { level5Data } from "./level5Data"; // Added Level 5
 
 const ProfileView = ({ user, progress, onBack }) => {
   
@@ -14,8 +15,8 @@ const ProfileView = ({ user, progress, onBack }) => {
     const subjectStats = { Science: 0, Math: 0, English: 0, GK: 0 };
     const completedChapters = [];
     
-    // 2. Added Level 3 and Level 4 to the search array!
-    const allLevelData = [lessonsData, level2Data, level3Data, level4Data];
+    // 2. Added Levels 3, 4, and 5 to the search array!
+    const allLevelData = [lessonsData, level2Data, level3Data, level4Data, level5Data];
 
     subjects.forEach(sub => {
       allLevelData.forEach((levelSource, index) => {
